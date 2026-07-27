@@ -16,18 +16,18 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-gray-100 bg-white">
-      <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-3">
+      <div className="mx-auto flex items-center justify-between px-8 py-4">
         <Link href="/" className="flex items-center gap-2" onClick={() => setIsOpen(false)}>
-          <Image src="/logo.png" alt="Clínica ROE" width={36} height={36} preload />
-          <span className="text-xl font-bold text-gray-900">Clínica ROE</span>
+          <Image src="/logo.png" alt="Clínica ROE" width={44} height={44} preload />
+          <span className="text-[22px] font-bold text-gray-900">Clínica ROE</span>
         </Link>
 
-        <nav className="hidden items-center gap-10 md:flex">
+        <nav className="hidden items-center gap-14 md:flex">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.label}
               href={link.href}
-              className="relative text-base font-medium text-gray-700 transition-colors duration-200 hover:text-gray-900 after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-gray-900 after:transition-all after:duration-200 hover:after:w-full"
+              className="relative text-lg font-medium text-gray-700 transition-colors duration-200 hover:text-gray-900 after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-gray-900 after:transition-all after:duration-200 hover:after:w-full"
             >
               {link.label}
             </Link>
@@ -36,7 +36,7 @@ export default function Navbar() {
 
         <Link
           href="#contato"
-          className="hidden rounded-full bg-black px-5 py-2 text-sm font-medium text-white transition-all duration-200 hover:bg-gray-800 hover:scale-105 md:block"
+          className="hidden rounded-full bg-black px-6 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:bg-gray-800 hover:scale-105 md:block"
         >
           Agendar Exame
         </Link>
@@ -46,7 +46,7 @@ export default function Navbar() {
           aria-label={isOpen ? "Fechar menu" : "Abrir menu"}
           aria-expanded={isOpen}
           onClick={() => setIsOpen((prev) => !prev)}
-          className="flex h-9 w-9 items-center justify-center rounded-md text-gray-900 md:hidden"
+          className="flex h-10 w-10 items-center justify-center rounded-md text-gray-900 md:hidden"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
