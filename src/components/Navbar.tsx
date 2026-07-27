@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const NAV_LINKS = [
   { label: "Início", href: "/" },
@@ -13,9 +13,23 @@ const NAV_LINKS = [
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setIsScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-gray-100 bg-white">
+    <header
+      className={`sticky top-0 z-50 border-b transition-all duration-300 ${
+        isScrolled
+          ? "border-gray-100 bg-white/80 shadow-sm backdrop-blur-md"
+          : "border-transparent bg-white"
+      }`}
+    >
       <div className="mx-auto flex items-center justify-between px-8 py-4">
         <Link href="/" className="flex items-center gap-2" onClick={() => setIsOpen(false)}>
           <Image src="/logo.png" alt="Clínica ROE" width={44} height={44} preload />
@@ -46,35 +60,41 @@ export default function Navbar() {
           aria-label={isOpen ? "Fechar menu" : "Abrir menu"}
           aria-expanded={isOpen}
           onClick={() => setIsOpen((prev) => !prev)}
-          className="flex h-10 w-10 items-center justify-center rounded-md text-gray-900 md:hidden"
+          className="relative flex h-10 w-10 items-center justify-center rounded-md text-gray-900 md:hidden"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={2}
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="h-6 w-6"
-          >
-            {isOpen ? (
-              <path d="M18 6 6 18M6 6l12 12" />
-            ) : (
-              <path d="M3 6h18M3 12h18M3 18h18" />
-            )}
-          </svg>
+          <span
+            className={`absolute h-0.5 w-6 rounded-full bg-current transition-all duration-300 ease-in-out ${
+              isOpen ? "translate-y-0 rotate-45" : "-translate-y-1.5 rotate-0"
+            }`}
+          />
+          <span
+            className={`absolute h-0.5 w-6 rounded-full bg-current transition-all duration-200 ease-in-out ${
+              isOpen ? "scale-x-0 opacity-0" : "scale-x-100 opacity-100"
+            }`}
+          />
+          <span
+            className={`absolute h-0.5 w-6 rounded-full bg-current transition-all duration-300 ease-in-out ${
+              isOpen ? "translate-y-0 -rotate-45" : "translate-y-1.5 rotate-0"
+            }`}
+          />
         </button>
       </div>
 
-      {isOpen && (
-        <nav className="flex flex-col gap-1 border-t border-gray-100 px-6 py-4 md:hidden">
-          {NAV_LINKS.map((link) => (
+      <div
+        className={`overflow-hidden transition-all duration-300 ease-in-out md:hidden ${
+          isOpen ? "max-h-[28rem] opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <nav className="flex flex-col gap-2 border-t border-gray-100 px-6 py-4 shadow-lg">
+          {NAV_LINKS.map((link, index) => (
             <Link
               key={link.label}
               href={link.href}
               onClick={() => setIsOpen(false)}
-              className="rounded-md px-2 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900"
+              style={{ transitionDelay: isOpen ? `${index * 60}ms` : "0ms" }}
+              className={`rounded-lg px-4 py-4 text-lg font-medium text-gray-700 transition-all duration-300 ease-out active:bg-gray-100 ${
+                isOpen ? "translate-y-0 opacity-100" : "-translate-y-2 opacity-0"
+              }`}
             >
               {link.label}
             </Link>
@@ -82,12 +102,22 @@ export default function Navbar() {
           <Link
             href="#contato"
             onClick={() => setIsOpen(false)}
-            className="mt-2 rounded-full bg-black px-5 py-2 text-center text-sm font-medium text-white hover:bg-gray-800"
+            style={{ transitionDelay: isOpen ? `${NAV_LINKS.length * 60}ms` : "0ms" }}
+            className={`mt-2 rounded-full bg-black px-5 py-4 text-center text-lg font-semibold text-white transition-all duration-300 ease-out active:bg-gray-800 ${
+              isOpen ? "translate-y-0 opacity-100" : "-translate-y-2 opacity-0"
+            }`}
           >
             Agendar Exame
           </Link>
+          <div
+            className={`mx-auto mt-3 h-1 w-10 rounded-full bg-gray-200 transition-opacity duration-300 ${
+              isOpen ? "opacity-100" : "opacity-0"
+            }`}
+            style={{ transitionDelay: isOpen ? `${(NAV_LINKS.length + 1) * 60}ms` : "0ms" }}
+            aria-hidden="true"
+          />
         </nav>
-      )}
+      </div>
     </header>
   );
 }
