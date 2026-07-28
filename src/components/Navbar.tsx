@@ -32,7 +32,7 @@ export default function Navbar() {
     >
       <div className="mx-auto flex items-center justify-between px-8 py-4">
         <Link href="/" className="flex items-center gap-2" onClick={() => setIsOpen(false)}>
-          <Image src="/logo.png" alt="Clínica ROE" width={44} height={44} preload />
+          <Image src="/logo.webp" alt="Clínica ROE" width={100} height={100} preload />
           <span className="text-[22px] font-bold text-gray-900">Clínica ROE</span>
         </Link>
 
