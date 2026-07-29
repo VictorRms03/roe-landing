@@ -1,5 +1,7 @@
 "use client";
 
+
+import { useRef, useState, type FormEvent, type MouseEvent, type ReactNode } from "react";
 import type { FormEvent, ReactNode } from "react";
 import { UNITS } from "@/data/units";
 
@@ -62,6 +64,52 @@ function formatDate(value: string) {
   return day ? `${day}/${month}/${year}` : value;
 }
 
+
+function buildChatUrl(form: HTMLFormElement) {
+  const data = new FormData(form);
+  const unit = BOOKABLE_UNITS.find((candidate) => candidate.id === data.get("unidade"));
+  if (!unit?.whatsapp) return null;
+
+  const message = [
+    "Olá! Gostaria de agendar um exame.",
+    "",
+    `Nome: ${data.get("nome")}`,
+    `E-mail: ${data.get("email")}`,
+    `Data desejada: ${formatDate(String(data.get("data")))}`,
+    `Tipo de exame: ${data.get("tipo")}`,
+    `Unidade: ${unit.shortName}`,
+  ].join("\n");
+
+  return `https://wa.me/${unit.whatsapp}?text=${encodeURIComponent(message)}`;
+}
+
+export default function BookingForm() {
+  const formRef = useRef<HTMLFormElement>(null);
+  const [chatUrl, setChatUrl] = useState<string | null>(null);
+
+  function syncChatUrl() {
+    if (formRef.current) setChatUrl(buildChatUrl(formRef.current));
+  }
+
+  function handleClick(event: MouseEvent<HTMLAnchorElement>) {
+    // Native validation still gates the action, even though this is a link.
+    if (!formRef.current?.reportValidity() || !chatUrl) event.preventDefault();
+  }
+
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (formRef.current?.reportValidity() && chatUrl) window.location.assign(chatUrl);
+  }
+
+  return (
+    <form
+      ref={formRef}
+      onChange={syncChatUrl}
+      onInput={syncChatUrl}
+      onSubmit={handleSubmit}
+      className="mt-6 flex flex-col gap-3"
+    >
+=======
 export default function BookingForm() {
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -82,8 +130,6 @@ export default function BookingForm() {
 
     const url = `https://wa.me/${unit.whatsapp}?text=${encodeURIComponent(message)}`;
 
-    // This runs from a submit gesture, so it is not treated as a pop-up. The
-    // fallback covers browsers that block it anyway.
     const opened = window.open(url, "_blank", "noopener,noreferrer");
     if (!opened) window.location.href = url;
   }
@@ -122,6 +168,18 @@ export default function BookingForm() {
         ))}
       </Select>
 
+      <a
+        href={chatUrl ?? "#"}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={handleClick}
+        className="mt-3 block rounded-lg bg-black px-5 py-3 text-center text-sm font-semibold text-roe-white transition-colors duration-200 outline-none hover:bg-roe-yellow hover:text-gray-900 focus-visible:ring-2 focus-visible:ring-roe-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-roe-gray"
+      >
+        Enviar pelo WhatsApp
+      </a>
+
+      <p className="text-xs leading-relaxed text-gray-600">
+        O WhatsApp abre com a mensagem pronta para você conferir e confirmar.
       <button
         type="submit"
         className="mt-3 rounded-lg bg-black px-5 py-3 text-sm font-semibold text-roe-white transition-colors duration-200 hover:bg-roe-yellow hover:text-gray-900"
