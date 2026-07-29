@@ -17,7 +17,7 @@ export default function Hero() {
         </div>
 
         <div className="mt-10 grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
-          <div className="rounded-2xl bg-roe-gray p-6 sm:p-8">
+          <div id="agendar" className="scroll-mt-32 rounded-2xl bg-roe-gray p-6 sm:p-8">
             <h2 className="text-xl font-semibold text-gray-900">Agende Seu Exame</h2>
             <BookingForm />
           </div>
