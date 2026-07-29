@@ -1,23 +1,5 @@
 import Image from "next/image";
-
-const FIELDS = [
-  { id: "nome", label: "Nome Completo", type: "text" },
-  { id: "email", label: "E-mail", type: "email" },
-  { id: "data", label: "Data", type: "date" },
-];
-
-const EXAM_TYPES = [
-  "Panorâmica",
-  "Periapical",
-  "Interproximal",
-  "Oclusal",
-  "Telerradiografia",
-  "Tomografia",
-  "Documentação Ortodôntica",
-];
-
-const FIELD_CLASS =
-  "w-full rounded-lg bg-roe-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-500 outline-none transition-shadow duration-200 focus:ring-2 focus:ring-roe-yellow";
+import BookingForm from "@/components/BookingForm";
 
 export default function Hero() {
   return (
@@ -37,60 +19,7 @@ export default function Hero() {
         <div className="mt-10 grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
           <div className="rounded-2xl bg-roe-gray p-6 sm:p-8">
             <h2 className="text-xl font-semibold text-gray-900">Agende Seu Exame</h2>
-            <form className="mt-6 flex flex-col gap-3">
-              {FIELDS.map((field) => (
-                <div key={field.id}>
-                  <label htmlFor={field.id} className="sr-only">
-                    {field.label}
-                  </label>
-                  <input
-                    id={field.id}
-                    name={field.id}
-                    type={field.type}
-                    placeholder={field.label}
-                    className={FIELD_CLASS}
-                  />
-                </div>
-              ))}
-
-              <div className="relative">
-                <label htmlFor="tipo" className="sr-only">
-                  Tipo de Exame
-                </label>
-                <select
-                  id="tipo"
-                  name="tipo"
-                  defaultValue=""
-                  required
-                  className={`${FIELD_CLASS} appearance-none pr-10 invalid:text-gray-500`}
-                >
-                  <option value="" disabled>
-                    Tipo de Exame
-                  </option>
-                  {EXAM_TYPES.map((exam) => (
-                    <option key={exam} value={exam}>
-                      {exam}
-                    </option>
-                  ))}
-                </select>
-                <svg
-                  viewBox="0 0 16 16"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  aria-hidden="true"
-                  className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500"
-                >
-                  <path d="M4 6l4 4 4-4" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </div>
-              <button
-                type="submit"
-                className="mt-3 rounded-lg bg-black px-5 py-3 text-sm font-semibold text-roe-white transition-colors duration-200 hover:bg-roe-yellow hover:text-gray-900"
-              >
-                Enviar
-              </button>
-            </form>
+            <BookingForm />
           </div>
 
           <div className="relative aspect-4/3 overflow-hidden rounded-2xl lg:aspect-auto">
