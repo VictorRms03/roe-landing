@@ -14,7 +14,6 @@ export default function Home() {
       <Clinics />
       <Insurance />
       <Faq />
-      <Faq />
     </>
   );
 }
