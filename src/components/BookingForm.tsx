@@ -1,6 +1,8 @@
 "use client";
 
+
 import { useRef, useState, type FormEvent, type MouseEvent, type ReactNode } from "react";
+import type { FormEvent, ReactNode } from "react";
 import { UNITS } from "@/data/units";
 
 const FIELDS = [
@@ -62,6 +64,7 @@ function formatDate(value: string) {
   return day ? `${day}/${month}/${year}` : value;
 }
 
+
 function buildChatUrl(form: HTMLFormElement) {
   const data = new FormData(form);
   const unit = BOOKABLE_UNITS.find((candidate) => candidate.id === data.get("unidade"));
@@ -82,10 +85,6 @@ function buildChatUrl(form: HTMLFormElement) {
 
 export default function BookingForm() {
   const formRef = useRef<HTMLFormElement>(null);
-  // Kept in sync with the fields so the anchor below always carries a current
-  // href. The submit control has to be a real link the person clicks
-  // themselves: a scripted click on target="_blank" counts as a pop-up and
-  // browsers (and extensions) block it silently.
   const [chatUrl, setChatUrl] = useState<string | null>(null);
 
   function syncChatUrl() {
@@ -98,8 +97,6 @@ export default function BookingForm() {
   }
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    // Reached by pressing Enter in a field. Navigating the current tab is the
-    // one hand-off no pop-up blocker can refuse, so Enter is never a dead key.
     event.preventDefault();
     if (formRef.current?.reportValidity() && chatUrl) window.location.assign(chatUrl);
   }
@@ -112,6 +109,33 @@ export default function BookingForm() {
       onSubmit={handleSubmit}
       className="mt-6 flex flex-col gap-3"
     >
+=======
+export default function BookingForm() {
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const data = new FormData(event.currentTarget);
+    const unit = BOOKABLE_UNITS.find((candidate) => candidate.id === data.get("unidade"));
+    if (!unit?.whatsapp) return;
+
+    const message = [
+      "Olá! Gostaria de agendar um exame.",
+      "",
+      `Nome: ${data.get("nome")}`,
+      `E-mail: ${data.get("email")}`,
+      `Data desejada: ${formatDate(String(data.get("data")))}`,
+      `Tipo de exame: ${data.get("tipo")}`,
+      `Unidade: ${unit.shortName}`,
+    ].join("\n");
+
+    const url = `https://wa.me/${unit.whatsapp}?text=${encodeURIComponent(message)}`;
+
+    const opened = window.open(url, "_blank", "noopener,noreferrer");
+    if (!opened) window.location.href = url;
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="mt-6 flex flex-col gap-3">
       {FIELDS.map((field) => (
         <div key={field.id}>
           <label htmlFor={field.id} className="sr-only">
@@ -156,6 +180,15 @@ export default function BookingForm() {
 
       <p className="text-xs leading-relaxed text-gray-600">
         O WhatsApp abre com a mensagem pronta para você conferir e confirmar.
+      <button
+        type="submit"
+        className="mt-3 rounded-lg bg-black px-5 py-3 text-sm font-semibold text-roe-white transition-colors duration-200 hover:bg-roe-yellow hover:text-gray-900"
+      >
+        Enviar pelo WhatsApp
+      </button>
+
+      <p className="text-xs leading-relaxed text-gray-600">
+        Ao enviar, o WhatsApp abre com a mensagem pronta para você conferir e confirmar.
       </p>
     </form>
   );
