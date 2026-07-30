@@ -9,6 +9,47 @@ const NAV_LINKS = [
   { label: "Dúvidas", href: "#faq" },
 ];
 
+// Full brand badges rather than outlines: colour is what makes these
+// recognisable at a glance, which is the whole job of a social icon.
+const SOCIAL_LINKS = [
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/clinicaroe_/",
+    icon: (
+      <svg viewBox="0 0 24 24" aria-hidden="true" className="size-full">
+        <defs>
+          <linearGradient id="instagram-badge" x1="0" y1="1" x2="1" y2="0">
+            <stop offset="0" stopColor="#FEDA75" />
+            <stop offset="0.25" stopColor="#FA7E1E" />
+            <stop offset="0.5" stopColor="#D62976" />
+            <stop offset="0.75" stopColor="#962FBF" />
+            <stop offset="1" stopColor="#4F5BD5" />
+          </linearGradient>
+        </defs>
+        <rect x="1" y="1" width="22" height="22" rx="6.5" fill="url(#instagram-badge)" />
+        <g fill="none" stroke="#ffffff" strokeWidth="1.5">
+          <rect x="6" y="6" width="12" height="12" rx="3.6" />
+          <circle cx="12" cy="12" r="3.1" />
+        </g>
+        <circle cx="17.1" cy="6.9" r="1" fill="#ffffff" />
+      </svg>
+    ),
+  },
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/roelilian.raiox",
+    icon: (
+      <svg viewBox="0 0 24 24" aria-hidden="true" className="size-full">
+        <circle cx="12" cy="12" r="11" fill="#1877F2" />
+        <path
+          fill="#ffffff"
+          d="M13.5 21.9v-7.2h2.4l.36-2.8h-2.76v-1.79c0-.81.22-1.36 1.39-1.36h1.48V6.25c-.26-.03-1.14-.11-2.16-.11-2.13 0-3.59 1.3-3.59 3.69v2.06H8.2v2.8h2.42v7.2z"
+        />
+      </svg>
+    ),
+  },
+];
+
 export default function Footer() {
   const year = new Date().getFullYear();
 
@@ -32,6 +73,22 @@ export default function Footer() {
             <p className="mt-4 max-w-xs text-sm text-gray-600">
               Radiologia odontológica com imagens de alta definição e atendimento humanizado.
             </p>
+
+            <ul className="mt-5 flex items-center gap-3">
+              {SOCIAL_LINKS.map((social) => (
+                <li key={social.label}>
+                  <a
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${social.label} da Clínica ROE`}
+                    className="block size-11 rounded-xl outline-none transition-transform duration-200 hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-roe-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-roe-white"
+                  >
+                    {social.icon}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
 
           <nav aria-label="Rodapé">
