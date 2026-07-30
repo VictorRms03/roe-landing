@@ -34,7 +34,7 @@ export default function Navbar() {
       {/* Padding outside, max-width inside: the same nesting the sections use, so
           the logo lands on the exact left edge of the headings below it. */}
       <div className="px-6 md:px-12 lg:px-16">
-        <div className="mx-auto flex max-w-7xl items-center justify-between py-4">
+        <div className="mx-auto flex max-w-7xl items-center justify-between py-3 md:py-4">
           <Link
             href="/"
             className="flex items-center gap-2"
@@ -43,9 +43,10 @@ export default function Navbar() {
             <Image
               src="/logo.webp"
               alt="Clínica ROE"
-              width={100}
-              height={100}
+              width={180}
+              height={180}
               preload
+              className="size-8 md:size-[90px]"
             />
             <span className="text-[22px] font-bold text-gray-900">
               Clínica ROE
@@ -118,26 +119,14 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
-          <Link
-            href="#agendar"
-            onClick={() => setIsOpen(false)}
-            style={{
-              transitionDelay: isOpen ? `${NAV_LINKS.length * 60}ms` : "0ms",
-            }}
-            className={`mt-2 rounded-full bg-black px-5 py-4 text-center text-lg font-semibold text-white transition-all duration-300 ease-out active:bg-gray-800 ${
-              isOpen ? "translate-y-0 opacity-100" : "-translate-y-2 opacity-0"
-            }`}
-          >
-            Agendar Exame
-          </Link>
+          {/* No "Agendar Exame" here on purpose: MobileActionBar keeps it on
+              screen at all times, so repeating it in the menu is noise. */}
           <div
             className={`mx-auto mt-3 h-1 w-10 rounded-full bg-gray-200 transition-opacity duration-300 ${
               isOpen ? "opacity-100" : "opacity-0"
             }`}
             style={{
-              transitionDelay: isOpen
-                ? `${(NAV_LINKS.length + 1) * 60}ms`
-                : "0ms",
+              transitionDelay: isOpen ? `${NAV_LINKS.length * 60}ms` : "0ms",
             }}
             aria-hidden="true"
           />
