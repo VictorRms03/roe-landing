@@ -1,4 +1,5 @@
 import Image from "next/image";
+import CountUp from "@/components/CountUp";
 import Reveal from "@/components/Reveal";
 
 const BENEFITS = [
@@ -12,11 +13,13 @@ const BENEFITS = [
   },
 ];
 
+// `target`/`decimals` feed CountUp; `suffix` is static text tacked on after
+// the animated digits (so "K+" or "/5" never gets counted up itself).
 const STATS = [
-  { value: "4.5", suffix: "/5", label: "Avaliação Média" },
-  { value: "30+", label: "Anos de Serviço" },
-  { value: "5K+", label: "Pacientes Atendidos" },
-  { value: "10+", label: "Equipe Especializada" },
+  { target: 4.5, decimals: 1, suffix: "/5", label: "Avaliação Média" },
+  { target: 30, suffix: "+", label: "Anos de Serviço" },
+  { target: 5, suffix: "K+", label: "Pacientes Atendidos" },
+  { target: 10, suffix: "+", label: "Equipe Especializada" },
 ];
 
 export default function Benefits() {
@@ -83,10 +86,8 @@ export default function Benefits() {
               {STATS.map((stat, index) => (
                 <Reveal as="li" key={stat.label} delay={200 + index * 90}>
                   <p className="text-2xl font-bold tracking-tight text-gray-900">
-                    {stat.value}
-                    {stat.suffix && (
-                      <span className="text-lg font-medium text-gray-500">{stat.suffix}</span>
-                    )}
+                    <CountUp to={stat.target} decimals={stat.decimals} />
+                    <span className="text-lg font-medium text-gray-500">{stat.suffix}</span>
                   </p>
                   <p className="text-xs text-gray-800">{stat.label}</p>
                 </Reveal>
