@@ -58,18 +58,25 @@ export default function Hero() {
               <div className="mt-8 flex flex-wrap gap-4">
                 <a
                   href="#agendar"
-                  className="rounded-full bg-black px-6 py-3 text-sm font-semibold text-white shadow-md shadow-black/10 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-gray-800 hover:shadow-lg hover:shadow-black/25 active:translate-y-0 active:shadow-md"
+                  className="rounded-full bg-black px-5 py-2.5 text-[16px] text-white shadow-md shadow-black/10 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-gray-800 hover:shadow-lg hover:shadow-black/25 active:translate-y-0 active:shadow-md"
                 >
                   Agendar Exame
                 </a>
                 <a
                   href="#servicos"
-                  className="group relative overflow-hidden rounded-full bg-roe-gray px-6 py-3 text-sm font-semibold text-gray-900"
+                  className="group inline-flex items-center gap-2 rounded-full border-2 border-transparent bg-roe-gray px-5 py-2.5 text-[16px] font-semibold text-gray-900 transition-all duration-300 ease-out hover:gap-3 hover:border-black hover:bg-transparent"
                 >
-                  <span className="absolute inset-0 origin-left scale-x-0 bg-black transition-transform duration-300 ease-out group-hover:scale-x-100" />
-                  <span className="relative transition-colors duration-300 group-hover:text-white">
-                    Ver Exames
-                  </span>
+                  Ver Exames
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    aria-hidden="true"
+                    className="size-4 transition-transform duration-300 ease-out group-hover:translate-x-0.5"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M13 6l6 6-6 6" />
+                  </svg>
                 </a>
               </div>
             </div>
