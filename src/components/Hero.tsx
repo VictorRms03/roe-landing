@@ -1,5 +1,4 @@
 import Image from "next/image";
-import BookingForm from "@/components/BookingForm";
 
 function PinIcon() {
   return (
@@ -134,13 +133,6 @@ export default function Hero() {
       </section>
 
       <div className="h-10 bg-[#EAE4D7]" aria-hidden="true" />
-
-      <div id="agendar" className="scroll-mt-32 bg-roe-white px-6 py-12 md:px-12 lg:px-16">
-        <div className="mx-auto max-w-xl rounded-2xl bg-roe-gray p-6 sm:p-8">
-          <h2 className="text-xl font-semibold text-gray-900">Agende Seu Exame</h2>
-          <BookingForm />
-        </div>
-      </div>
     </>
   );
 }
