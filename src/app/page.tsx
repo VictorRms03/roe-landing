@@ -1,4 +1,5 @@
 import Benefits from "@/components/Benefits";
+import Booking from "@/components/Booking";
 import Clinics from "@/components/Clinics";
 import Faq from "@/components/Faq";
 import Hero from "@/components/Hero";
@@ -13,6 +14,7 @@ export default function Home() {
       <Benefits />
       <Clinics />
       <Insurance />
+      <Booking />
       <Faq />
     </>
   );
