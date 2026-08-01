@@ -46,31 +46,33 @@ export default function Navbar() {
               width={180}
               height={180}
               preload
-              className="size-8 md:size-[90px]"
+              className="size-8 md:size-14"
             />
             <span className="text-[22px] font-bold text-gray-900">
               Clínica ROE
             </span>
           </Link>
 
-          <nav className="hidden items-center gap-14 md:flex">
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.label}
-                href={link.href}
-                className="relative text-lg font-medium text-gray-700 transition-colors duration-200 hover:text-gray-900 after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-gray-900 after:transition-all after:duration-200 hover:after:w-full"
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
+          <div className="hidden items-center gap-8 md:flex">
+            <nav className="flex items-center gap-6">
+              {NAV_LINKS.map((link) => (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  className="relative text-sm font-medium text-gray-700 transition-colors duration-200 hover:text-gray-900 after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-gray-900 after:transition-all after:duration-200 hover:after:w-full"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
 
-          <Link
-            href="#agendar"
-            className="hidden rounded-full bg-black px-6 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:bg-gray-800 hover:scale-105 md:block"
-          >
-            Agendar Exame
-          </Link>
+            <Link
+              href="#agendar"
+              className="rounded-full bg-black px-6 py-2.5 text-[17px] font-semibold text-white shadow-md shadow-black/10 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-gray-800 hover:shadow-lg hover:shadow-black/25 active:translate-y-0 active:shadow-md"
+            >
+              Agendar Exame
+            </Link>
+          </div>
 
           <button
             type="button"
