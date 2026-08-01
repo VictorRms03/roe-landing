@@ -12,7 +12,7 @@ export default function MobileActionBar() {
       <div className="flex items-center gap-3">
         <Link
           href="#agendar"
-          className="flex-1 rounded-lg bg-black py-3.5 text-center text-sm font-semibold text-roe-white transition-colors duration-200 active:bg-roe-yellow active:text-gray-900"
+          className="flex-1 rounded-lg bg-black py-3.5 text-center text-sm font-semibold text-roe-white transition-[background-color,color,transform] duration-150 ease-out active:scale-[0.98] active:bg-roe-yellow active:text-gray-900"
         >
           Agendar exame
         </Link>
@@ -22,7 +22,7 @@ export default function MobileActionBar() {
         <Link
           href="#clinicas"
           aria-label="Ver o WhatsApp das unidades"
-          className="flex size-12 shrink-0 items-center justify-center rounded-lg bg-[#25d366]"
+          className="flex size-12 shrink-0 items-center justify-center rounded-lg bg-[#25d366] transition-transform duration-150 ease-out active:scale-95"
         >
           <svg viewBox="0 0 24 24" aria-hidden="true" className="size-7">
             <path

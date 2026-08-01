@@ -1,3 +1,5 @@
+import Reveal from "@/components/Reveal";
+
 const QUESTIONS = [
   {
     question: "O exame de raio-x dói?",
@@ -27,19 +29,21 @@ export default function Faq() {
   return (
     <section id="faq" className="scroll-mt-32 bg-roe-white px-6 py-12 md:px-12 lg:px-16">
       <div className="mx-auto max-w-4xl">
-        <h2 className="text-center text-3xl font-bold leading-tight tracking-tight text-gray-900 sm:text-4xl">
-          Perguntas Frequentes
-        </h2>
-        <p className="mt-3 text-center text-sm text-gray-600 sm:text-base">
-          Respostas rápidas para dúvidas comuns.
-        </p>
+        <Reveal>
+          <h2 className="text-center text-3xl font-bold leading-tight tracking-tight text-gray-900 sm:text-4xl">
+            Perguntas Frequentes
+          </h2>
+          <p className="mt-3 text-center text-sm text-gray-600 sm:text-base">
+            Respostas rápidas para dúvidas comuns.
+          </p>
+        </Reveal>
 
-        <div className="mt-10 border-t border-gray-300">
+        <Reveal delay={100} className="mt-10 border-t border-gray-300">
           {QUESTIONS.map((item) => (
             // <details> gives the open/close behaviour, keyboard support and
             // in-page find for free, with no client component involved.
             <details key={item.question} className="group border-b border-gray-300">
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-base font-medium text-gray-900 outline-none [&::-webkit-details-marker]:hidden focus-visible:ring-2 focus-visible:ring-roe-yellow">
+              <summary className="-mx-2 flex cursor-pointer list-none items-center justify-between gap-6 rounded-lg px-2 py-5 text-base font-medium text-gray-900 outline-none transition-colors duration-200 hover:bg-black/[0.03] [&::-webkit-details-marker]:hidden focus-visible:ring-2 focus-visible:ring-roe-yellow">
                 {item.question}
                 <svg
                   viewBox="0 0 24 24"
@@ -49,15 +53,17 @@ export default function Faq() {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   aria-hidden="true"
-                  className="size-5 shrink-0 text-gray-900 transition-transform duration-300 group-open:rotate-180"
+                  className="size-5 shrink-0 text-gray-900 transition-[transform,color] duration-300 group-hover:text-roe-yellow group-open:rotate-180"
                 >
                   <path d="M12 4v16M6 14l6 6 6-6" />
                 </svg>
               </summary>
-              <p className="pb-5 pr-11 text-sm leading-relaxed text-gray-600">{item.answer}</p>
+              <p className="pb-5 pr-11 text-sm leading-relaxed text-gray-600 group-open:animate-fade-in motion-reduce:animate-none">
+                {item.answer}
+              </p>
             </details>
           ))}
-        </div>
+        </Reveal>
       </div>
     </section>
   );

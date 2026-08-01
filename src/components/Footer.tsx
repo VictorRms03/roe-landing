@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import Reveal from "@/components/Reveal";
 import { UNITS } from "@/data/units";
 
 const NAV_LINKS = [
@@ -56,7 +57,7 @@ export default function Footer() {
   return (
     <footer className="border-t border-roe-gray bg-roe-white px-6 py-12 md:px-12 lg:px-16">
       <div className="mx-auto max-w-7xl">
-        <div className="grid gap-10 md:grid-cols-[1.2fr_1fr] lg:grid-cols-[1.2fr_0.8fr_1.4fr]">
+        <Reveal className="grid gap-10 md:grid-cols-[1.2fr_1fr] lg:grid-cols-[1.2fr_0.8fr_1.4fr]">
           <div>
             <Link href="/" className="flex items-center gap-2">
               <Image
@@ -82,7 +83,7 @@ export default function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`${social.label} da Clínica ROE`}
-                    className="block size-11 rounded-xl outline-none transition-transform duration-200 hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-roe-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-roe-white"
+                    className="block size-11 rounded-xl outline-none transition-transform duration-200 ease-out hover:-translate-y-0.5 hover:scale-105 focus-visible:ring-2 focus-visible:ring-roe-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-roe-white"
                   >
                     {social.icon}
                   </a>
@@ -96,9 +97,10 @@ export default function Footer() {
             <ul className="mt-4 flex flex-col gap-2.5">
               {NAV_LINKS.map((link) => (
                 <li key={link.href}>
+                  {/* Same growing underline the header links use. */}
                   <Link
                     href={link.href}
-                    className="text-sm text-gray-600 transition-colors duration-200 hover:text-gray-900"
+                    className="relative inline-block text-sm text-gray-600 transition-colors duration-200 hover:text-gray-900 after:absolute after:-bottom-0.5 after:left-0 after:h-0.5 after:w-0 after:bg-gray-900 after:transition-all after:duration-200 hover:after:w-full"
                   >
                     {link.label}
                   </Link>
@@ -129,7 +131,7 @@ export default function Footer() {
               ))}
             </ul>
           </div>
-        </div>
+        </Reveal>
 
         {/* TODO: add CNPJ and the responsável técnico with their CRO once confirmed. */}
         <p className="mt-10 border-t border-roe-gray pt-6 text-xs text-gray-500">

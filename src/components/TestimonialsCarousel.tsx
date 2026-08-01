@@ -51,7 +51,7 @@ const CARD_STATE = {
 };
 
 const ARROW_CLASS =
-  "flex size-11 items-center justify-center rounded-full border border-black/10 bg-white text-gray-900 outline-none transition-colors duration-200 ease-out hover:bg-roe-yellow focus-visible:ring-2 focus-visible:ring-roe-yellow focus-visible:ring-offset-2";
+  "flex size-11 items-center justify-center rounded-full border border-black/10 bg-white text-gray-900 outline-none transition-[background-color,transform] duration-200 ease-out hover:scale-105 hover:bg-roe-yellow active:scale-95 focus-visible:ring-2 focus-visible:ring-roe-yellow focus-visible:ring-offset-2";
 
 // Width of one copy of the list, gap included. Measuring two siblings' offsetLeft
 // dodges the trailing-margin quirks of a flex scroll container, and transforms do

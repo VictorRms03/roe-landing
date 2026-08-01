@@ -19,8 +19,10 @@ const EXAM_TYPES = [
   "Documentação Ortodôntica",
 ];
 
+// Tailwind orders `hover:` before `focus:`, so the yellow focus ring still wins
+// over the hover one when a pointer rests on the focused field.
 const FIELD_CLASS =
-  "w-full rounded-lg bg-roe-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-500 outline-none transition-shadow duration-200 focus:ring-2 focus:ring-roe-yellow";
+  "w-full rounded-lg bg-roe-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-500 outline-none transition-shadow duration-200 hover:ring-2 hover:ring-black/5 focus:ring-2 focus:ring-roe-yellow";
 
 // A unit with no WhatsApp number has nowhere to send the booking.
 const BOOKABLE_UNITS = UNITS.filter((unit) => unit.whatsapp !== null);
@@ -143,7 +145,7 @@ export default function BookingForm() {
         target="_blank"
         rel="noopener noreferrer"
         onClick={handleClick}
-        className="mt-3 block rounded-lg bg-black px-5 py-3 text-center text-sm font-semibold text-roe-white transition-colors duration-200 outline-none hover:bg-roe-yellow hover:text-gray-900 focus-visible:ring-2 focus-visible:ring-roe-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-roe-gray"
+        className="mt-3 block rounded-lg bg-black px-5 py-3 text-center text-sm font-semibold text-roe-white shadow-md shadow-black/10 transition-all duration-300 ease-out outline-none hover:-translate-y-0.5 hover:bg-roe-yellow hover:text-gray-900 hover:shadow-lg hover:shadow-black/20 active:translate-y-0 active:shadow-md focus-visible:ring-2 focus-visible:ring-roe-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-roe-gray"
       >
         Enviar pelo WhatsApp
       </a>
