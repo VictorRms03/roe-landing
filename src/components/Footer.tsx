@@ -92,7 +92,7 @@ export default function Footer() {
           </div>
 
           <nav aria-label="Rodapé">
-            <h2 className="text-sm font-semibold text-gray-900">Navegue</h2>
+            <h3 className="text-sm font-semibold text-gray-900">Navegue</h3>
             <ul className="mt-4 flex flex-col gap-2.5">
               {NAV_LINKS.map((link) => (
                 <li key={link.href}>
@@ -108,7 +108,7 @@ export default function Footer() {
           </nav>
 
           <div>
-            <h2 className="text-sm font-semibold text-gray-900">Unidades</h2>
+            <h3 className="text-sm font-semibold text-gray-900">Unidades</h3>
             <ul className="mt-4 grid gap-6 sm:grid-cols-2">
               {UNITS.map((unit) => (
                 <li key={unit.id} className="text-sm text-gray-600">
