@@ -20,14 +20,15 @@ const STATS = [
 
 export default function Benefits() {
   return (
-    <section id="beneficios" className="scroll-mt-32 bg-roe-white px-6 py-12 md:px-12 lg:px-16">
+    <section id="beneficios" className="scroll-mt-32 bg-[#EAE4D7] px-6 py-12 md:px-12 lg:px-16">
       <div className="mx-auto max-w-7xl">
-        <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr_auto] lg:items-center lg:gap-12">
+        <div className="grid gap-10 lg:grid-cols-[1.05fr_auto] lg:items-center lg:gap-12">
           <div>
-            <h2 className="text-3xl font-bold leading-tight tracking-tight text-gray-900 sm:text-4xl">
+            <p className="text-2xl font-semibold text-roe-yellow sm:text-3xl">Diferenciais</p>
+            <h2 className="mt-2 text-3xl font-bold leading-tight tracking-tight text-black sm:text-4xl">
               Por que escolher a clínica ROE?
             </h2>
-            <p className="mt-3 max-w-md text-sm text-gray-600 sm:text-base">
+            <p className="mt-3 max-w-md text-xs text-black sm:text-sm">
               Confiada por milhares de pacientes para exames precisos e humanizados.
             </p>
 
@@ -42,42 +43,50 @@ export default function Benefits() {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     aria-hidden="true"
-                    className="mt-0.5 size-5 shrink-0 text-roe-yellow"
+                    className="mt-0.5 size-[22px] shrink-0 text-roe-yellow"
                   >
                     <path d="M4 12.5 9.5 18 20 6.5" />
                   </svg>
                   <div>
-                    <h3 className="text-base font-semibold text-gray-900">{benefit.title}</h3>
-                    <p className="mt-1 text-sm text-gray-600">{benefit.description}</p>
+                    <h3 className="text-lg font-semibold text-black">{benefit.title}</h3>
+                    <p className="mt-1 text-sm text-black">{benefit.description}</p>
                   </div>
                 </li>
               ))}
             </ul>
           </div>
 
-          <div className="relative aspect-4/3 overflow-hidden rounded-2xl">
-            <Image
-              src="/images/benefits/exame-4.webp"
-              alt="Paciente posicionada em um aparelho de raio-x panorâmico"
-              fill
-              sizes="(min-width: 1024px) 33vw, 100vw"
-              className="object-cover"
-            />
-          </div>
+          <div className="flex items-center gap-6 lg:gap-6">
+            <div className="relative">
+              <div className="relative aspect-[4/2.6] w-full overflow-hidden rounded-2xl shadow-xl lg:w-[380px]">
+                <Image
+                  src="/images/benefits/exame-4.webp"
+                  alt="Paciente posicionada em um aparelho de raio-x panorâmico"
+                  fill
+                  sizes="(min-width: 1024px) 33vw, 100vw"
+                  className="object-cover"
+                />
+              </div>
+              <div
+                className="absolute -right-[14px] inset-y-3 hidden w-1 rounded-full bg-roe-yellow lg:block"
+                aria-hidden="true"
+              />
+            </div>
 
-          <ul className="grid grid-cols-2 gap-6 sm:grid-cols-4 lg:grid-cols-1 lg:gap-9">
-            {STATS.map((stat) => (
-              <li key={stat.label}>
-                <p className="text-3xl font-bold tracking-tight text-gray-900">
-                  {stat.value}
-                  {stat.suffix && (
-                    <span className="text-lg font-medium text-gray-500">{stat.suffix}</span>
-                  )}
-                </p>
-                <p className="mt-1 text-xs text-gray-600">{stat.label}</p>
-              </li>
-            ))}
-          </ul>
+            <ul className="grid grid-cols-2 gap-6 sm:grid-cols-4 lg:h-[247px] lg:flex lg:flex-col lg:justify-between lg:gap-0">
+              {STATS.map((stat) => (
+                <li key={stat.label}>
+                  <p className="text-2xl font-bold tracking-tight text-gray-900">
+                    {stat.value}
+                    {stat.suffix && (
+                      <span className="text-lg font-medium text-gray-500">{stat.suffix}</span>
+                    )}
+                  </p>
+                  <p className="text-xs text-gray-800">{stat.label}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </section>
