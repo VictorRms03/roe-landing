@@ -57,7 +57,7 @@ export default function Benefits() {
 
           <div className="relative aspect-4/3 overflow-hidden rounded-2xl">
             <Image
-              src="/images/hero/exame-2.webp"
+              src="/images/benefits/exame-4.webp"
               alt="Paciente posicionada em um aparelho de raio-x panorâmico"
               fill
               sizes="(min-width: 1024px) 33vw, 100vw"
