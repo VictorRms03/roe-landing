@@ -56,9 +56,9 @@ export default function Benefits() {
             </ul>
           </div>
 
-          <div className="flex items-center gap-6 lg:gap-6">
+          <div className="flex items-center gap-8 lg:gap-8">
             <div className="relative">
-              <div className="relative aspect-[4/2.6] w-full overflow-hidden rounded-2xl shadow-xl lg:w-[380px]">
+              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-xl lg:w-[380px]">
                 <Image
                   src="/images/benefits/exame-4.webp"
                   alt="Paciente posicionada em um aparelho de raio-x panorâmico"
@@ -68,12 +68,12 @@ export default function Benefits() {
                 />
               </div>
               <div
-                className="absolute -right-[14px] inset-y-3 hidden w-1 rounded-full bg-roe-yellow lg:block"
+                className="absolute -right-[18px] inset-y-3 hidden w-1 rounded-full bg-roe-yellow lg:block"
                 aria-hidden="true"
               />
             </div>
 
-            <ul className="grid grid-cols-2 gap-6 sm:grid-cols-4 lg:h-[247px] lg:flex lg:flex-col lg:justify-between lg:gap-0">
+            <ul className="grid grid-cols-2 gap-6 sm:grid-cols-4 lg:h-[285px] lg:flex lg:flex-col lg:justify-between lg:gap-0">
               {STATS.map((stat) => (
                 <li key={stat.label}>
                   <p className="text-2xl font-bold tracking-tight text-gray-900">
