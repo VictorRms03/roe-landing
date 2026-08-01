@@ -82,35 +82,41 @@ export default function Services() {
   return (
     <section id="servicos" className="scroll-mt-32 bg-roe-white px-6 py-12 md:px-12 lg:px-16">
       <div className="mx-auto max-w-7xl">
-        <h2 className="text-3xl font-bold leading-tight tracking-tight text-gray-900 sm:text-4xl">
-          Exames de Raio-x para Cada Necessidade
+        <p className="text-2xl font-semibold text-roe-yellow sm:text-3xl">Exames</p>
+        <h2 className="mt-2 text-3xl font-bold leading-tight tracking-tight text-black sm:text-4xl">
+          Raio-x para Cada Necessidade
         </h2>
-        <p className="mt-3 max-w-xl text-sm text-gray-600 sm:text-base">
+        <p className="max-w-xl text-sm text-black sm:max-w-none sm:whitespace-nowrap sm:text-base">
           Tecnologia avançada de imagem para todo tipo de diagnóstico odontológico.
         </p>
 
-        <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {EXAMS.map((exam) => (
-            <li key={exam.name} className="rounded-2xl bg-roe-gray p-6">
-              <span className="flex size-12 items-center justify-center rounded-xl bg-roe-yellow">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.6"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                  className="size-7 text-gray-900"
-                >
-                  {exam.icon}
-                </svg>
-              </span>
-              <h3 className="mt-6 text-lg font-semibold text-gray-900">{exam.name}</h3>
-              <p className="mt-1.5 text-sm text-gray-600">{exam.description}</p>
-            </li>
-          ))}
-        </ul>
+        <div className="mt-5">
+          <ul className="grid gap-12 sm:grid-cols-2 lg:grid-cols-3">
+            {EXAMS.map((exam) => (
+              <li
+                key={exam.name}
+                className="rounded-3xl bg-[#D5CBB3] px-8 py-6 shadow-[0_2px_5px_rgba(0,0,0,0.12)]"
+              >
+                <span className="flex size-16 items-center justify-center rounded-xl bg-roe-yellow">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                    className="size-9 text-gray-900"
+                  >
+                    {exam.icon}
+                  </svg>
+                </span>
+                <h3 className="mt-6 text-lg font-semibold text-black">{exam.name}</h3>
+                <p className="mt-1.5 text-sm text-black">{exam.description}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
   );
