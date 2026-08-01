@@ -5,4 +5,37 @@
   --color-roe-gray: #d9d9d9;
   --color-roe-white: #fefdff;
   --color-roe-yellow: #e6af2e;
+
+  --animate-fade-up: fade-up 600ms ease-out both;
+  --animate-fade-in: fade-in 400ms ease-out both;
+}
+
+/* Declared outside @theme so they are emitted as plain CSS, independent of how
+   `inline` resolves the tokens above. */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Only on <html>. A wider selector would also animate the `scrollLeft` the
+   testimonials carousel sets by hand, breaking its infinite-loop rewind. */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }

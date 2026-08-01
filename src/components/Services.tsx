@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import Reveal from "@/components/Reveal";
 
 type Exam = {
   name: string;
@@ -82,38 +83,41 @@ export default function Services() {
   return (
     <section id="servicos" className="scroll-mt-32 bg-roe-white px-6 py-12 md:px-12 lg:px-16">
       <div className="mx-auto max-w-7xl">
-        <p className="text-2xl font-semibold text-roe-yellow sm:text-3xl">Exames</p>
-        <h2 className="mt-2 text-3xl font-bold leading-tight tracking-tight text-black sm:text-4xl">
-          Raio-x para Cada Necessidade
-        </h2>
-        <p className="max-w-xl text-sm text-black sm:max-w-none sm:whitespace-nowrap sm:text-base">
-          Tecnologia avançada de imagem para todo tipo de diagnóstico odontológico.
-        </p>
+        <Reveal>
+          <p className="text-2xl font-semibold text-roe-yellow sm:text-3xl">Exames</p>
+          <h2 className="mt-2 text-3xl font-bold leading-tight tracking-tight text-black sm:text-4xl">
+            Raio-x para Cada Necessidade
+          </h2>
+          <p className="max-w-xl text-sm text-black sm:max-w-none sm:whitespace-nowrap sm:text-base">
+            Tecnologia avançada de imagem para todo tipo de diagnóstico odontológico.
+          </p>
+        </Reveal>
 
         <div className="mt-5">
           <ul className="grid gap-12 sm:grid-cols-2 lg:grid-cols-3">
-            {EXAMS.map((exam) => (
-              <li
-                key={exam.name}
-                className="rounded-3xl bg-[#D5CBB3] px-8 py-6 shadow-[0_2px_5px_rgba(0,0,0,0.12)]"
-              >
-                <span className="flex size-16 items-center justify-center rounded-xl bg-roe-yellow">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.6"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                    className="size-9 text-gray-900"
-                  >
-                    {exam.icon}
-                  </svg>
-                </span>
-                <h3 className="mt-6 text-lg font-semibold text-black">{exam.name}</h3>
-                <p className="mt-1.5 text-sm text-black">{exam.description}</p>
-              </li>
+            {EXAMS.map((exam, index) => (
+              // Reveal owns the transform of the li, so the hover lift lives on
+              // the card inside it — h-full because the li is what stretches.
+              <Reveal as="li" key={exam.name} delay={index * 80}>
+                <div className="group h-full rounded-3xl bg-[#D5CBB3] px-8 py-6 shadow-[0_2px_5px_rgba(0,0,0,0.12)] transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_10px_24px_rgba(0,0,0,0.16)]">
+                  <span className="flex size-16 items-center justify-center rounded-xl bg-roe-yellow transition-transform duration-300 ease-out group-hover:scale-110">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.6"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                      className="size-9 text-gray-900"
+                    >
+                      {exam.icon}
+                    </svg>
+                  </span>
+                  <h3 className="mt-6 text-lg font-semibold text-black">{exam.name}</h3>
+                  <p className="mt-1.5 text-sm text-black">{exam.description}</p>
+                </div>
+              </Reveal>
             ))}
           </ul>
         </div>

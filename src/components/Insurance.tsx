@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Reveal from "@/components/Reveal";
 
 // Fill this in with the accepted plans and the section renders the list instead
 // of the "ask us" message below. Nothing else needs to change.
@@ -8,7 +9,7 @@ export default function Insurance() {
   return (
     <section id="convenios" className="scroll-mt-32 bg-roe-white px-6 py-12 md:px-12 lg:px-16">
       <div className="mx-auto max-w-7xl">
-        <div className="rounded-2xl bg-roe-gray p-6 sm:p-8">
+        <Reveal className="rounded-2xl bg-roe-gray p-6 sm:p-8">
           <h2 className="text-xl font-semibold text-gray-900">Convênios</h2>
 
           {INSURERS.length > 0 ? (
@@ -31,11 +32,11 @@ export default function Insurance() {
 
           <Link
             href="#clinicas"
-            className="mt-5 inline-block rounded-lg bg-black px-5 py-3 text-sm font-semibold text-roe-white transition-colors duration-200 hover:bg-roe-yellow hover:text-gray-900"
+            className="mt-5 inline-block rounded-lg bg-black px-5 py-3 text-sm font-semibold text-roe-white shadow-md shadow-black/10 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-roe-yellow hover:text-gray-900 hover:shadow-lg hover:shadow-black/20 active:translate-y-0 active:shadow-md"
           >
             Ver contatos das unidades
           </Link>
-        </div>
+        </Reveal>
       </div>
     </section>
   );
