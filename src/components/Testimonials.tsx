@@ -7,7 +7,7 @@ export default function Testimonials() {
       <section id="depoimentos" className="scroll-mt-32 bg-roe-white py-12">
         <div className="mx-auto max-w-7xl px-6 md:px-12 lg:px-16">
           <h2 className="text-center text-3xl font-bold leading-tight tracking-tight text-black sm:text-4xl">
-            O que nossos clientes dizem
+            O Que Nossos Clientes Dizem?
           </h2>
         </div>
 
