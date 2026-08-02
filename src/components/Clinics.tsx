@@ -2,6 +2,9 @@ import Image from "next/image";
 import { ClockIcon, PinIcon, RouteIcon } from "@/components/Icons";
 import Reveal from "@/components/Reveal";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
+import Section from "@/components/ui/Section";
+import SectionHeader from "@/components/ui/SectionHeader";
+import WhatsAppLink from "@/components/ui/WhatsAppLink";
 import { UNITS } from "@/data/units";
 
 // Ink rather than the brand yellow this section used to be: the Mogi Guaçu
@@ -17,30 +20,29 @@ export default function Clinics() {
           scroll-mt-32 expects it. */}
       <div className="h-1 bg-roe-yellow" aria-hidden="true" />
 
-      <section
+      <Section
         id="clinicas"
-        className="relative scroll-mt-32 overflow-hidden bg-roe-ink px-6 py-16 md:px-12 lg:px-16"
+        className="relative overflow-hidden bg-roe-ink py-16"
+        containerClassName="relative max-w-7xl"
+        bleed={
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-x-0 top-0 h-[420px]"
+            style={{
+              backgroundImage:
+                "radial-gradient(50% 100% at 50% 0%, rgba(230,175,46,0.16) 0%, rgba(230,175,46,0) 70%)",
+            }}
+          />
+        }
       >
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 top-0 h-[420px]"
-          style={{
-            backgroundImage:
-              "radial-gradient(50% 100% at 50% 0%, rgba(230,175,46,0.16) 0%, rgba(230,175,46,0) 70%)",
-          }}
+        <SectionHeader
+          className="max-w-2xl"
+          eyebrow="Unidades"
+          title="Nossas Clínicas"
+          description="Duas unidades no centro de Mogi Guaçu e Mogi Mirim, com o mesmo padrão de exame e atendimento."
+          titleClassName="text-roe-white"
+          descriptionClassName="mt-3 text-sm text-white/70 sm:text-base"
         />
-
-        <div className="relative mx-auto max-w-7xl">
-          <Reveal className="max-w-2xl">
-            <p className="text-2xl font-semibold text-roe-yellow sm:text-3xl">Unidades</p>
-            <h2 className="mt-2 text-3xl leading-tight font-bold tracking-tight text-roe-white sm:text-4xl">
-              Nossas Clínicas
-            </h2>
-            <p className="mt-3 text-sm text-white/70 sm:text-base">
-              Duas unidades no centro de Mogi Guaçu e Mogi Mirim, com o mesmo padrão de exame e
-              atendimento.
-            </p>
-          </Reveal>
 
           {/* Full-width rows, not a 2-up grid: at 2-up the image column of a split
               card is only ~237px, which is the cramped shape that made these look
@@ -119,16 +121,14 @@ export default function Clinics() {
                           obvious button — not the floating badge it replaced,
                           which sat on top of the address text. */}
                       {unit.whatsapp && (
-                        <a
-                          href={`https://wa.me/${unit.whatsapp}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          aria-label={`Falar com a ${unit.name} no WhatsApp`}
+                        <WhatsAppLink
+                          phone={unit.whatsapp}
+                          unitName={unit.name}
                           className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-semibold text-roe-white outline-none transition-colors duration-200 hover:border-transparent hover:bg-roe-whatsapp focus-visible:ring-2 focus-visible:ring-roe-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-roe-ink"
                         >
                           <WhatsAppIcon className="size-4" />
                           WhatsApp
-                        </a>
+                        </WhatsAppLink>
                       )}
                     </div>
                   </div>
@@ -136,8 +136,7 @@ export default function Clinics() {
               </Reveal>
             ))}
           </ul>
-        </div>
-      </section>
+      </Section>
 
       <div className="h-1 bg-roe-yellow" aria-hidden="true" />
     </>

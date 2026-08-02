@@ -1,4 +1,6 @@
 import Reveal from "@/components/Reveal";
+import Section from "@/components/ui/Section";
+import SectionHeader from "@/components/ui/SectionHeader";
 import { FAQ_ITEMS } from "@/data/faq";
 
 // Feeds Google's FAQ rich result, alongside the Dentist blocks the layout
@@ -18,24 +20,27 @@ const jsonLd = {
 
 export default function Faq() {
   return (
-    <section id="faq" className="scroll-mt-32 bg-roe-white px-6 py-16 md:px-12 lg:px-16">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    <Section
+      id="faq"
+      className="bg-roe-white py-16"
+      containerClassName="max-w-4xl"
+      bleed={
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      }
+    >
+      <SectionHeader
+        eyebrow="Dúvidas"
+        title="Perguntas Frequentes"
+        description="Respostas rápidas para dúvidas comuns."
+        eyebrowClassName="text-center"
+        titleClassName="text-center text-gray-900"
+        descriptionClassName="mt-3 text-center text-sm text-gray-600 sm:text-base"
       />
 
-      <div className="mx-auto max-w-4xl">
-        <Reveal>
-          <p className="text-center text-2xl font-semibold text-roe-yellow sm:text-3xl">Dúvidas</p>
-          <h2 className="mt-2 text-center text-3xl font-bold leading-tight tracking-tight text-gray-900 sm:text-4xl">
-            Perguntas Frequentes
-          </h2>
-          <p className="mt-3 text-center text-sm text-gray-600 sm:text-base">
-            Respostas rápidas para dúvidas comuns.
-          </p>
-        </Reveal>
-
-        <ul className="mt-10 flex flex-col gap-3">
+      <ul className="mt-10 flex flex-col gap-3">
           {FAQ_ITEMS.map((item, index) => (
             <Reveal as="li" key={item.question} delay={index * 80}>
               {/* <details> gives the open/close behaviour, keyboard support and
@@ -64,23 +69,22 @@ export default function Faq() {
           ))}
         </ul>
 
-        {/* The way out for everything the four answers above do not cover. */}
-        <Reveal delay={120} className="mt-10 rounded-3xl bg-roe-sand p-6 text-center sm:p-8">
-          <h3 className="text-lg font-semibold text-gray-900 sm:text-xl">
-            Não encontrou sua dúvida?
-          </h3>
-          <p className="mx-auto mt-2 max-w-md text-sm text-gray-700">
-            Mande sua pergunta junto com o pedido de agendamento — a equipe responde no horário
-            comercial.
-          </p>
-          <a
-            href="#agendar"
-            className="mt-5 inline-block rounded-full bg-black px-6 py-3 text-sm font-semibold text-roe-white shadow-md shadow-black/10 outline-none transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-roe-yellow hover:text-gray-900 hover:shadow-lg hover:shadow-black/20 active:translate-y-0 active:shadow-md focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 focus-visible:ring-offset-roe-sand"
-          >
-            Falar com a gente
-          </a>
-        </Reveal>
-      </div>
-    </section>
+      {/* The way out for anything the answers above do not cover. */}
+      <Reveal delay={120} className="mt-10 rounded-3xl bg-roe-sand p-6 text-center sm:p-8">
+        <h3 className="text-lg font-semibold text-gray-900 sm:text-xl">
+          Não encontrou sua dúvida?
+        </h3>
+        <p className="mx-auto mt-2 max-w-md text-sm text-gray-700">
+          Mande sua pergunta junto com o pedido de agendamento — a equipe responde no horário
+          comercial.
+        </p>
+        <a
+          href="#agendar"
+          className="mt-5 inline-block rounded-full bg-black px-6 py-3 text-sm font-semibold text-roe-white shadow-md shadow-black/10 outline-none transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-roe-yellow hover:text-gray-900 hover:shadow-lg hover:shadow-black/20 active:translate-y-0 active:shadow-md focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 focus-visible:ring-offset-roe-sand"
+        >
+          Falar com a gente
+        </a>
+      </Reveal>
+    </Section>
   );
 }

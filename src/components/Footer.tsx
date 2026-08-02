@@ -1,49 +1,27 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { ReactNode } from "react";
+import {
+  ArrowUpIcon,
+  FacebookIcon,
+  InstagramIcon,
+  type IconProps,
+} from "@/components/Icons";
 import Reveal from "@/components/Reveal";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
+import WhatsAppLink from "@/components/ui/WhatsAppLink";
 import { NAV_LINKS } from "@/data/navigation";
 import { UNITS } from "@/data/units";
 
-// Full brand badges rather than outlines: colour is what makes these
-// recognisable at a glance, which is the whole job of a social icon.
-const SOCIAL_LINKS = [
-  {
-    label: "Instagram",
-    href: "https://www.instagram.com/clinicaroe_/",
-    icon: (
-      <svg viewBox="0 0 24 24" aria-hidden="true" className="size-full">
-        <defs>
-          <linearGradient id="instagram-badge" x1="0" y1="1" x2="1" y2="0">
-            <stop offset="0" stopColor="#FEDA75" />
-            <stop offset="0.25" stopColor="#FA7E1E" />
-            <stop offset="0.5" stopColor="#D62976" />
-            <stop offset="0.75" stopColor="#962FBF" />
-            <stop offset="1" stopColor="#4F5BD5" />
-          </linearGradient>
-        </defs>
-        <rect x="1" y="1" width="22" height="22" rx="6.5" fill="url(#instagram-badge)" />
-        <g fill="none" stroke="#ffffff" strokeWidth="1.5">
-          <rect x="6" y="6" width="12" height="12" rx="3.6" />
-          <circle cx="12" cy="12" r="3.1" />
-        </g>
-        <circle cx="17.1" cy="6.9" r="1" fill="#ffffff" />
-      </svg>
-    ),
-  },
-  {
-    label: "Facebook",
-    href: "https://www.facebook.com/roelilian.raiox",
-    icon: (
-      <svg viewBox="0 0 24 24" aria-hidden="true" className="size-full">
-        <circle cx="12" cy="12" r="11" fill="#1877F2" />
-        <path
-          fill="#ffffff"
-          d="M13.5 21.9v-7.2h2.4l.36-2.8h-2.76v-1.79c0-.81.22-1.36 1.39-1.36h1.48V6.25c-.26-.03-1.14-.11-2.16-.11-2.13 0-3.59 1.3-3.59 3.69v2.06H8.2v2.8h2.42v7.2z"
-        />
-      </svg>
-    ),
-  },
+type SocialLink = {
+  label: string;
+  href: string;
+  Icon: (props: IconProps) => ReactNode;
+};
+
+const SOCIAL_LINKS: SocialLink[] = [
+  { label: "Instagram", href: "https://www.instagram.com/clinicaroe_/", Icon: InstagramIcon },
+  { label: "Facebook", href: "https://www.facebook.com/roelilian.raiox", Icon: FacebookIcon },
 ];
 
 // One shared style for the three column titles.
@@ -83,16 +61,16 @@ export default function Footer() {
               </p>
 
               <ul className="mt-6 flex items-center gap-3">
-                {SOCIAL_LINKS.map((social) => (
-                  <li key={social.label}>
+                {SOCIAL_LINKS.map(({ label, href, Icon }) => (
+                  <li key={label}>
                     <a
-                      href={social.href}
+                      href={href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      aria-label={`${social.label} da Clínica ROE`}
+                      aria-label={`${label} da Clínica ROE`}
                       className="block size-11 rounded-xl outline-none transition-transform duration-200 ease-out hover:-translate-y-0.5 hover:scale-105 focus-visible:ring-2 focus-visible:ring-roe-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-roe-ink"
                     >
-                      {social.icon}
+                      <Icon />
                     </a>
                   </li>
                 ))}
@@ -126,16 +104,14 @@ export default function Footer() {
                     <p className="mt-1.5">{unit.address}</p>
                     <p className="mt-1.5">{unit.hours}</p>
                     {unit.whatsapp && (
-                      <a
-                        href={`https://wa.me/${unit.whatsapp}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={`Falar com a ${unit.name} no WhatsApp`}
+                      <WhatsAppLink
+                        phone={unit.whatsapp}
+                        unitName={unit.name}
                         className="mt-3 inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-2 text-xs font-semibold text-roe-white outline-none transition-colors duration-200 hover:bg-roe-whatsapp focus-visible:ring-2 focus-visible:ring-roe-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-roe-ink"
                       >
                         <WhatsAppIcon className="size-4" />
                         Falar no WhatsApp
-                      </a>
+                      </WhatsAppLink>
                     )}
                   </li>
                 ))}
@@ -156,18 +132,7 @@ export default function Footer() {
               className="group inline-flex items-center gap-2 self-start rounded-full text-xs font-semibold text-white/60 outline-none transition-colors duration-200 hover:text-roe-yellow focus-visible:ring-2 focus-visible:ring-roe-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-roe-ink sm:self-auto"
             >
               Voltar ao topo
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-                className="size-4 transition-transform duration-300 ease-out group-hover:-translate-y-0.5"
-              >
-                <path d="M12 20V4M6 10l6-6 6 6" />
-              </svg>
+              <ArrowUpIcon className="size-4 transition-transform duration-300 ease-out group-hover:-translate-y-0.5" />
             </a>
           </div>
         </div>

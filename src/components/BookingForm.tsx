@@ -3,6 +3,7 @@
 import { useEffect, useRef, type FormEvent, type ReactNode } from "react";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
 import { BOOKABLE_UNITS } from "@/data/units";
+import { whatsappUrl } from "@/lib/whatsapp";
 
 const EXAM_TYPES = [
   "Panorâmica",
@@ -94,7 +95,7 @@ function buildChatUrl(form: HTMLFormElement) {
     `Unidade: ${unit.shortName}`,
   ].join("\n");
 
-  return `https://wa.me/${unit.whatsapp}?text=${encodeURIComponent(message)}`;
+  return whatsappUrl(unit.whatsapp, message);
 }
 
 export default function BookingForm() {
