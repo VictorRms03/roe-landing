@@ -33,7 +33,7 @@ export default function Booking() {
   return (
     // Sand rather than white: this is where the page's colour rhythm resumes,
     // and the strip Testimonials leaves behind melts into it as top breathing room.
-    <Section id="agendar" className="bg-roe-sand py-16">
+    <Section id="agendar" className="bg-roe-sand py-4 md:py-8">
       <div className="grid gap-10 lg:grid-cols-[1fr_1.05fr] lg:items-center lg:gap-16">
         <div>
           <SectionHeader
