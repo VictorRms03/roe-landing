@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
+import WhatsAppIcon from "@/components/WhatsAppIcon";
 import { UNITS } from "@/data/units";
 
 const NAV_LINKS = [
@@ -51,92 +52,131 @@ const SOCIAL_LINKS = [
   },
 ];
 
+// One shared style for the three column titles.
+const COLUMN_TITLE = "text-xs font-semibold uppercase tracking-[0.14em] text-roe-yellow";
+
 export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-roe-gray bg-roe-white px-6 py-12 md:px-12 lg:px-16">
-      <div className="mx-auto max-w-7xl">
-        <Reveal className="grid gap-10 md:grid-cols-[1.2fr_1fr] lg:grid-cols-[1.2fr_0.8fr_1.4fr]">
-          <div>
-            <Link href="/" className="flex items-center gap-2">
-              <Image
-                src="/logo.webp"
-                alt=""
-                aria-hidden="true"
-                width={256}
-                height={256}
-                sizes="56px"
-                className="size-14"
-              />
-              <span className="text-lg font-bold text-gray-900">Clínica ROE</span>
-            </Link>
-            <p className="mt-4 max-w-xs text-sm text-gray-600">
-              Radiologia odontológica com imagens de alta definição e atendimento humanizado.
-            </p>
+    // Ink, not white: the page runs sand → white → black, so the footer is what
+    // finally closes it instead of blending into the FAQ above.
+    <footer className="bg-[#121212]">
+      {/* Outside the padded box so the brand rule runs edge to edge. */}
+      <div className="h-1 bg-roe-yellow" aria-hidden="true" />
 
-            <ul className="mt-5 flex items-center gap-3">
-              {SOCIAL_LINKS.map((social) => (
-                <li key={social.label}>
-                  <a
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`${social.label} da Clínica ROE`}
-                    className="block size-11 rounded-xl outline-none transition-transform duration-200 ease-out hover:-translate-y-0.5 hover:scale-105 focus-visible:ring-2 focus-visible:ring-roe-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-roe-white"
-                  >
-                    {social.icon}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+      <div className="px-6 py-14 md:px-12 lg:px-16">
+        <div className="mx-auto max-w-7xl">
+          <Reveal className="grid gap-10 md:grid-cols-2 lg:grid-cols-[1.2fr_0.8fr_1.6fr] lg:gap-12">
+            <div>
+              <Link
+                href="/"
+                className="inline-flex items-center gap-2 rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-roe-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-[#121212]"
+              >
+                <Image
+                  src="/logo.webp"
+                  alt=""
+                  aria-hidden="true"
+                  width={256}
+                  height={256}
+                  sizes="56px"
+                  className="size-14"
+                />
+                <span className="text-lg font-bold text-roe-white">Clínica ROE</span>
+              </Link>
+              <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/70">
+                Radiologia odontológica com imagens de alta definição e atendimento humanizado.
+              </p>
 
-          <nav aria-label="Rodapé">
-            <h3 className="text-sm font-semibold text-gray-900">Navegue</h3>
-            <ul className="mt-4 flex flex-col gap-2.5">
-              {NAV_LINKS.map((link) => (
-                <li key={link.href}>
-                  {/* Same growing underline the header links use. */}
-                  <Link
-                    href={link.href}
-                    className="relative inline-block text-sm text-gray-600 transition-colors duration-200 hover:text-gray-900 after:absolute after:-bottom-0.5 after:left-0 after:h-0.5 after:w-0 after:bg-gray-900 after:transition-all after:duration-200 hover:after:w-full"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-
-          <div>
-            <h3 className="text-sm font-semibold text-gray-900">Unidades</h3>
-            <ul className="mt-4 grid gap-6 sm:grid-cols-2">
-              {UNITS.map((unit) => (
-                <li key={unit.id} className="text-sm text-gray-600">
-                  <p className="font-semibold text-gray-900">{unit.shortName}</p>
-                  <p className="mt-1.5">{unit.address}</p>
-                  <p className="mt-1.5">{unit.hours}</p>
-                  {unit.whatsapp && (
+              <ul className="mt-6 flex items-center gap-3">
+                {SOCIAL_LINKS.map((social) => (
+                  <li key={social.label}>
                     <a
-                      href={`https://wa.me/${unit.whatsapp}`}
+                      href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="mt-1.5 inline-block font-semibold text-gray-900 underline underline-offset-2 transition-colors duration-200 hover:text-roe-yellow"
+                      aria-label={`${social.label} da Clínica ROE`}
+                      className="block size-11 rounded-xl outline-none transition-transform duration-200 ease-out hover:-translate-y-0.5 hover:scale-105 focus-visible:ring-2 focus-visible:ring-roe-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-[#121212]"
                     >
-                      Falar no WhatsApp
+                      {social.icon}
                     </a>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </Reveal>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-        {/* TODO: add CNPJ and the responsável técnico with their CRO once confirmed. */}
-        <p className="mt-10 border-t border-roe-gray pt-6 text-xs text-gray-500">
-          © {year} Clínica ROE · Radiologia Odontológica
-        </p>
+            <nav aria-label="Rodapé">
+              <h3 className={COLUMN_TITLE}>Navegue</h3>
+              <ul className="mt-5 flex flex-col gap-3">
+                {NAV_LINKS.map((link) => (
+                  <li key={link.href}>
+                    {/* Same growing underline the header links use, in yellow so
+                        it reads on the dark. */}
+                    <Link
+                      href={link.href}
+                      className="relative inline-block text-sm text-white/70 transition-colors duration-200 hover:text-roe-white after:absolute after:-bottom-0.5 after:left-0 after:h-0.5 after:w-0 after:bg-roe-yellow after:transition-all after:duration-200 hover:after:w-full"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+
+            <div>
+              <h3 className={COLUMN_TITLE}>Unidades</h3>
+              <ul className="mt-5 grid gap-6 sm:grid-cols-2">
+                {UNITS.map((unit) => (
+                  <li key={unit.id} className="text-sm leading-relaxed text-white/70">
+                    <p className="font-semibold text-roe-white">{unit.shortName}</p>
+                    <p className="mt-1.5">{unit.address}</p>
+                    <p className="mt-1.5">{unit.hours}</p>
+                    {unit.whatsapp && (
+                      <a
+                        href={`https://wa.me/${unit.whatsapp}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`Falar com a ${unit.name} no WhatsApp`}
+                        className="mt-3 inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-2 text-xs font-semibold text-roe-white outline-none transition-colors duration-200 hover:bg-[#25d366] focus-visible:ring-2 focus-visible:ring-roe-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-[#121212]"
+                      >
+                        <WhatsAppIcon className="size-4" />
+                        Falar no WhatsApp
+                      </a>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Reveal>
+
+          <div className="mt-12 flex flex-col gap-4 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
+            {/* TODO: add CNPJ and the responsável técnico with their CRO once confirmed. */}
+            <p className="text-xs text-white/50">
+              © {year} Clínica ROE · Radiologia Odontológica
+            </p>
+
+            {/* "#top" has no element behind it on purpose: with no match, the
+                fragment is defined to mean the top of the document. */}
+            <a
+              href="#top"
+              className="group inline-flex items-center gap-2 self-start rounded-full text-xs font-semibold text-white/60 outline-none transition-colors duration-200 hover:text-roe-yellow focus-visible:ring-2 focus-visible:ring-roe-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-[#121212] sm:self-auto"
+            >
+              Voltar ao topo
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+                className="size-4 transition-transform duration-300 ease-out group-hover:-translate-y-0.5"
+              >
+                <path d="M12 20V4M6 10l6-6 6 6" />
+              </svg>
+            </a>
+          </div>
+        </div>
       </div>
     </footer>
   );
