@@ -105,7 +105,7 @@ export default function Services() {
   }
 
   return (
-    <Section id="servicos" className="bg-roe-white py-12">
+    <Section id="servicos" className="bg-roe-white py-4 md:py-8">
       <SectionHeader
         eyebrow="Exames"
         title="Raio-x para Cada Necessidade"
