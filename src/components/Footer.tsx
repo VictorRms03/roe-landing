@@ -120,7 +120,7 @@ export default function Footer() {
           </Reveal>
 
           <div className="mt-12 flex flex-col gap-4 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
-            {/* TODO: add CNPJ and the responsável técnico with their CRO once confirmed. */}
+            {/* TODO: add the CNPJ and the technical director with their CRO number. */}
             <p className="text-xs text-white/50">
               © {year} Clínica ROE · Radiologia Odontológica
             </p>

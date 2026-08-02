@@ -43,8 +43,8 @@ export default function Faq() {
       <ul className="mt-10 flex flex-col gap-3">
           {FAQ_ITEMS.map((item, index) => (
             <Reveal as="li" key={item.question} delay={index * 80}>
-              {/* <details> gives the open/close behaviour, keyboard support and
-                  in-page find for free, with no client component involved. */}
+              {/* <details> gives open/close, keyboard support and in-page find
+                  for free, with no client component involved. */}
               <details className="group rounded-2xl bg-roe-cream shadow-sm ring-1 ring-black/5 transition-shadow duration-300 ease-out hover:shadow-md open:shadow-lg open:ring-roe-yellow/50">
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-5 rounded-2xl px-5 py-5 text-base font-semibold text-gray-900 outline-none [&::-webkit-details-marker]:hidden focus-visible:ring-2 focus-visible:ring-roe-yellow sm:px-6">
                   {item.question}

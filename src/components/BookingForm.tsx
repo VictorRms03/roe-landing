@@ -5,7 +5,7 @@ import WhatsAppIcon from "@/components/WhatsAppIcon";
 import { BOOKABLE_UNITS } from "@/data/units";
 import { whatsappUrl } from "@/lib/whatsapp";
 
-const EXAM_TYPES = [
+const EXAM_TYPES: string[] = [
   "Panorâmica",
   "Periapical",
   "Interproximal",
@@ -15,15 +15,30 @@ const EXAM_TYPES = [
   "Documentação Ortodôntica",
 ];
 
-// White fields sit on a cream card, so they need the hairline ring to read as
-// fields at all. Tailwind orders `hover:` before `focus:`, so the yellow focus
-// ring still wins over the hover one when a pointer rests on the focused field.
+// Field names, kept in one place because buildChatUrl reads them back by string.
+const FIELD = {
+  name: "name",
+  email: "email",
+  date: "date",
+  examType: "examType",
+  unit: "unit",
+} as const;
+
+// White fields on a cream card need the hairline ring to read as fields at all.
+// Tailwind orders `hover:` before `focus:`, so the yellow focus ring still wins
+// while a pointer rests on the focused field.
 const FIELD_CLASS =
   "w-full rounded-lg bg-roe-white px-4 py-3 text-sm text-gray-900 ring-1 ring-black/10 placeholder:text-gray-500 outline-none transition-shadow duration-200 hover:ring-black/25 focus:ring-2 focus:ring-roe-yellow";
 
-// Visible labels rather than placeholders alone: the placeholder disappears the
+type FieldProps = {
+  id: string;
+  label: string;
+  children: ReactNode;
+};
+
+// Visible labels rather than placeholders alone: a placeholder disappears the
 // moment someone types, right when they still want to know what the field was.
-function Field({ id, label, children }: { id: string; label: string; children: ReactNode }) {
+function Field({ id, label, children }: FieldProps) {
   return (
     <div>
       <label htmlFor={id} className="block text-sm font-medium text-gray-900">
@@ -34,17 +49,11 @@ function Field({ id, label, children }: { id: string; label: string; children: R
   );
 }
 
-function Select({
-  id,
-  label,
-  placeholder,
-  children,
-}: {
-  id: string;
-  label: string;
+type SelectProps = FieldProps & {
   placeholder: string;
-  children: ReactNode;
-}) {
+};
+
+function Select({ id, label, placeholder, children }: SelectProps) {
   return (
     <Field id={id} label={label}>
       <div className="relative">
@@ -75,23 +84,23 @@ function Select({
   );
 }
 
-function formatDate(value: string) {
+function formatDate(value: string): string {
   const [year, month, day] = value.split("-");
   return day ? `${day}/${month}/${year}` : value;
 }
 
-function buildChatUrl(form: HTMLFormElement) {
+function buildChatUrl(form: HTMLFormElement): string | null {
   const data = new FormData(form);
-  const unit = BOOKABLE_UNITS.find((candidate) => candidate.id === data.get("unidade"));
+  const unit = BOOKABLE_UNITS.find((candidate) => candidate.id === data.get(FIELD.unit));
   if (!unit) return null;
 
   const message = [
     "Olá! Gostaria de agendar um exame.",
     "",
-    `Nome: ${data.get("nome")}`,
-    `E-mail: ${data.get("email")}`,
-    `Data desejada: ${formatDate(String(data.get("data")))}`,
-    `Tipo de exame: ${data.get("tipo")}`,
+    `Nome: ${data.get(FIELD.name)}`,
+    `E-mail: ${data.get(FIELD.email)}`,
+    `Data desejada: ${formatDate(String(data.get(FIELD.date)))}`,
+    `Tipo de exame: ${data.get(FIELD.examType)}`,
     `Unidade: ${unit.shortName}`,
   ].join("\n");
 
@@ -99,20 +108,17 @@ function buildChatUrl(form: HTMLFormElement) {
 }
 
 export default function BookingForm() {
-  const formRef = useRef<HTMLFormElement>(null);
   const dateRef = useRef<HTMLInputElement>(null);
 
-  // Written straight to the DOM after mount instead of rendered: the server has
-  // no idea what "today" is in the visitor's timezone, so shipping its own date
-  // in the HTML would only be a hydration mismatch waiting to happen. The
-  // Swedish locale is the short path to the `YYYY-MM-DD` the input expects.
+  // Written to the DOM after mount rather than rendered: the server cannot know
+  // the visitor's timezone, so shipping a date in the HTML would be a hydration
+  // mismatch. The Swedish locale is the short path to the YYYY-MM-DD the input
+  // expects.
   useEffect(() => {
     if (dateRef.current) dateRef.current.min = new Date().toLocaleDateString("sv-SE");
   }, []);
 
-  // A real submit button means the browser runs the native validation before
-  // this fires, so every required field is already filled by the time we build
-  // the message.
+  // Native validation runs before this fires, so every required field is filled.
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const chatUrl = buildChatUrl(event.currentTarget);
@@ -120,11 +126,11 @@ export default function BookingForm() {
   }
 
   return (
-    <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col gap-4">
-      <Field id="nome" label="Nome completo">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <Field id={FIELD.name} label="Nome completo">
         <input
-          id="nome"
-          name="nome"
+          id={FIELD.name}
+          name={FIELD.name}
           type="text"
           placeholder="Como podemos te chamar"
           required
@@ -133,10 +139,10 @@ export default function BookingForm() {
       </Field>
 
       <div className="grid gap-4 sm:grid-cols-2">
-        <Field id="email" label="E-mail">
+        <Field id={FIELD.email} label="E-mail">
           <input
-            id="email"
-            name="email"
+            id={FIELD.email}
+            name={FIELD.email}
             type="email"
             placeholder="voce@email.com"
             required
@@ -144,10 +150,10 @@ export default function BookingForm() {
           />
         </Field>
 
-        <Field id="data" label="Data desejada">
+        <Field id={FIELD.date} label="Data desejada">
           <input
-            id="data"
-            name="data"
+            id={FIELD.date}
+            name={FIELD.date}
             type="date"
             ref={dateRef}
             required
@@ -157,7 +163,7 @@ export default function BookingForm() {
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2">
-        <Select id="tipo" label="Tipo de exame" placeholder="Selecione o exame">
+        <Select id={FIELD.examType} label="Tipo de exame" placeholder="Selecione o exame">
           {EXAM_TYPES.map((exam) => (
             <option key={exam} value={exam}>
               {exam}
@@ -165,7 +171,7 @@ export default function BookingForm() {
           ))}
         </Select>
 
-        <Select id="unidade" label="Unidade" placeholder="Selecione a unidade">
+        <Select id={FIELD.unit} label="Unidade" placeholder="Selecione a unidade">
           {BOOKABLE_UNITS.map((unit) => (
             <option key={unit.id} value={unit.id}>
               {unit.shortName}

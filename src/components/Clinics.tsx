@@ -7,17 +7,12 @@ import SectionHeader from "@/components/ui/SectionHeader";
 import WhatsAppLink from "@/components/ui/WhatsAppLink";
 import { UNITS } from "@/data/units";
 
-// Ink rather than the brand yellow this section used to be: the Mogi Guaçu
-// facade is itself a yellow building, so on yellow the subject dissolved into
-// the page. A dark ground turns both facades back into photographs, and it lets
-// the yellow finally be used as type at 10:1 instead of 1.9:1.
+// Ink rather than yellow: the Mogi Guaçu facade is itself a yellow building, so
+// on yellow the subject dissolved into the page.
 export default function Clinics() {
   return (
     <>
-      {/* The old sand strips were sand-on-sand against Benefits above — invisible
-          padding. A yellow hairline is the footer's idiom and actually bookends
-          the dark block. Kept outside the section so #clinicas still lands where
-          scroll-mt-32 expects it. */}
+      {/* Outside the section so #clinicas still lands where scroll-mt-32 expects. */}
       <div className="h-1 bg-roe-yellow" aria-hidden="true" />
 
       <Section
@@ -44,20 +39,16 @@ export default function Clinics() {
           descriptionClassName="mt-3 text-sm text-white/70 sm:text-base"
         />
 
-          {/* Full-width rows, not a 2-up grid: at 2-up the image column of a split
-              card is only ~237px, which is the cramped shape that made these look
-              thin. Full width gives a near-square well — the right shape for one
-              square photo and one portrait one, neither of which survives 16:9. */}
+          {/* Full-width rows, not a 2-up grid: at 2-up the image column is only
+              ~237px, too cramped for either photo. */}
           <ul className="mt-12 grid gap-6 lg:gap-8">
             {UNITS.map((unit, index) => (
-              // Reveal owns the transform of the li, so the hover lift lives on
-              // the card inside it — h-full because the li is what stretches.
+              // Reveal owns the li's transform, so the hover lift lives on the
+              // card inside it — h-full because the li is what stretches.
               <Reveal as="li" key={unit.id} delay={index * 140}>
                 <div
                   className={`group flex h-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] shadow-xl shadow-black/40 transition-all duration-300 ease-out hover:-translate-y-1 hover:border-roe-yellow/40 hover:bg-white/[0.06] hover:shadow-2xl sm:flex-row lg:min-h-[380px] ${
-                    // Alternating side, so the two rows do not read as a list of
-                    // identical blocks. Both class names are written out in full,
-                    // so Tailwind's scanner sees them.
+                    // Alternating side, so the rows do not read as identical blocks.
                     index % 2 === 1 ? "sm:flex-row-reverse" : ""
                   }`}
                 >
@@ -69,8 +60,8 @@ export default function Clinics() {
                       sizes="(min-width: 640px) 40vw, 100vw"
                       className="object-cover object-center transition-transform duration-500 ease-out group-hover:scale-105"
                     />
-                    {/* Keeps the yellow facade from bleeding into the card edge,
-                        and gives the badge something to sit on. */}
+                    {/* Keeps the yellow facade off the card edge and gives the
+                        badge something to sit on. */}
                     <div
                       aria-hidden="true"
                       className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent sm:bg-gradient-to-r sm:from-black/30 sm:via-transparent sm:to-transparent"
@@ -85,9 +76,8 @@ export default function Clinics() {
                       {unit.name}
                     </h3>
 
-                    {/* Full-width hairline rows rather than a short stacked list:
-                        the content column runs the best part of 700px here, and
-                        two loose lines of text left most of that empty. */}
+                    {/* Hairline rows rather than a stacked list: the content
+                        column runs close to 700px, which two loose lines leave empty. */}
                     <ul className="mt-6 flex flex-col divide-y divide-white/10 border-y border-white/10 text-sm">
                       <li className="flex gap-3 py-4">
                         <PinIcon className="mt-0.5 size-4 shrink-0 text-roe-yellow" />
@@ -115,11 +105,8 @@ export default function Clinics() {
                         Como chegar
                       </a>
 
-                      {/* The neutral pill that turns WhatsApp green on hover is
-                          the footer's chip. MobileActionBar sends people here
-                          expecting a per-unit number, so this has to stay an
-                          obvious button — not the floating badge it replaced,
-                          which sat on top of the address text. */}
+                      {/* MobileActionBar sends people here expecting a per-unit
+                          number, so this has to stay an obvious button. */}
                       {unit.whatsapp && (
                         <WhatsAppLink
                           phone={unit.whatsapp}

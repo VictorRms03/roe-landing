@@ -17,13 +17,11 @@
 
   --animate-fade-up: fade-up 600ms ease-out both;
   --animate-fade-in: fade-in 400ms ease-out both;
-  /* Same keyframe as above, shorter: an accordion answer opens next to the
-     question that was just clicked, so the entrance has to be quick. */
+  /* Same keyframe, shorter: an accordion answer has to open quickly. */
   --animate-fade-in-up: fade-up 300ms ease-out both;
   --animate-float-slow: float-slow 7s ease-in-out infinite;
-  /* Duration then delay. The 420ms is baked into the token rather than passed
-     as an inline animationDelay because this one is not positional: the
-     underline always trails its own headline, wherever that headline sits. */
+  /* Duration then delay. The delay is baked in rather than passed inline
+     because the underline always trails its own headline, wherever it sits. */
   --animate-draw-underline: draw-underline 620ms 420ms cubic-bezier(0.65, 0, 0.35, 1) both;
 }
 

@@ -9,13 +9,12 @@ type Exam = {
   icon: ReactNode;
 };
 
-// Each icon is drawn to the same 24x24 grid and inherits the shared stroke,
-// so only the shapes differ between cards.
+// Each icon is drawn to the same 24x24 grid and inherits the wrapper's stroke
+// below, so only the shapes differ between cards.
 const EXAMS: Exam[] = [
   {
     name: "Raio-X Panorâmico",
     description: "Visão completa da arcada dentária em uma única imagem.",
-    // The dental arch, as a horseshoe band.
     icon: (
       <>
         <path d="M3 5c0 18 18 18 18 0" />
@@ -26,7 +25,6 @@ const EXAMS: Exam[] = [
   {
     name: "Raio-X Periapical",
     description: "Detalha um dente inteiro, da coroa à ponta da raiz.",
-    // A single tooth: crown, two roots, valley between them.
     icon: (
       <path d="M12 2.5C8.2 2.5 4.5 4 4.5 8C4.5 11 5.6 13.5 6.2 17C6.6 19.4 7 21.5 8.3 21.5C9.6 21.5 9.9 19.3 10.2 17.2C10.5 15.2 10.9 14 12 14C13.1 14 13.5 15.2 13.8 17.2C14.1 19.3 14.4 21.5 15.7 21.5C17 21.5 17.4 19.4 17.8 17C18.4 13.5 19.5 11 19.5 8C19.5 4 15.8 2.5 12 2.5Z" />
     ),
@@ -34,7 +32,6 @@ const EXAMS: Exam[] = [
   {
     name: "Raio-X Interproximal",
     description: "Mostra o contato entre dentes vizinhos para flagrar cáries.",
-    // Two neighbouring teeth with the contact point marked between them.
     icon: (
       <>
         <rect x="4" y="5" width="6.5" height="14" rx="2.2" />
@@ -46,7 +43,6 @@ const EXAMS: Exam[] = [
   {
     name: "Telerradiografia",
     description: "Perfil do crânio usado no planejamento ortodôntico.",
-    // The measured angle of a cephalometric tracing.
     icon: (
       <>
         <path d="M4 20h16" />
@@ -58,7 +54,6 @@ const EXAMS: Exam[] = [
   {
     name: "Tomografia",
     description: "Reconstrução em 3D para implantes e casos complexos.",
-    // A volume, since this is the exam that reconstructs one.
     icon: (
       <>
         <path d="M12 2 21 7v10l-9 5-9-5V7z" />
@@ -71,7 +66,6 @@ const EXAMS: Exam[] = [
   {
     name: "Documentação Ortodôntica",
     description: "Conjunto de exames e fotos para montar o tratamento.",
-    // Stacked sheets: this one is a set, not a single image.
     icon: (
       <>
         <rect x="7" y="3" width="14" height="14" rx="2.5" />

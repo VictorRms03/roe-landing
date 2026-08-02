@@ -13,13 +13,10 @@ const INFO_ITEMS = [
   { icon: ChatIcon, title: "Agende no WhatsApp", detail: "Respostas no horário comercial" },
 ];
 
-// Two layers: a yellow bloom sitting behind the photography, and a vertical
-// wash. The wash starts on the exact sand the transition strips used to be and
-// ends on --color-roe-white, so this section now joins the navbar above and
-// Services below without a seam — which is why it no longer carries strips of
-// its own. Written as an inline style because a two-layer background with
-// rgba() stops would need more underscore escaping than it is worth, and the
-// file already reaches for `style` to set animation delays.
+// A yellow bloom behind the photography over a vertical wash, running sand to
+// roe-white so this section joins the navbar above and Services below without a
+// seam. Inline rather than a utility: two layers with rgba() stops would need
+// more underscore escaping than it is worth.
 const BACKGROUND =
   "radial-gradient(60% 55% at 82% 22%, rgba(230,175,46,0.42) 0%, rgba(230,175,46,0.12) 45%, rgba(230,175,46,0) 72%), linear-gradient(180deg, #EAE4D7 0%, #F5EDDD 40%, #FEFDFF 100%)";
 
@@ -94,16 +91,14 @@ export default function Hero() {
           </div>
 
           {/* `isolate` is load-bearing: without its own stacking context the
-              -z-10 frame below would paint behind the section background and
-              disappear entirely. */}
+              -z-10 frame below would paint behind the section background. */}
           <div className="relative isolate">
             <div
               aria-hidden="true"
               className="absolute -top-4 -right-3 -z-10 size-28 animate-float-slow rounded-3xl border-2 border-roe-yellow/60 motion-reduce:animate-none lg:size-40"
             />
 
-            {/* Opacity only, no delay, no transform: this is the LCP element and
-                anything else would push it back. */}
+            {/* Opacity only, no delay: this is the LCP element. */}
             <div className="relative aspect-4/3 animate-fade-in overflow-hidden rounded-[28px] shadow-2xl shadow-black/15 ring-1 ring-black/5 motion-reduce:animate-none">
               <Image
                 src="/images/hero/exame.webp"
@@ -115,8 +110,7 @@ export default function Hero() {
               />
             </div>
 
-            {/* 247x458 native. Held to 144 CSS px so it renders about 1:1 at
-                DPR 2 — any larger and the upscale shows. */}
+            {/* 247x458 native, held to 144 CSS px so it renders ~1:1 at DPR 2. */}
             <div
               style={{ animationDelay: "380ms" }}
               className="absolute -bottom-8 -left-4 z-20 w-32 animate-fade-up overflow-hidden rounded-2xl shadow-xl shadow-black/20 ring-4 ring-roe-cream motion-reduce:animate-none sm:w-36 lg:-left-8">
@@ -151,8 +145,7 @@ export default function Hero() {
               style={{ animationDelay: `${520 + index * 90}ms` }}
               className="flex animate-fade-up items-center gap-4 px-5 py-5 motion-reduce:animate-none"
             >
-              {/* The same filled tile Services uses for its exam icons, scaled
-                  down from size-16 — so the two sections read as one system. */}
+              {/* Services' exam tile, scaled down from size-16. */}
               <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-roe-yellow text-gray-900 shadow-sm shadow-black/10">
                 <Icon className="size-5" />
               </span>

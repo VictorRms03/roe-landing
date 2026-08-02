@@ -46,14 +46,13 @@ export default function Reveal({
 
   return (
     <Tag
-      // Typed on the supertype so the same component can render a div or an li
-      // without a cast.
+      // Typed on the supertype so this renders a div or an li without a cast.
       ref={(element: HTMLElement | null) => {
         node.current = element;
       }}
       style={{ transitionDelay: shown ? `${delay}ms` : "0ms" }}
-      // motion-reduce kills the transition too: setting `shown` early only skips
-      // the wait, the 700ms of movement would still play without this.
+      // motion-reduce kills the transition too: showing early only skips the
+      // wait, the 700ms of movement would still play.
       className={`reveal transition-[opacity,transform] duration-700 ease-out motion-reduce:transition-none ${
         shown ? "translate-y-0 opacity-100" : "translate-y-5 opacity-0"
       } ${className}`}

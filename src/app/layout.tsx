@@ -84,11 +84,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    // `data-scroll-behavior` is what tells Next 16 it owns the smooth scrolling
-    // set in globals.css: it drops back to an instant jump on a real route
-    // change, and leaves the in-page anchors alone.
+    // `data-scroll-behavior` hands Next 16 the smooth scrolling set in
+    // globals.css, so a real route change still jumps instantly.
     <html lang="pt-BR" data-scroll-behavior="smooth" className={inter.variable}>
-      {/* Bottom padding keeps the fixed action bar from covering the footer. */}
       <body className="pb-24 font-sans md:pb-0">
         <noscript>
           {/* The reveal observer never runs without JS, so show everything. */}

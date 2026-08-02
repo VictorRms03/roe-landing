@@ -13,8 +13,8 @@ export default function Testimonials() {
           </h2>
         </Reveal>
 
-        {/* The carousel stays outside any Reveal: it measures its cards with
-            getBoundingClientRect, and a translating ancestor would skew that. */}
+        {/* Outside any Reveal: the carousel measures its cards, and a
+            translating ancestor would skew that. */}
         <TestimonialsCarousel reviews={REVIEWS} />
       </section>
 

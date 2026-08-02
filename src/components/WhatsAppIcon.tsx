@@ -1,9 +1,8 @@
-// The two-tone brand mark: a green bubble with the handset knocked out of it in
-// white — the actual WhatsApp badge colours. The bubble carries a faint dark
-// rim so its edge stays readable even when it sits on a button that's the
-// same WhatsApp green (the pills, the unit cards, the footer on hover) —
-// without the rim the bubble fill would merge invisibly into the background.
-export default function WhatsAppIcon({ className = "size-5" }: { className?: string }) {
+import type { IconProps } from "@/components/Icons";
+
+// The bubble carries a faint dark rim so its edge stays readable when it sits on
+// a button that is already WhatsApp green.
+export default function WhatsAppIcon({ className = "size-5" }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true" className={className}>
       <path

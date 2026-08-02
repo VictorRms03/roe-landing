@@ -30,9 +30,9 @@ const CARD_STATE = {
 const ARROW_CLASS =
   "flex size-11 cursor-pointer items-center justify-center rounded-full border border-black/10 bg-white text-gray-900 outline-none transition-[background-color,transform] duration-200 ease-out hover:scale-105 hover:bg-roe-yellow active:scale-95 focus-visible:ring-2 focus-visible:ring-roe-yellow focus-visible:ring-offset-2";
 
-// Width of one copy of the list, gap included. Measuring two siblings' offsetLeft
-// dodges the trailing-margin quirks of a flex scroll container, and transforms do
-// not affect it — so the card scaling cannot throw the math off.
+// Width of one copy, gap included. offsetLeft dodges the trailing-margin quirks
+// of a flex scroll container and ignores transforms, so the card scaling cannot
+// throw the maths off.
 function copyWidth(track: HTMLUListElement, perCopy: number) {
   const first = track.children[0] as HTMLElement | undefined;
   const nextCopy = track.children[perCopy] as HTMLElement | undefined;
