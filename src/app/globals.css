@@ -28,6 +28,9 @@
      reads as a hint, not as the same decoration drifting elsewhere. */
   --animate-bounce-slow: bounce-slow 2.2s ease-in-out infinite;
   --animate-scroll-wheel: scroll-wheel 1.8s ease-in-out infinite;
+  /* Hero's rating badge: ticks sideways to reveal text too long for one line
+     on a narrow phone, instead of wrapping it to a second line. */
+  --animate-marquee-peek: marquee-peek 9s ease-in-out infinite;
 }
 
 /* Declared outside @theme so they are emitted as plain CSS, independent of how
@@ -97,6 +100,26 @@
   100% {
     transform: translateY(10px);
     opacity: 0;
+  }
+}
+
+/* Percentages resolve against the element's own width, not the viewport, so
+   this needs no JS measurement of the actual text/container mismatch. -25%
+   was picked by measuring the real overflow at common phone widths: it fully
+   clears ~375px and up, and still meaningfully advances (if not quite to the
+   end) on the rare ~320-360px phone — better than one fixed number ever
+   being exactly right for every width. */
+@keyframes marquee-peek {
+  0%,
+  15% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-25%);
+  }
+  85%,
+  100% {
+    transform: translateX(0);
   }
 }
 

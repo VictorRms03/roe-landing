@@ -25,15 +25,24 @@ export default function Hero() {
           {/* The opening cascade is pure CSS: the first fold cannot wait for
               hydration, so no Reveal anywhere in this section. */}
           <div>
-            <div className="animate-fade-up bg-roe-cream inline-flex items-center gap-2.5 rounded-full border border-black/10 py-1.5 pr-4 pl-2.5 shadow-sm shadow-black/5 motion-reduce:animate-none">
+            {/* A percentage max-width wouldn't do it here: this pill sits
+                inside an auto-sized single-column grid track below sm, so a
+                nowrap descendant's full width would inflate that track before
+                any percentage of it could clamp back down. Anchoring to
+                100vw (minus this section's own px-6) sidesteps that
+                circularity and gives the flex row below an actual width to
+                shrink the text span against. */}
+            <div className="animate-fade-up bg-roe-cream inline-flex max-w-[calc(100vw-3rem)] items-center gap-2.5 rounded-full border border-black/10 py-1.5 pr-4 pl-2.5 shadow-sm shadow-black/5 motion-reduce:animate-none sm:max-w-none">
               {/* Decorative: the sentence beside it already carries the rating. */}
-              <span className="text-roe-yellow flex items-center gap-0.5" aria-hidden="true">
+              <span className="text-roe-yellow flex shrink-0 items-center gap-0.5" aria-hidden="true">
                 {Array.from({ length: 5 }, (_, index) => (
                   <StarIcon key={index} className="size-3.5" />
                 ))}
               </span>
-              <span className="text-xs font-semibold text-gray-900 sm:text-sm">
-                4,5/5 · mais de 30 anos de radiologia odontológica
+              <span className="min-w-0 overflow-hidden text-xs font-semibold whitespace-nowrap text-gray-900 motion-reduce:overflow-visible motion-reduce:whitespace-normal sm:min-w-fit sm:overflow-visible sm:text-sm sm:whitespace-normal">
+                <span className="animate-marquee-peek inline-block motion-reduce:animate-none sm:animate-none">
+                  4,5/5 · mais de 30 anos de radiologia odontológica
+                </span>
               </span>
             </div>
 
