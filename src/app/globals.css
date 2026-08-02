@@ -23,6 +23,11 @@
   /* Duration then delay. The delay is baked in rather than passed inline
      because the underline always trails its own headline, wherever it sits. */
   --animate-draw-underline: draw-underline 620ms 420ms cubic-bezier(0.65, 0, 0.35, 1) both;
+  /* Hero's "scroll for more" cue: the mouse outline bobs, the wheel dot
+     travels inside it. Kept apart from float-slow's bigger travel so the cue
+     reads as a hint, not as the same decoration drifting elsewhere. */
+  --animate-bounce-slow: bounce-slow 2.2s ease-in-out infinite;
+  --animate-scroll-wheel: scroll-wheel 1.8s ease-in-out infinite;
 }
 
 /* Declared outside @theme so they are emitted as plain CSS, independent of how
@@ -66,6 +71,32 @@
   }
   to {
     transform: scaleX(1);
+  }
+}
+
+@keyframes bounce-slow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(5px);
+  }
+}
+
+/* The dot inside the scroll cue's mouse outline, mimicking a wheel travelling
+   down and fading before it would exit the shape. */
+@keyframes scroll-wheel {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  70% {
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(10px);
+    opacity: 0;
   }
 }
 

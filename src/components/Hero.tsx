@@ -151,6 +151,29 @@ export default function Hero() {
             </li>
           ))}
         </ul>
+
+        {/* Wayfinding, not pure decoration: it links to the next section
+            rather than sitting there inert. Hidden below sm — the hero is
+            already tight on vertical space at that width. */}
+        <div className="mt-16 hidden justify-center sm:flex">
+          <a
+            href="#servicos"
+            style={{ animationDelay: "820ms" }}
+            className="animate-fade-up group flex flex-col items-center gap-2 motion-reduce:animate-none"
+          >
+            <span className="text-xs font-medium tracking-widest text-gray-500 uppercase transition-colors group-hover:text-gray-800">
+              Desça para ver mais
+            </span>
+            <span className="animate-bounce-slow motion-reduce:animate-none">
+              <span
+                aria-hidden="true"
+                className="flex h-9 w-5 items-start justify-center rounded-full border-2 border-gray-400/70 pt-1.5 transition-colors group-hover:border-gray-700"
+              >
+                <span className="animate-scroll-wheel size-1 rounded-full bg-gray-400/70 transition-colors group-hover:bg-gray-700 motion-reduce:animate-none" />
+              </span>
+            </span>
+          </a>
+        </div>
       </div>
     </section>
   );
