@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 
 type Review = {
   name: string;
@@ -65,6 +66,7 @@ function copyWidth(track: HTMLUListElement) {
 export default function TestimonialsCarousel() {
   const trackRef = useRef<HTMLUListElement>(null);
   const [active, setActive] = useState(-1);
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {
     const track = trackRef.current;
@@ -137,7 +139,7 @@ export default function TestimonialsCarousel() {
 
     track.scrollBy({
       left: direction * (second.offsetLeft - first.offsetLeft),
-      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+      behavior: prefersReducedMotion ? "auto" : "smooth",
     });
   }
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 
 type Props = {
   to: number;
@@ -15,15 +16,11 @@ export default function CountUp({ to, decimals = 0, duration = 1200 }: Props) {
   const node = useRef<HTMLSpanElement>(null);
   const frame = useRef(0);
   const [value, setValue] = useState(0);
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {
     const element = node.current;
-    if (!element) return;
-
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setValue(to);
-      return;
-    }
+    if (!element || prefersReducedMotion) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -47,7 +44,7 @@ export default function CountUp({ to, decimals = 0, duration = 1200 }: Props) {
       observer.disconnect();
       cancelAnimationFrame(frame.current);
     };
-  }, [to, duration]);
+  }, [to, duration, prefersReducedMotion]);
 
-  return <span ref={node}>{value.toFixed(decimals)}</span>;
+  return <span ref={node}>{(prefersReducedMotion ? to : value).toFixed(decimals)}</span>;
 }

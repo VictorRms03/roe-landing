@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 
 type Props = {
   children: ReactNode;
@@ -20,23 +21,20 @@ export default function Reveal({
   as: Tag = "div",
 }: Props) {
   const node = useRef<HTMLElement | null>(null);
-  const [shown, setShown] = useState(false);
+  const [revealed, setRevealed] = useState(false);
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const shown = revealed || prefersReducedMotion;
 
   useEffect(() => {
     const element = node.current;
-    if (!element) return;
-
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setShown(true);
-      return;
-    }
+    if (!element || prefersReducedMotion) return;
 
     // One shot: once it has played there is nothing left to watch, so the
     // observer disconnects itself and the page settles with none running.
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (!entry.isIntersecting) return;
-        setShown(true);
+        setRevealed(true);
         observer.disconnect();
       },
       { rootMargin: "0px 0px -12% 0px" },
@@ -44,7 +42,7 @@ export default function Reveal({
 
     observer.observe(element);
     return () => observer.disconnect();
-  }, []);
+  }, [prefersReducedMotion]);
 
   return (
     <Tag
