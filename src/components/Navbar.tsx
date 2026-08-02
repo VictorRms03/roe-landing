@@ -30,11 +30,7 @@ export default function Navbar() {
           the logo lands on the exact left edge of the headings below it. */}
       <div className="px-6 md:px-12 lg:px-16">
         <div className="mx-auto flex max-w-7xl items-center justify-between py-3 md:py-4">
-          <Link
-            href="/"
-            className="flex items-center gap-2"
-            onClick={() => setIsOpen(false)}
-          >
+          <Link href="/" className="flex items-center gap-2" onClick={() => setIsOpen(false)}>
             {/* No preload and no eager: both make Next emit a <link rel=preload>,
                 and this 32px logo should not race the hero image for bandwidth.
                 It sits in the initial viewport, so the browser fetches it at
@@ -46,9 +42,7 @@ export default function Navbar() {
               height={180}
               className="size-8 md:size-14"
             />
-            <span className="text-[22px] font-bold text-gray-900">
-              Clínica ROE
-            </span>
+            <span className="text-[22px] font-bold text-gray-900">Clínica ROE</span>
           </Link>
 
           <div className="hidden items-center gap-8 md:flex">
@@ -57,7 +51,7 @@ export default function Navbar() {
                 <Link
                   key={link.label}
                   href={link.href}
-                  className="relative text-sm font-medium text-gray-700 transition-colors duration-200 hover:text-gray-900 after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-gray-900 after:transition-all after:duration-200 hover:after:w-full"
+                  className="relative text-sm font-medium text-gray-700 transition-colors duration-200 after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-gray-900 after:transition-all after:duration-200 hover:text-gray-900 hover:after:w-full"
                 >
                   {link.label}
                 </Link>
@@ -116,9 +110,7 @@ export default function Navbar() {
               onClick={() => setIsOpen(false)}
               style={{ transitionDelay: isOpen ? `${index * 60}ms` : "0ms" }}
               className={`rounded-lg px-4 py-4 text-lg font-medium text-gray-700 transition-all duration-300 ease-out active:bg-gray-100 ${
-                isOpen
-                  ? "translate-y-0 opacity-100"
-                  : "-translate-y-2 opacity-0"
+                isOpen ? "translate-y-0 opacity-100" : "-translate-y-2 opacity-0"
               }`}
             >
               {link.label}

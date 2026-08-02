@@ -75,7 +75,7 @@ function Select({ id, label, placeholder, children }: SelectProps) {
           stroke="currentColor"
           strokeWidth="1.5"
           aria-hidden="true"
-          className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500"
+          className="pointer-events-none absolute top-1/2 right-4 h-4 w-4 -translate-y-1/2 text-gray-500"
         >
           <path d="M4 6l4 4 4-4" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
@@ -182,7 +182,7 @@ export default function BookingForm() {
 
       <button
         type="submit"
-        className="mt-2 flex items-center justify-center gap-2 rounded-lg bg-black px-5 py-3.5 text-center text-sm font-semibold text-roe-white shadow-md shadow-black/10 transition-all duration-300 ease-out outline-none hover:-translate-y-0.5 hover:bg-roe-yellow hover:text-gray-900 hover:shadow-lg hover:shadow-black/20 active:translate-y-0 active:shadow-md focus-visible:ring-2 focus-visible:ring-roe-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-roe-cream"
+        className="text-roe-white hover:bg-roe-yellow focus-visible:ring-roe-yellow focus-visible:ring-offset-roe-cream mt-2 flex items-center justify-center gap-2 rounded-lg bg-black px-5 py-3.5 text-center text-sm font-semibold shadow-md shadow-black/10 transition-all duration-300 ease-out outline-none hover:-translate-y-0.5 hover:text-gray-900 hover:shadow-lg hover:shadow-black/20 focus-visible:ring-2 focus-visible:ring-offset-2 active:translate-y-0 active:shadow-md"
       >
         <WhatsAppIcon />
         Enviar pelo WhatsApp

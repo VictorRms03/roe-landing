@@ -14,12 +14,7 @@ type Props = {
 // Fades content up the first time it reaches the viewport. The server renders
 // the hidden state, so anything wrapped in here must not be above the fold —
 // waiting for hydration up there would only delay the first paint.
-export default function Reveal({
-  children,
-  delay = 0,
-  className = "",
-  as: Tag = "div",
-}: Props) {
+export default function Reveal({ children, delay = 0, className = "", as: Tag = "div" }: Props) {
   const node = useRef<HTMLElement | null>(null);
   const [revealed, setRevealed] = useState(false);
   const prefersReducedMotion = usePrefersReducedMotion();

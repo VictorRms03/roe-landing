@@ -12,12 +12,7 @@ type WhatsAppLinkProps = {
 
 // Three places opened a unit's WhatsApp with the same href, target, rel and
 // aria-label template, and each spelled all four out.
-export default function WhatsAppLink({
-  phone,
-  unitName,
-  className,
-  children,
-}: WhatsAppLinkProps) {
+export default function WhatsAppLink({ phone, unitName, className, children }: WhatsAppLinkProps) {
   return (
     <a
       href={whatsappUrl(phone)}

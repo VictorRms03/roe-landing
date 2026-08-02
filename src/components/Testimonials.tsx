@@ -6,9 +6,9 @@ export default function Testimonials() {
   return (
     <>
       {/* No horizontal padding on the section: the carousel bleeds past the edges. */}
-      <section id="depoimentos" className="scroll-mt-32 bg-roe-white py-12">
+      <section id="depoimentos" className="bg-roe-white scroll-mt-32 py-12">
         <Reveal className="mx-auto max-w-7xl px-6 md:px-12 lg:px-16">
-          <h2 className="text-center text-3xl font-bold leading-tight tracking-tight text-black sm:text-4xl">
+          <h2 className="text-center text-3xl leading-tight font-bold tracking-tight text-black sm:text-4xl">
             O Que Nossos Clientes Dizem?
           </h2>
         </Reveal>
@@ -18,7 +18,7 @@ export default function Testimonials() {
         <TestimonialsCarousel reviews={REVIEWS} />
       </section>
 
-      <div className="h-10 bg-roe-sand" aria-hidden="true" />
+      <div className="bg-roe-sand h-10" aria-hidden="true" />
     </>
   );
 }

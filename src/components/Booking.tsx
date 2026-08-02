@@ -65,7 +65,7 @@ export default function Booking() {
                   <WhatsAppLink
                     phone={unit.whatsapp}
                     unitName={unit.name}
-                    className="inline-flex items-center gap-2 rounded-full bg-roe-whatsapp px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-black/10 outline-none transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/20 active:translate-y-0 active:shadow-md focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 focus-visible:ring-offset-roe-sand"
+                    className="bg-roe-whatsapp focus-visible:ring-offset-roe-sand inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-black/10 transition-all duration-300 ease-out outline-none hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/20 focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 active:translate-y-0 active:shadow-md"
                   >
                     <WhatsAppIcon />
                     {unit.shortName}
@@ -78,7 +78,7 @@ export default function Booking() {
 
         {/* Cream card on sand: the same pairing the clinic cards use over yellow. */}
         <Reveal delay={120}>
-          <div className="rounded-3xl bg-roe-cream p-6 shadow-xl shadow-black/10 sm:p-8">
+          <div className="bg-roe-cream rounded-3xl p-6 shadow-xl shadow-black/10 sm:p-8">
             <BookingForm />
           </div>
         </Reveal>

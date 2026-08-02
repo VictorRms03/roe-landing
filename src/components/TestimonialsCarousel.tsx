@@ -132,7 +132,7 @@ export default function TestimonialsCarousel({ reviews }: Props) {
         ref={trackRef}
         tabIndex={0}
         aria-label="Avaliações de clientes no Google"
-        className="mt-6 flex snap-x snap-mandatory gap-5 overflow-x-auto overscroll-x-contain py-12 outline-none [scrollbar-width:none] focus-visible:inset-ring-2 focus-visible:inset-ring-roe-yellow sm:gap-6 [&::-webkit-scrollbar]:hidden"
+        className="focus-visible:inset-ring-roe-yellow mt-6 flex snap-x snap-mandatory [scrollbar-width:none] gap-5 overflow-x-auto overscroll-x-contain py-12 outline-none focus-visible:inset-ring-2 sm:gap-6 [&::-webkit-scrollbar]:hidden"
       >
         {Array.from({ length: COPIES }).flatMap((_, copy) =>
           reviews.map((review, position) => {
@@ -148,21 +148,21 @@ export default function TestimonialsCarousel({ reviews }: Props) {
                 <div
                   role="img"
                   aria-label={`${review.rating} de 5 estrelas`}
-                  className="flex gap-0.5 text-roe-yellow"
+                  className="text-roe-yellow flex gap-0.5"
                 >
                   {Array.from({ length: review.rating }, (_, star) => (
                     <StarIcon key={star} />
                   ))}
                 </div>
 
-                <p className="mb-6 mt-4 text-sm italic leading-relaxed text-gray-700">
+                <p className="mt-4 mb-6 text-sm leading-relaxed text-gray-700 italic">
                   “{review.text}”
                 </p>
 
                 <div className="mt-auto flex items-center gap-3 border-t border-black/10 pt-4">
                   <span
                     aria-hidden="true"
-                    className="flex size-10 shrink-0 items-center justify-center rounded-full bg-roe-yellow text-sm font-semibold text-gray-900"
+                    className="bg-roe-yellow flex size-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold text-gray-900"
                   >
                     {review.name.charAt(0)}
                   </span>

@@ -1,11 +1,5 @@
 import Image from "next/image";
-import {
-  ArrowRightIcon,
-  ChatIcon,
-  ClockIcon,
-  PinIcon,
-  StarIcon,
-} from "@/components/Icons";
+import { ArrowRightIcon, ChatIcon, ClockIcon, PinIcon, StarIcon } from "@/components/Icons";
 
 const INFO_ITEMS = [
   { icon: PinIcon, title: "Duas Unidades", detail: "Mogi Mirim e Mogi Guaçu" },
@@ -31,9 +25,9 @@ export default function Hero() {
           {/* The opening cascade is pure CSS: the first fold cannot wait for
               hydration, so no Reveal anywhere in this section. */}
           <div>
-            <div className="inline-flex animate-fade-up items-center gap-2.5 rounded-full border border-black/10 bg-roe-cream py-1.5 pr-4 pl-2.5 shadow-sm shadow-black/5 motion-reduce:animate-none">
+            <div className="animate-fade-up bg-roe-cream inline-flex items-center gap-2.5 rounded-full border border-black/10 py-1.5 pr-4 pl-2.5 shadow-sm shadow-black/5 motion-reduce:animate-none">
               {/* Decorative: the sentence beside it already carries the rating. */}
-              <span className="flex items-center gap-0.5 text-roe-yellow" aria-hidden="true">
+              <span className="text-roe-yellow flex items-center gap-0.5" aria-hidden="true">
                 {Array.from({ length: 5 }, (_, index) => (
                   <StarIcon key={index} className="size-3.5" />
                 ))}
@@ -45,7 +39,7 @@ export default function Hero() {
 
             <h1
               style={{ animationDelay: "60ms" }}
-              className="mt-6 max-w-[18ch] animate-fade-up text-[2.5rem] leading-[1.06] font-bold tracking-tight text-balance text-gray-950 motion-reduce:animate-none sm:text-5xl lg:text-[3.4rem]"
+              className="animate-fade-up mt-6 max-w-[18ch] text-[2.5rem] leading-[1.06] font-bold tracking-tight text-balance text-gray-950 motion-reduce:animate-none sm:text-5xl lg:text-[3.4rem]"
             >
               Imagens Precisas para{" "}
               {/* The accent is an underline rather than yellow type: yellow on
@@ -54,17 +48,17 @@ export default function Hero() {
                 <span className="relative z-10">Diagnósticos Certos</span>
                 <span
                   aria-hidden="true"
-                  className="absolute inset-x-0 bottom-0.5 z-0 h-3 origin-left animate-draw-underline rounded-full bg-roe-yellow/70 motion-reduce:animate-none sm:h-4"
+                  className="animate-draw-underline bg-roe-yellow/70 absolute inset-x-0 bottom-0.5 z-0 h-3 origin-left rounded-full motion-reduce:animate-none sm:h-4"
                 />
               </span>
             </h1>
 
             <p
               style={{ animationDelay: "140ms" }}
-              className="mt-6 max-w-md animate-fade-up text-lg leading-relaxed text-gray-800 motion-reduce:animate-none"
+              className="animate-fade-up mt-6 max-w-md text-lg leading-relaxed text-gray-800 motion-reduce:animate-none"
             >
-              Tecnologia de ponta em radiologia odontológica para oferecer imagens de alta
-              precisão, laudos rápidos e um atendimento pensado no seu conforto.
+              Tecnologia de ponta em radiologia odontológica para oferecer imagens de alta precisão,
+              laudos rápidos e um atendimento pensado no seu conforto.
             </p>
 
             {/* Focus is an outline here, not the site's ring + ring-offset: the
@@ -72,17 +66,17 @@ export default function Hero() {
                 gradient. Every other section keeps the ring. */}
             <div
               style={{ animationDelay: "220ms" }}
-              className="mt-8 flex animate-fade-up flex-wrap gap-4 motion-reduce:animate-none"
+              className="animate-fade-up mt-8 flex flex-wrap gap-4 motion-reduce:animate-none"
             >
               <a
                 href="#agendar"
-                className="inline-flex items-center rounded-full bg-black px-6 py-3 text-[16px] font-semibold text-white shadow-md shadow-black/10 outline-none transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-gray-800 hover:shadow-lg hover:shadow-black/25 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900 active:translate-y-0 active:shadow-md"
+                className="inline-flex items-center rounded-full bg-black px-6 py-3 text-[16px] font-semibold text-white shadow-md shadow-black/10 transition-all duration-300 ease-out outline-none hover:-translate-y-0.5 hover:bg-gray-800 hover:shadow-lg hover:shadow-black/25 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900 active:translate-y-0 active:shadow-md"
               >
                 Agendar Exame
               </a>
               <a
                 href="#servicos"
-                className="group inline-flex items-center gap-2 rounded-full border-2 border-gray-900/15 bg-roe-cream/80 px-6 py-3 text-[16px] font-semibold text-gray-900 outline-none transition-all duration-300 ease-out hover:gap-3 hover:border-gray-900/70 hover:bg-roe-cream focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900"
+                className="group bg-roe-cream/80 hover:bg-roe-cream inline-flex items-center gap-2 rounded-full border-2 border-gray-900/15 px-6 py-3 text-[16px] font-semibold text-gray-900 transition-all duration-300 ease-out outline-none hover:gap-3 hover:border-gray-900/70 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900"
               >
                 Ver Exames
                 <ArrowRightIcon className="size-4 transition-transform duration-300 ease-out group-hover:translate-x-0.5" />
@@ -95,11 +89,11 @@ export default function Hero() {
           <div className="relative isolate">
             <div
               aria-hidden="true"
-              className="absolute -top-4 -right-3 -z-10 size-28 animate-float-slow rounded-3xl border-2 border-roe-yellow/60 motion-reduce:animate-none lg:size-40"
+              className="animate-float-slow border-roe-yellow/60 absolute -top-4 -right-3 -z-10 size-28 rounded-3xl border-2 motion-reduce:animate-none lg:size-40"
             />
 
             {/* Opacity only, no delay: this is the LCP element. */}
-            <div className="relative aspect-4/3 animate-fade-in overflow-hidden rounded-[28px] shadow-2xl shadow-black/15 ring-1 ring-black/5 motion-reduce:animate-none">
+            <div className="animate-fade-in relative aspect-4/3 overflow-hidden rounded-[28px] shadow-2xl ring-1 shadow-black/15 ring-black/5 motion-reduce:animate-none">
               <Image
                 src="/images/hero/exame.webp"
                 alt="Profissional analisando uma tomografia odontológica em 3D"
@@ -113,7 +107,8 @@ export default function Hero() {
             {/* 247x458 native, held to 144 CSS px so it renders ~1:1 at DPR 2. */}
             <div
               style={{ animationDelay: "380ms" }}
-              className="absolute -bottom-8 -left-4 z-20 w-32 animate-fade-up overflow-hidden rounded-2xl shadow-xl shadow-black/20 ring-4 ring-roe-cream motion-reduce:animate-none sm:w-36 lg:-left-8">
+              className="animate-fade-up ring-roe-cream absolute -bottom-8 -left-4 z-20 w-32 overflow-hidden rounded-2xl shadow-xl ring-4 shadow-black/20 motion-reduce:animate-none sm:w-36 lg:-left-8"
+            >
               <div className="relative aspect-3/4">
                 <Image
                   src="/images/hero/exame-3.webp"
@@ -127,7 +122,7 @@ export default function Hero() {
 
             <div
               style={{ animationDelay: "460ms" }}
-              className="absolute right-4 bottom-4 z-20 animate-fade-up rounded-2xl border border-black/5 bg-roe-cream/95 px-4 py-3 shadow-xl shadow-black/20 motion-reduce:animate-none"
+              className="animate-fade-up bg-roe-cream/95 absolute right-4 bottom-4 z-20 rounded-2xl border border-black/5 px-4 py-3 shadow-xl shadow-black/20 motion-reduce:animate-none"
             >
               <p className="text-xl leading-none font-bold tracking-tight text-gray-900">
                 5 mil<span className="text-roe-yellow">+</span>
@@ -138,15 +133,15 @@ export default function Hero() {
         </div>
 
         {/* The top margin clears the portrait tile that overhangs by -bottom-8. */}
-        <ul className="mt-16 grid divide-y divide-black/5 overflow-hidden rounded-3xl border border-black/5 bg-roe-cream shadow-lg shadow-black/5 sm:mt-14 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+        <ul className="bg-roe-cream mt-16 grid divide-y divide-black/5 overflow-hidden rounded-3xl border border-black/5 shadow-lg shadow-black/5 sm:mt-14 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
           {INFO_ITEMS.map(({ icon: Icon, title, detail }, index) => (
             <li
               key={title}
               style={{ animationDelay: `${520 + index * 90}ms` }}
-              className="flex animate-fade-up items-center gap-4 px-5 py-5 motion-reduce:animate-none"
+              className="animate-fade-up flex items-center gap-4 px-5 py-5 motion-reduce:animate-none"
             >
               {/* Services' exam tile, scaled down from size-16. */}
-              <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-roe-yellow text-gray-900 shadow-sm shadow-black/10">
+              <span className="bg-roe-yellow flex size-11 shrink-0 items-center justify-center rounded-xl text-gray-900 shadow-sm shadow-black/10">
                 <Icon className="size-5" />
               </span>
               <div className="min-w-0">

@@ -78,12 +78,12 @@ export default function Benefits() {
               />
             </div>
             <div
-              className="absolute -right-[18px] inset-y-3 hidden w-1 rounded-full bg-roe-yellow lg:block"
+              className="bg-roe-yellow absolute inset-y-3 -right-[18px] hidden w-1 rounded-full lg:block"
               aria-hidden="true"
             />
           </Reveal>
 
-          <ul className="grid grid-cols-2 gap-6 sm:grid-cols-4 lg:h-[285px] lg:flex lg:flex-col lg:justify-between lg:gap-0">
+          <ul className="grid grid-cols-2 gap-6 sm:grid-cols-4 lg:flex lg:h-[285px] lg:flex-col lg:justify-between lg:gap-0">
             {STATS.map((stat, index) => (
               <Reveal as="li" key={stat.label} delay={200 + index * 90}>
                 <p className="text-2xl font-bold tracking-tight text-gray-900">

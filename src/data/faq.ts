@@ -20,8 +20,7 @@ export const FAQ_ITEMS: FaqItem[] = [
   {
     // TODO: state the real turnaround time for the report.
     question: "Quanto tempo leva para sair o laudo?",
-    answer:
-      "O prazo varia conforme o exame e é combinado com você no momento do agendamento.",
+    answer: "O prazo varia conforme o exame e é combinado com você no momento do agendamento.",
   },
   {
     question: "Qual a diferença entre panorâmico e tomografia 3D?",
