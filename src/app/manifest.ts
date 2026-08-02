@@ -13,6 +13,14 @@ export default function manifest(): MetadataRoute.Manifest {
         src: "/favicon.ico",
         sizes: "any",
       },
+      // An installable app needs a raster icon of at least 192px; the 1024px
+      // logo already in /public covers both the 192 and 512 requirements.
+      {
+        src: "/logo.webp",
+        sizes: "1024x1024",
+        type: "image/webp",
+        purpose: "any",
+      },
     ],
   };
 }

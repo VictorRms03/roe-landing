@@ -6,14 +6,14 @@ import WhatsAppIcon from "@/components/WhatsAppIcon";
 export default function MobileActionBar() {
   return (
     <div
-      className="fixed inset-x-0 bottom-0 z-40 border-t border-roe-gray bg-roe-white px-4 pt-3 md:hidden"
+      className="border-roe-gray bg-roe-white fixed inset-x-0 bottom-0 z-40 border-t px-4 pt-3 md:hidden"
       // Clears the iOS home indicator without a Tailwind arbitrary value.
       style={{ paddingBottom: "calc(0.75rem + env(safe-area-inset-bottom))" }}
     >
       <div className="flex items-center gap-3">
         <Link
           href="#agendar"
-          className="flex-1 rounded-lg bg-black py-3.5 text-center text-sm font-semibold text-roe-white transition-[background-color,color,transform] duration-150 ease-out active:scale-[0.98] active:bg-roe-yellow active:text-gray-900"
+          className="text-roe-white active:bg-roe-yellow flex-1 rounded-lg bg-black py-3.5 text-center text-sm font-semibold transition-[background-color,color,transform] duration-150 ease-out active:scale-[0.98] active:text-gray-900"
         >
           Agendar exame
         </Link>
@@ -23,7 +23,7 @@ export default function MobileActionBar() {
         <Link
           href="#clinicas"
           aria-label="Ver o WhatsApp das unidades"
-          className="flex size-12 shrink-0 items-center justify-center rounded-lg bg-[#25d366] transition-transform duration-150 ease-out active:scale-95"
+          className="bg-roe-whatsapp flex size-12 shrink-0 items-center justify-center rounded-lg transition-transform duration-150 ease-out active:scale-95"
         >
           <WhatsAppIcon className="size-7" />
         </Link>

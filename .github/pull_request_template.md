@@ -4,6 +4,6 @@
 
 ## Evidências visuais
 
-| Antes | Depois |
-| ----- | ------ |
+| Antes                       | Depois                       |
+| --------------------------- | ---------------------------- |
 | _Evidência visual anterior_ | _Evidência visual posterior_ |

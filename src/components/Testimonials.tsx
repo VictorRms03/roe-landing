@@ -1,23 +1,24 @@
 import Reveal from "@/components/Reveal";
 import TestimonialsCarousel from "@/components/TestimonialsCarousel";
+import { REVIEWS } from "@/data/reviews";
 
 export default function Testimonials() {
   return (
     <>
       {/* No horizontal padding on the section: the carousel bleeds past the edges. */}
-      <section id="depoimentos" className="scroll-mt-32 bg-roe-white py-12">
+      <section id="depoimentos" className="bg-roe-white scroll-mt-32 py-12">
         <Reveal className="mx-auto max-w-7xl px-6 md:px-12 lg:px-16">
-          <h2 className="text-center text-3xl font-bold leading-tight tracking-tight text-black sm:text-4xl">
+          <h2 className="text-center text-3xl leading-tight font-bold tracking-tight text-black sm:text-4xl">
             O Que Nossos Clientes Dizem?
           </h2>
         </Reveal>
 
-        {/* The carousel stays outside any Reveal: it measures its cards with
-            getBoundingClientRect, and a translating ancestor would skew that. */}
-        <TestimonialsCarousel />
+        {/* Outside any Reveal: the carousel measures its cards, and a
+            translating ancestor would skew that. */}
+        <TestimonialsCarousel reviews={REVIEWS} />
       </section>
 
-      <div className="h-10 bg-[#EAE4D7]" aria-hidden="true" />
+      <div className="bg-roe-sand h-10" aria-hidden="true" />
     </>
   );
 }

@@ -1,55 +1,91 @@
+/** Both units keep the same hours, in the two forms the site needs. */
+export const OPENING_HOURS = {
+  /** What the page shows. */
+  label: "Segunda a Sexta · 8h às 12h e 13h às 17h",
+  /** schema.org openingHours, for the Dentist JSON-LD. */
+  schema: "Mo-Fr 08:00-12:00,13:00-17:00",
+} as const;
+
 export type Unit = {
   id: string;
   /** Full name, for headings. */
   name: string;
   /** Just the city, for compact places like form options. */
   shortName: string;
-  /** Full one-line address, for the footer and the JSON-LD. */
-  address: string;
-  /** Street and number alone, so the card can give it its own weight. */
   street: string;
-  /** Neighbourhood, city and postcode — the quieter half of `address`. */
-  cityLine: string;
+  neighborhood: string;
+  city: string;
+  /** Two-letter state code, as schema.org addressRegion expects. */
+  state: string;
+  postalCode: string;
   hours: string;
-  /** Google Maps directions deep link, built from `address`. */
-  mapsUrl: string;
   image: string;
   imageAlt: string;
   /** Digits only, with country and area code. Null hides WhatsApp for this unit. */
   whatsapp: string | null;
+  /** Full one-line address. Derived. */
+  address: string;
+  /** The quieter half of `address`, so the card can weight the street on its own. Derived. */
+  cityLine: string;
+  /** Google Maps directions deep link. Derived. */
+  mapsUrl: string;
 };
 
+type UnitSeed = Omit<Unit, "address" | "cityLine" | "mapsUrl">;
+
+// The three display/link strings used to be typed out by hand next to the parts
+// they were built from, so they could drift. Deriving them also gives the
+// JSON-LD a real PostalAddress instead of one collapsed streetAddress.
+function buildUnit(seed: UnitSeed): Unit {
+  const { street, neighborhood, city, state, postalCode } = seed;
+  return {
+    ...seed,
+    address: `${street} - ${neighborhood} - ${city} - ${state} - ${postalCode}`,
+    cityLine: `${neighborhood} · ${city} - ${state} · ${postalCode}`,
+    // `/maps/dir/` and not `/maps/search/`: the button says "Como chegar", so it
+    // routes from wherever the visitor is. `api=1` is the documented form and
+    // deep-links into the app when it is installed.
+    mapsUrl:
+      "https://www.google.com/maps/dir/?api=1&destination=" +
+      encodeURIComponent(`${street} - ${neighborhood}, ${city} - ${state}, ${postalCode}`),
+  };
+}
+
 export const UNITS: Unit[] = [
-  {
+  buildUnit({
     id: "mogi-guacu",
     name: "Clínica Mogi Guaçu",
     shortName: "Mogi Guaçu",
-    address: "Rua Chico de Paula, 684 - Centro - Mogi Guaçu - SP - 13840-001",
     street: "Rua Chico de Paula, 684",
-    cityLine: "Centro · Mogi Guaçu - SP · 13840-001",
-    hours: "Segunda a Sexta · 8h às 12h e 13h às 17h",
-    // `/maps/dir/` and not `/maps/search/`: the button says "Como chegar", so it
-    // should route from wherever the visitor is. The `api=1` form is the stable
-    // documented one and deep-links into the app when it is installed.
-    mapsUrl:
-      "https://www.google.com/maps/dir/?api=1&destination=Rua%20Chico%20de%20Paula%2C%20684%20-%20Centro%2C%20Mogi%20Gua%C3%A7u%20-%20SP%2C%2013840-001",
+    neighborhood: "Centro",
+    city: "Mogi Guaçu",
+    state: "SP",
+    postalCode: "13840-001",
+    hours: OPENING_HOURS.label,
     image: "/images/hero/clinica-guacu.webp",
     imageAlt: "Fachada amarela da unidade de Mogi Guaçu",
-    // Read off the clinic's own signage in the photo. Confirm before launch.
+    // TODO: read off the clinic's own signage in the photo. Confirm before launch.
     whatsapp: "5519998807176",
-  },
-  {
+  }),
+  buildUnit({
     id: "mogi-mirim",
     name: "Clínica Mogi Mirim",
     shortName: "Mogi Mirim",
-    address: "Rua Coronel Leitão, 367 - Centro - Mogi Mirim - SP - 13800-040",
     street: "Rua Coronel Leitão, 367",
-    cityLine: "Centro · Mogi Mirim - SP · 13800-040",
-    hours: "Segunda a Sexta · 8h às 12h e 13h às 17h",
-    mapsUrl:
-      "https://www.google.com/maps/dir/?api=1&destination=Rua%20Coronel%20Leit%C3%A3o%2C%20367%20-%20Centro%2C%20Mogi%20Mirim%20-%20SP%2C%2013800-040",
+    neighborhood: "Centro",
+    city: "Mogi Mirim",
+    state: "SP",
+    postalCode: "13800-040",
+    hours: OPENING_HOURS.label,
     image: "/images/hero/clinica-mogi.webp",
     imageAlt: "Fachada em pedra e tijolo da unidade de Mogi Mirim",
     whatsapp: "5519998863332",
-  },
+  }),
 ];
+
+/** A unit with no number has nowhere to send a booking, so narrow it away once. */
+export type BookableUnit = Unit & { whatsapp: string };
+
+export const BOOKABLE_UNITS: BookableUnit[] = UNITS.filter(
+  (unit): unit is BookableUnit => unit.whatsapp !== null,
+);

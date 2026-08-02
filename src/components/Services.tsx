@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
 import Reveal from "@/components/Reveal";
+import Section from "@/components/ui/Section";
+import SectionHeader from "@/components/ui/SectionHeader";
 
 type Exam = {
   name: string;
@@ -7,13 +9,12 @@ type Exam = {
   icon: ReactNode;
 };
 
-// Each icon is drawn to the same 24x24 grid and inherits the shared stroke,
-// so only the shapes differ between cards.
+// Each icon is drawn to the same 24x24 grid and inherits the wrapper's stroke
+// below, so only the shapes differ between cards.
 const EXAMS: Exam[] = [
   {
     name: "Raio-X Panorâmico",
     description: "Visão completa da arcada dentária em uma única imagem.",
-    // The dental arch, as a horseshoe band.
     icon: (
       <>
         <path d="M3 5c0 18 18 18 18 0" />
@@ -24,7 +25,6 @@ const EXAMS: Exam[] = [
   {
     name: "Raio-X Periapical",
     description: "Detalha um dente inteiro, da coroa à ponta da raiz.",
-    // A single tooth: crown, two roots, valley between them.
     icon: (
       <path d="M12 2.5C8.2 2.5 4.5 4 4.5 8C4.5 11 5.6 13.5 6.2 17C6.6 19.4 7 21.5 8.3 21.5C9.6 21.5 9.9 19.3 10.2 17.2C10.5 15.2 10.9 14 12 14C13.1 14 13.5 15.2 13.8 17.2C14.1 19.3 14.4 21.5 15.7 21.5C17 21.5 17.4 19.4 17.8 17C18.4 13.5 19.5 11 19.5 8C19.5 4 15.8 2.5 12 2.5Z" />
     ),
@@ -32,7 +32,6 @@ const EXAMS: Exam[] = [
   {
     name: "Raio-X Interproximal",
     description: "Mostra o contato entre dentes vizinhos para flagrar cáries.",
-    // Two neighbouring teeth with the contact point marked between them.
     icon: (
       <>
         <rect x="4" y="5" width="6.5" height="14" rx="2.2" />
@@ -44,7 +43,6 @@ const EXAMS: Exam[] = [
   {
     name: "Telerradiografia",
     description: "Perfil do crânio usado no planejamento ortodôntico.",
-    // The measured angle of a cephalometric tracing.
     icon: (
       <>
         <path d="M4 20h16" />
@@ -56,7 +54,6 @@ const EXAMS: Exam[] = [
   {
     name: "Tomografia",
     description: "Reconstrução em 3D para implantes e casos complexos.",
-    // A volume, since this is the exam that reconstructs one.
     icon: (
       <>
         <path d="M12 2 21 7v10l-9 5-9-5V7z" />
@@ -69,7 +66,6 @@ const EXAMS: Exam[] = [
   {
     name: "Documentação Ortodôntica",
     description: "Conjunto de exames e fotos para montar o tratamento.",
-    // Stacked sheets: this one is a set, not a single image.
     icon: (
       <>
         <rect x="7" y="3" width="14" height="14" rx="2.5" />
@@ -81,47 +77,43 @@ const EXAMS: Exam[] = [
 
 export default function Services() {
   return (
-    <section id="servicos" className="scroll-mt-32 bg-roe-white px-6 py-12 md:px-12 lg:px-16">
-      <div className="mx-auto max-w-7xl">
-        <Reveal>
-          <p className="text-2xl font-semibold text-roe-yellow sm:text-3xl">Exames</p>
-          <h2 className="mt-2 text-3xl font-bold leading-tight tracking-tight text-black sm:text-4xl">
-            Raio-x para Cada Necessidade
-          </h2>
-          <p className="max-w-xl text-sm text-black sm:max-w-none sm:whitespace-nowrap sm:text-base">
-            Tecnologia avançada de imagem para todo tipo de diagnóstico odontológico.
-          </p>
-        </Reveal>
+    <Section id="servicos" className="bg-roe-white py-12">
+      <SectionHeader
+        eyebrow="Exames"
+        title="Raio-x para Cada Necessidade"
+        description="Tecnologia avançada de imagem para todo tipo de diagnóstico odontológico."
+        titleClassName="text-black"
+        descriptionClassName="max-w-xl text-sm text-black sm:max-w-none sm:whitespace-nowrap sm:text-base"
+      />
 
-        <div className="mt-5">
-          <ul className="grid gap-12 sm:grid-cols-2 lg:grid-cols-3">
-            {EXAMS.map((exam, index) => (
-              // Reveal owns the transform of the li, so the hover lift lives on
-              // the card inside it — h-full because the li is what stretches.
-              <Reveal as="li" key={exam.name} delay={index * 80}>
-                <div className="group h-full rounded-3xl bg-[#D5CBB3] px-8 py-6 shadow-[0_2px_5px_rgba(0,0,0,0.12)] transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_10px_24px_rgba(0,0,0,0.16)]">
-                  <span className="flex size-16 items-center justify-center rounded-xl bg-roe-yellow transition-transform duration-300 ease-out group-hover:scale-110">
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.6"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      aria-hidden="true"
-                      className="size-9 text-gray-900"
-                    >
-                      {exam.icon}
-                    </svg>
-                  </span>
-                  <h3 className="mt-6 text-lg font-semibold text-black">{exam.name}</h3>
-                  <p className="mt-1.5 text-sm text-black">{exam.description}</p>
-                </div>
-              </Reveal>
-            ))}
-          </ul>
-        </div>
+      <div className="mt-5">
+        <ul className="grid gap-12 sm:grid-cols-2 lg:grid-cols-3">
+          {EXAMS.map((exam, index) => (
+            // Reveal owns the transform of the li, so the hover lift lives on
+            // the card inside it — h-full because the li is what stretches.
+            <Reveal as="li" key={exam.name} delay={index * 80}>
+              <div className="group bg-roe-clay h-full rounded-3xl px-8 py-6 shadow-[0_2px_5px_rgba(0,0,0,0.12)] transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_10px_24px_rgba(0,0,0,0.16)]">
+                <span className="bg-roe-yellow flex size-16 items-center justify-center rounded-xl transition-transform duration-300 ease-out group-hover:scale-110">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                    className="size-9 text-gray-900"
+                  >
+                    {exam.icon}
+                  </svg>
+                </span>
+                <h3 className="mt-6 text-lg font-semibold text-black">{exam.name}</h3>
+                <p className="mt-1.5 text-sm text-black">{exam.description}</p>
+              </div>
+            </Reveal>
+          ))}
+        </ul>
       </div>
-    </section>
+    </Section>
   );
 }

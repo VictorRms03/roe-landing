@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import Footer from "@/components/Footer";
 import MobileActionBar from "@/components/MobileActionBar";
 import Navbar from "@/components/Navbar";
-import { UNITS } from "@/data/units";
+import { OPENING_HOURS, UNITS } from "@/data/units";
 import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
@@ -69,10 +69,13 @@ const jsonLd = UNITS.map((unit) => ({
   telephone: unit.whatsapp ? `+${unit.whatsapp}` : undefined,
   address: {
     "@type": "PostalAddress",
-    streetAddress: unit.address,
+    streetAddress: unit.street,
+    addressLocality: unit.city,
+    addressRegion: unit.state,
+    postalCode: unit.postalCode,
     addressCountry: "BR",
   },
-  openingHours: "Mo-Fr 08:00-12:00,13:00-17:00",
+  openingHours: OPENING_HOURS.schema,
 }));
 
 export default function RootLayout({
@@ -81,11 +84,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    // `data-scroll-behavior` is what tells Next 16 it owns the smooth scrolling
-    // set in globals.css: it drops back to an instant jump on a real route
-    // change, and leaves the in-page anchors alone.
+    // `data-scroll-behavior` hands Next 16 the smooth scrolling set in
+    // globals.css, so a real route change still jumps instantly.
     <html lang="pt-BR" data-scroll-behavior="smooth" className={inter.variable}>
-      {/* Bottom padding keeps the fixed action bar from covering the footer. */}
       <body className="pb-24 font-sans md:pb-0">
         <noscript>
           {/* The reveal observer never runs without JS, so show everything. */}
@@ -96,7 +97,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <Navbar />
-        {children}
+        <main>{children}</main>
         <Footer />
         <MobileActionBar />
       </body>
