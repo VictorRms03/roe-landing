@@ -65,6 +65,7 @@ const jsonLd = UNITS.map((unit) => ({
   name: unit.name,
   image: `${SITE_URL}${unit.image}`,
   url: SITE_URL,
+  hasMap: unit.mapsUrl,
   telephone: unit.whatsapp ? `+${unit.whatsapp}` : undefined,
   address: {
     "@type": "PostalAddress",
