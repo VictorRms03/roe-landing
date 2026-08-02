@@ -72,6 +72,24 @@ export function StarIcon({ className = "size-4" }: IconProps) {
   );
 }
 
+// Same path as StarIcon, clipped to its left half — for ratings like 4.5
+// that land between two whole stars.
+export function HalfStarIcon({ className = "size-4" }: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      style={{ clipPath: "inset(0 50% 0 0)" }}
+      className={className}
+    >
+      <path
+        fill="currentColor"
+        d="M12 2.6l2.9 5.9 6.5.95-4.7 4.58 1.11 6.47L12 17.44 6.19 20.5l1.11-6.47L2.6 9.45l6.5-.95z"
+      />
+    </svg>
+  );
+}
+
 export function ChevronIcon({ className = "size-5" }: IconProps) {
   return (
     <svg {...STROKE} strokeWidth={2} className={className}>

@@ -1,5 +1,12 @@
 import Image from "next/image";
-import { ArrowRightIcon, ChatIcon, ClockIcon, PinIcon, StarIcon } from "@/components/Icons";
+import {
+  ArrowRightIcon,
+  ChatIcon,
+  ClockIcon,
+  HalfStarIcon,
+  PinIcon,
+  StarIcon,
+} from "@/components/Icons";
 
 const INFO_ITEMS = [
   { icon: PinIcon, title: "Duas Unidades", detail: "Mogi Mirim e Mogi Guaçu" },
@@ -35,9 +42,10 @@ export default function Hero() {
             <div className="animate-fade-up bg-roe-cream inline-flex max-w-[calc(100vw-3rem)] items-center gap-2.5 rounded-full border border-black/10 py-1.5 pr-4 pl-2.5 shadow-sm shadow-black/5 motion-reduce:animate-none sm:max-w-none">
               {/* Decorative: the sentence beside it already carries the rating. */}
               <span className="text-roe-yellow flex shrink-0 items-center gap-0.5" aria-hidden="true">
-                {Array.from({ length: 5 }, (_, index) => (
+                {Array.from({ length: 4 }, (_, index) => (
                   <StarIcon key={index} className="size-3.5" />
                 ))}
+                <HalfStarIcon className="size-3.5" />
               </span>
               <span className="min-w-0 overflow-hidden text-xs font-semibold whitespace-nowrap text-gray-900 motion-reduce:overflow-visible motion-reduce:whitespace-normal sm:min-w-fit sm:overflow-visible sm:text-sm sm:whitespace-normal">
                 <span className="animate-marquee-peek inline-block motion-reduce:animate-none sm:animate-none">
