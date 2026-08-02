@@ -40,7 +40,7 @@ export default function Faq() {
             <Reveal as="li" key={item.question} delay={index * 80}>
               {/* <details> gives the open/close behaviour, keyboard support and
                   in-page find for free, with no client component involved. */}
-              <details className="group rounded-2xl bg-[#FFFCF5] shadow-sm ring-1 ring-black/5 transition-shadow duration-300 ease-out hover:shadow-md open:shadow-lg open:ring-roe-yellow/50">
+              <details className="group rounded-2xl bg-roe-cream shadow-sm ring-1 ring-black/5 transition-shadow duration-300 ease-out hover:shadow-md open:shadow-lg open:ring-roe-yellow/50">
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-5 rounded-2xl px-5 py-5 text-base font-semibold text-gray-900 outline-none [&::-webkit-details-marker]:hidden focus-visible:ring-2 focus-visible:ring-roe-yellow sm:px-6">
                   {item.question}
                   {/* A plus that folds into a minus: the upright bar unrotates
@@ -65,7 +65,7 @@ export default function Faq() {
         </ul>
 
         {/* The way out for everything the four answers above do not cover. */}
-        <Reveal delay={120} className="mt-10 rounded-3xl bg-[#EAE4D7] p-6 text-center sm:p-8">
+        <Reveal delay={120} className="mt-10 rounded-3xl bg-roe-sand p-6 text-center sm:p-8">
           <h3 className="text-lg font-semibold text-gray-900 sm:text-xl">
             Não encontrou sua dúvida?
           </h3>
@@ -75,7 +75,7 @@ export default function Faq() {
           </p>
           <a
             href="#agendar"
-            className="mt-5 inline-block rounded-full bg-black px-6 py-3 text-sm font-semibold text-roe-white shadow-md shadow-black/10 outline-none transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-roe-yellow hover:text-gray-900 hover:shadow-lg hover:shadow-black/20 active:translate-y-0 active:shadow-md focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 focus-visible:ring-offset-[#EAE4D7]"
+            className="mt-5 inline-block rounded-full bg-black px-6 py-3 text-sm font-semibold text-roe-white shadow-md shadow-black/10 outline-none transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-roe-yellow hover:text-gray-900 hover:shadow-lg hover:shadow-black/20 active:translate-y-0 active:shadow-md focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 focus-visible:ring-offset-roe-sand"
           >
             Falar com a gente
           </a>

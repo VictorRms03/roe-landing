@@ -24,7 +24,7 @@ const STATS = [
 
 export default function Benefits() {
   return (
-    <section id="beneficios" className="scroll-mt-32 bg-[#EAE4D7] px-6 py-12 md:px-12 lg:px-16">
+    <section id="beneficios" className="scroll-mt-32 bg-roe-sand px-6 py-12 md:px-12 lg:px-16">
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-10 lg:grid-cols-[1.05fr_auto] lg:items-center lg:gap-12">
           <div>

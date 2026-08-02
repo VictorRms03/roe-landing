@@ -29,7 +29,7 @@ export default function Booking() {
   return (
     // Sand rather than white: this is where the page's colour rhythm resumes,
     // and the strip Testimonials leaves behind melts into it as top breathing room.
-    <section id="agendar" className="scroll-mt-32 bg-[#EAE4D7] px-6 py-16 md:px-12 lg:px-16">
+    <section id="agendar" className="scroll-mt-32 bg-roe-sand px-6 py-16 md:px-12 lg:px-16">
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-10 lg:grid-cols-[1fr_1.05fr] lg:items-center lg:gap-16">
           <div>
@@ -83,7 +83,7 @@ export default function Booking() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`Falar com a ${unit.name} no WhatsApp`}
-                      className="inline-flex items-center gap-2 rounded-full bg-[#25d366] px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-black/10 outline-none transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/20 active:translate-y-0 active:shadow-md focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 focus-visible:ring-offset-[#EAE4D7]"
+                      className="inline-flex items-center gap-2 rounded-full bg-roe-whatsapp px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-black/10 outline-none transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/20 active:translate-y-0 active:shadow-md focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 focus-visible:ring-offset-roe-sand"
                     >
                       <WhatsAppIcon />
                       {unit.shortName}
@@ -96,7 +96,7 @@ export default function Booking() {
 
           {/* Cream card on sand: the same pairing the clinic cards use over yellow. */}
           <Reveal delay={120}>
-            <div className="rounded-3xl bg-[#FFFCF5] p-6 shadow-xl shadow-black/10 sm:p-8">
+            <div className="rounded-3xl bg-roe-cream p-6 shadow-xl shadow-black/10 sm:p-8">
               <BookingForm />
             </div>
           </Reveal>

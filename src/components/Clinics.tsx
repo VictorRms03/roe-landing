@@ -107,7 +107,7 @@ export default function Clinics() {
                         href={unit.mapsUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 rounded-full bg-roe-yellow px-5 py-2.5 text-sm font-semibold text-gray-950 shadow-md shadow-black/20 outline-none transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-[#f2bd3f] hover:shadow-lg hover:shadow-roe-yellow/20 focus-visible:ring-2 focus-visible:ring-roe-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-roe-ink active:translate-y-0 active:shadow-md"
+                        className="inline-flex items-center gap-2 rounded-full bg-roe-yellow px-5 py-2.5 text-sm font-semibold text-gray-950 shadow-md shadow-black/20 outline-none transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-roe-yellow-hover hover:shadow-lg hover:shadow-roe-yellow/20 focus-visible:ring-2 focus-visible:ring-roe-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-roe-ink active:translate-y-0 active:shadow-md"
                       >
                         <RouteIcon className="size-4" />
                         Como chegar

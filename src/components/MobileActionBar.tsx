@@ -23,7 +23,7 @@ export default function MobileActionBar() {
         <Link
           href="#clinicas"
           aria-label="Ver o WhatsApp das unidades"
-          className="flex size-12 shrink-0 items-center justify-center rounded-lg bg-[#25d366] transition-transform duration-150 ease-out active:scale-95"
+          className="flex size-12 shrink-0 items-center justify-center rounded-lg bg-roe-whatsapp transition-transform duration-150 ease-out active:scale-95"
         >
           <WhatsAppIcon className="size-7" />
         </Link>

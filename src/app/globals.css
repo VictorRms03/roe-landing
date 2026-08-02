@@ -5,15 +5,15 @@
   --color-roe-gray: #d9d9d9;
   --color-roe-white: #fefdff;
   --color-roe-yellow: #e6af2e;
-  /* The surfaces that used to be spelled out as arbitrary hexes on every
-     element. Naming them is what makes `ring-offset-roe-ink` possible: the
-     offset colour has to match whatever the element sits on, and hand-copying
-     a hex into every focus ring is how those drift apart. */
+  /* Page surfaces. A focus ring's offset has to match whatever the element
+     sits on, so these have to be named for `ring-offset-roe-ink` to exist. */
   --color-roe-sand: #eae4d7;
   --color-roe-cream: #fffcf5;
   --color-roe-clay: #d5cbb3;
   --color-roe-ink: #121212;
   --color-roe-whatsapp: #25d366;
+  /* Lifted yellow, for hover on a surface that is already roe-yellow. */
+  --color-roe-yellow-hover: #f2bd3f;
 
   --animate-fade-up: fade-up 600ms ease-out both;
   --animate-fade-in: fade-in 400ms ease-out both;

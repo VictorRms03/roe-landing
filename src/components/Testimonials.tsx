@@ -17,7 +17,7 @@ export default function Testimonials() {
         <TestimonialsCarousel />
       </section>
 
-      <div className="h-10 bg-[#EAE4D7]" aria-hidden="true" />
+      <div className="h-10 bg-roe-sand" aria-hidden="true" />
     </>
   );
 }

@@ -61,7 +61,7 @@ export default function Footer() {
   return (
     // Ink, not white: the page runs sand → white → black, so the footer is what
     // finally closes it instead of blending into the FAQ above.
-    <footer className="bg-[#121212]">
+    <footer className="bg-roe-ink">
       {/* Outside the padded box so the brand rule runs edge to edge. */}
       <div className="h-1 bg-roe-yellow" aria-hidden="true" />
 
@@ -71,7 +71,7 @@ export default function Footer() {
             <div>
               <Link
                 href="/"
-                className="inline-flex items-center gap-2 rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-roe-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-[#121212]"
+                className="inline-flex items-center gap-2 rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-roe-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-roe-ink"
               >
                 <Image
                   src="/logo.webp"
@@ -96,7 +96,7 @@ export default function Footer() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`${social.label} da Clínica ROE`}
-                      className="block size-11 rounded-xl outline-none transition-transform duration-200 ease-out hover:-translate-y-0.5 hover:scale-105 focus-visible:ring-2 focus-visible:ring-roe-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-[#121212]"
+                      className="block size-11 rounded-xl outline-none transition-transform duration-200 ease-out hover:-translate-y-0.5 hover:scale-105 focus-visible:ring-2 focus-visible:ring-roe-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-roe-ink"
                     >
                       {social.icon}
                     </a>
@@ -137,7 +137,7 @@ export default function Footer() {
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label={`Falar com a ${unit.name} no WhatsApp`}
-                        className="mt-3 inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-2 text-xs font-semibold text-roe-white outline-none transition-colors duration-200 hover:bg-[#25d366] focus-visible:ring-2 focus-visible:ring-roe-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-[#121212]"
+                        className="mt-3 inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-2 text-xs font-semibold text-roe-white outline-none transition-colors duration-200 hover:bg-roe-whatsapp focus-visible:ring-2 focus-visible:ring-roe-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-roe-ink"
                       >
                         <WhatsAppIcon className="size-4" />
                         Falar no WhatsApp
@@ -159,7 +159,7 @@ export default function Footer() {
                 fragment is defined to mean the top of the document. */}
             <a
               href="#top"
-              className="group inline-flex items-center gap-2 self-start rounded-full text-xs font-semibold text-white/60 outline-none transition-colors duration-200 hover:text-roe-yellow focus-visible:ring-2 focus-visible:ring-roe-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-[#121212] sm:self-auto"
+              className="group inline-flex items-center gap-2 self-start rounded-full text-xs font-semibold text-white/60 outline-none transition-colors duration-200 hover:text-roe-yellow focus-visible:ring-2 focus-visible:ring-roe-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-roe-ink sm:self-auto"
             >
               Voltar ao topo
               <svg

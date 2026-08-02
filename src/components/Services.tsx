@@ -99,7 +99,7 @@ export default function Services() {
               // Reveal owns the transform of the li, so the hover lift lives on
               // the card inside it — h-full because the li is what stretches.
               <Reveal as="li" key={exam.name} delay={index * 80}>
-                <div className="group h-full rounded-3xl bg-[#D5CBB3] px-8 py-6 shadow-[0_2px_5px_rgba(0,0,0,0.12)] transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_10px_24px_rgba(0,0,0,0.16)]">
+                <div className="group h-full rounded-3xl bg-roe-clay px-8 py-6 shadow-[0_2px_5px_rgba(0,0,0,0.12)] transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_10px_24px_rgba(0,0,0,0.16)]">
                   <span className="flex size-16 items-center justify-center rounded-xl bg-roe-yellow transition-transform duration-300 ease-out group-hover:scale-110">
                     <svg
                       viewBox="0 0 24 24"
