@@ -8,6 +8,9 @@
 
   --animate-fade-up: fade-up 600ms ease-out both;
   --animate-fade-in: fade-in 400ms ease-out both;
+  /* Same keyframe as above, shorter: an accordion answer opens next to the
+     question that was just clicked, so the entrance has to be quick. */
+  --animate-fade-in-up: fade-up 300ms ease-out both;
 }
 
 /* Declared outside @theme so they are emitted as plain CSS, independent of how

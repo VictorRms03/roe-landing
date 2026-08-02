@@ -1,13 +1,15 @@
 "use client";
 
-import { useRef, useState, type FormEvent, type MouseEvent, type ReactNode } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type FormEvent,
+  type MouseEvent,
+  type ReactNode,
+} from "react";
+import WhatsAppIcon from "@/components/WhatsAppIcon";
 import { UNITS } from "@/data/units";
-
-const FIELDS = [
-  { id: "nome", label: "Nome Completo", type: "text" },
-  { id: "email", label: "E-mail", type: "email" },
-  { id: "data", label: "Data", type: "date" },
-];
 
 const EXAM_TYPES = [
   "Panorâmica",
@@ -19,43 +21,66 @@ const EXAM_TYPES = [
   "Documentação Ortodôntica",
 ];
 
-// Tailwind orders `hover:` before `focus:`, so the yellow focus ring still wins
-// over the hover one when a pointer rests on the focused field.
+// White fields sit on a cream card, so they need the hairline ring to read as
+// fields at all. Tailwind orders `hover:` before `focus:`, so the yellow focus
+// ring still wins over the hover one when a pointer rests on the focused field.
 const FIELD_CLASS =
-  "w-full rounded-lg bg-roe-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-500 outline-none transition-shadow duration-200 hover:ring-2 hover:ring-black/5 focus:ring-2 focus:ring-roe-yellow";
+  "w-full rounded-lg bg-roe-white px-4 py-3 text-sm text-gray-900 ring-1 ring-black/10 placeholder:text-gray-500 outline-none transition-shadow duration-200 hover:ring-black/25 focus:ring-2 focus:ring-roe-yellow";
 
 // A unit with no WhatsApp number has nowhere to send the booking.
 const BOOKABLE_UNITS = UNITS.filter((unit) => unit.whatsapp !== null);
 
-function Select({ id, label, children }: { id: string; label: string; children: ReactNode }) {
+// Visible labels rather than placeholders alone: the placeholder disappears the
+// moment someone types, right when they still want to know what the field was.
+function Field({ id, label, children }: { id: string; label: string; children: ReactNode }) {
   return (
-    <div className="relative">
-      <label htmlFor={id} className="sr-only">
+    <div>
+      <label htmlFor={id} className="block text-sm font-medium text-gray-900">
         {label}
       </label>
-      <select
-        id={id}
-        name={id}
-        defaultValue=""
-        required
-        className={`${FIELD_CLASS} appearance-none pr-10 invalid:text-gray-500`}
-      >
-        <option value="" disabled>
-          {label}
-        </option>
-        {children}
-      </select>
-      <svg
-        viewBox="0 0 16 16"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        aria-hidden="true"
-        className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500"
-      >
-        <path d="M4 6l4 4 4-4" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
+      <div className="mt-1.5">{children}</div>
     </div>
+  );
+}
+
+function Select({
+  id,
+  label,
+  placeholder,
+  children,
+}: {
+  id: string;
+  label: string;
+  placeholder: string;
+  children: ReactNode;
+}) {
+  return (
+    <Field id={id} label={label}>
+      <div className="relative">
+        <select
+          id={id}
+          name={id}
+          defaultValue=""
+          required
+          className={`${FIELD_CLASS} appearance-none pr-10 invalid:text-gray-500`}
+        >
+          <option value="" disabled>
+            {placeholder}
+          </option>
+          {children}
+        </select>
+        <svg
+          viewBox="0 0 16 16"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          aria-hidden="true"
+          className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500"
+        >
+          <path d="M4 6l4 4 4-4" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </div>
+    </Field>
   );
 }
 
@@ -84,7 +109,16 @@ function buildChatUrl(form: HTMLFormElement) {
 
 export default function BookingForm() {
   const formRef = useRef<HTMLFormElement>(null);
+  const dateRef = useRef<HTMLInputElement>(null);
   const [chatUrl, setChatUrl] = useState<string | null>(null);
+
+  // Written straight to the DOM after mount instead of rendered: the server has
+  // no idea what "today" is in the visitor's timezone, so shipping its own date
+  // in the HTML would only be a hydration mismatch waiting to happen. The
+  // Swedish locale is the short path to the `YYYY-MM-DD` the input expects.
+  useEffect(() => {
+    if (dateRef.current) dateRef.current.min = new Date().toLocaleDateString("sv-SE");
+  }, []);
 
   function syncChatUrl() {
     if (formRef.current) setChatUrl(buildChatUrl(formRef.current));
@@ -106,47 +140,69 @@ export default function BookingForm() {
       onChange={syncChatUrl}
       onInput={syncChatUrl}
       onSubmit={handleSubmit}
-      className="mt-6 flex flex-col gap-3"
+      className="flex flex-col gap-4"
     >
-      {FIELDS.map((field) => (
-        <div key={field.id}>
-          <label htmlFor={field.id} className="sr-only">
-            {field.label}
-          </label>
+      <Field id="nome" label="Nome completo">
+        <input
+          id="nome"
+          name="nome"
+          type="text"
+          placeholder="Como podemos te chamar"
+          required
+          className={FIELD_CLASS}
+        />
+      </Field>
+
+      <div className="grid gap-4 sm:grid-cols-2">
+        <Field id="email" label="E-mail">
           <input
-            id={field.id}
-            name={field.id}
-            type={field.type}
-            placeholder={field.label}
+            id="email"
+            name="email"
+            type="email"
+            placeholder="voce@email.com"
             required
             className={FIELD_CLASS}
           />
-        </div>
-      ))}
+        </Field>
 
-      <Select id="tipo" label="Tipo de Exame">
-        {EXAM_TYPES.map((exam) => (
-          <option key={exam} value={exam}>
-            {exam}
-          </option>
-        ))}
-      </Select>
+        <Field id="data" label="Data desejada">
+          <input
+            id="data"
+            name="data"
+            type="date"
+            ref={dateRef}
+            required
+            className={FIELD_CLASS}
+          />
+        </Field>
+      </div>
 
-      <Select id="unidade" label="Unidade">
-        {BOOKABLE_UNITS.map((unit) => (
-          <option key={unit.id} value={unit.id}>
-            {unit.shortName}
-          </option>
-        ))}
-      </Select>
+      <div className="grid gap-4 sm:grid-cols-2">
+        <Select id="tipo" label="Tipo de exame" placeholder="Selecione o exame">
+          {EXAM_TYPES.map((exam) => (
+            <option key={exam} value={exam}>
+              {exam}
+            </option>
+          ))}
+        </Select>
+
+        <Select id="unidade" label="Unidade" placeholder="Selecione a unidade">
+          {BOOKABLE_UNITS.map((unit) => (
+            <option key={unit.id} value={unit.id}>
+              {unit.shortName}
+            </option>
+          ))}
+        </Select>
+      </div>
 
       <a
         href={chatUrl ?? "#"}
         target="_blank"
         rel="noopener noreferrer"
         onClick={handleClick}
-        className="mt-3 block rounded-lg bg-black px-5 py-3 text-center text-sm font-semibold text-roe-white shadow-md shadow-black/10 transition-all duration-300 ease-out outline-none hover:-translate-y-0.5 hover:bg-roe-yellow hover:text-gray-900 hover:shadow-lg hover:shadow-black/20 active:translate-y-0 active:shadow-md focus-visible:ring-2 focus-visible:ring-roe-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-roe-gray"
+        className="mt-2 flex items-center justify-center gap-2 rounded-lg bg-black px-5 py-3.5 text-center text-sm font-semibold text-roe-white shadow-md shadow-black/10 transition-all duration-300 ease-out outline-none hover:-translate-y-0.5 hover:bg-roe-yellow hover:text-gray-900 hover:shadow-lg hover:shadow-black/20 active:translate-y-0 active:shadow-md focus-visible:ring-2 focus-visible:ring-roe-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-[#FFFCF5]"
       >
+        <WhatsAppIcon />
         Enviar pelo WhatsApp
       </a>
 
