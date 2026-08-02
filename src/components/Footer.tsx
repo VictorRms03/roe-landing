@@ -45,13 +45,14 @@ export default function Footer() {
                 href="/"
                 className="inline-flex items-center gap-2 rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-roe-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-roe-ink"
               >
+                {/* 112 = 2x the 56px slot. `sizes` without `fill` made Next
+                    build a srcset off deviceSizes and fetch far more than that. */}
                 <Image
                   src="/logo.webp"
                   alt=""
                   aria-hidden="true"
-                  width={256}
-                  height={256}
-                  sizes="56px"
+                  width={112}
+                  height={112}
                   className="size-14"
                 />
                 <span className="text-lg font-bold text-roe-white">Clínica ROE</span>

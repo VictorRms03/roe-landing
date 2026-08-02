@@ -51,24 +51,28 @@ export default function TestimonialsCarousel({ reviews }: Props) {
 
     let frame = 0;
     let settle = 0;
+    // Card pitch and the first card's centre, measured once instead of reading
+    // 25 bounding rects on every animation frame while scrolling.
+    let pitch = 0;
+    let firstCentre = 0;
+
+    const measure = () => {
+      const first = track.children[0] as HTMLElement | undefined;
+      const second = track.children[1] as HTMLElement | undefined;
+      if (!first || !second) return;
+      pitch = second.offsetLeft - first.offsetLeft;
+      firstCentre = first.offsetLeft + first.offsetWidth / 2;
+    };
 
     const highlight = () => {
       frame = 0;
-      const box = track.getBoundingClientRect();
-      const middle = box.left + box.width / 2;
-      let closest = 0;
-      let shortest = Infinity;
+      if (!pitch) return;
 
-      Array.from(track.children).forEach((card, index) => {
-        const rect = card.getBoundingClientRect();
-        const distance = Math.abs(rect.left + rect.width / 2 - middle);
-        if (distance < shortest) {
-          shortest = distance;
-          closest = index;
-        }
-      });
-
-      setActive(closest);
+      // Card centres are unaffected by the scale transform (the default
+      // transform-origin is the centre), so layout positions are enough.
+      const middle = track.scrollLeft + track.clientWidth / 2;
+      const index = Math.round((middle - firstCentre) / pitch);
+      setActive(Math.min(Math.max(index, 0), track.children.length - 1));
     };
 
     const rewind = () => {
@@ -88,12 +92,14 @@ export default function TestimonialsCarousel({ reviews }: Props) {
     };
 
     const onResize = () => {
+      measure();
       rewind();
       highlight();
     };
 
     // Start on the middle copy so the first click has room in either direction.
     track.scrollLeft = copyWidth(track, perCopy) * HOME_COPY;
+    measure();
     highlight();
 
     track.addEventListener("scroll", onScroll, { passive: true });

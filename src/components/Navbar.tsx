@@ -35,12 +35,15 @@ export default function Navbar() {
             className="flex items-center gap-2"
             onClick={() => setIsOpen(false)}
           >
+            {/* No preload and no eager: both make Next emit a <link rel=preload>,
+                and this 32px logo should not race the hero image for bandwidth.
+                It sits in the initial viewport, so the browser fetches it at
+                once regardless. */}
             <Image
               src="/logo.webp"
               alt="Clínica ROE"
               width={180}
               height={180}
-              preload
               className="size-8 md:size-14"
             />
             <span className="text-[22px] font-bold text-gray-900">
