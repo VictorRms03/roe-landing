@@ -3,16 +3,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { NAV_LINKS } from "@/data/navigation";
 
 const MOBILE_MENU_ID = "mobile-menu";
-
-// Every href below must match a section id rendered on the page.
-const NAV_LINKS = [
-  { label: "Exames", href: "#servicos" },
-  { label: "A Clínica", href: "#beneficios" },
-  { label: "Unidades", href: "#clinicas" },
-  { label: "Dúvidas", href: "#faq" },
-];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);

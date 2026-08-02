@@ -1,7 +1,7 @@
 import BookingForm from "@/components/BookingForm";
 import Reveal from "@/components/Reveal";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
-import { UNITS, type Unit } from "@/data/units";
+import { BOOKABLE_UNITS } from "@/data/units";
 
 // What the form actually does, in the visitor's terms. Nothing here promises
 // more than the WhatsApp link BookingForm builds already delivers.
@@ -19,11 +19,6 @@ const ASSURANCES = [
     description: "O pedido vai direto para o número de Mogi Guaçu ou de Mogi Mirim.",
   },
 ];
-
-// Narrowed rather than filtered loosely, so `unit.whatsapp` is a string below.
-const CONTACT_UNITS = UNITS.filter(
-  (unit): unit is Unit & { whatsapp: string } => unit.whatsapp !== null,
-);
 
 export default function Booking() {
   return (
@@ -76,7 +71,7 @@ export default function Booking() {
             <Reveal delay={300} className="mt-8 border-t border-black/10 pt-6">
               <p className="text-sm font-semibold text-black">Prefere falar direto?</p>
               <ul className="mt-3 flex flex-wrap gap-3">
-                {CONTACT_UNITS.map((unit) => (
+                {BOOKABLE_UNITS.map((unit) => (
                   <li key={unit.id}>
                     <a
                       href={`https://wa.me/${unit.whatsapp}`}

@@ -2,7 +2,12 @@ import Image from "next/image";
 import CountUp from "@/components/CountUp";
 import Reveal from "@/components/Reveal";
 
-const BENEFITS = [
+type Benefit = {
+  title: string;
+  description: string;
+};
+
+const BENEFITS: Benefit[] = [
   {
     title: "Foco no Paciente",
     description: "Seu conforto sempre em primeiro lugar.",
@@ -13,9 +18,16 @@ const BENEFITS = [
   },
 ];
 
-// `target`/`decimals` feed CountUp; `suffix` is static text tacked on after
-// the animated digits (so "K+" or "/5" never gets counted up itself).
-const STATS = [
+type Stat = {
+  target: number;
+  /** Decimal places for the animated digits. */
+  decimals?: number;
+  /** Static text after the digits, so "K+" or "/5" is never counted up. */
+  suffix: string;
+  label: string;
+};
+
+const STATS: Stat[] = [
   { target: 4.5, decimals: 1, suffix: "/5", label: "Avaliação Média" },
   { target: 30, suffix: "+", label: "Anos de Serviço" },
   { target: 5, suffix: "K+", label: "Pacientes Atendidos" },

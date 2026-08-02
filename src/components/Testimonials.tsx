@@ -1,5 +1,6 @@
 import Reveal from "@/components/Reveal";
 import TestimonialsCarousel from "@/components/TestimonialsCarousel";
+import { REVIEWS } from "@/data/reviews";
 
 export default function Testimonials() {
   return (
@@ -14,7 +15,7 @@ export default function Testimonials() {
 
         {/* The carousel stays outside any Reveal: it measures its cards with
             getBoundingClientRect, and a translating ancestor would skew that. */}
-        <TestimonialsCarousel />
+        <TestimonialsCarousel reviews={REVIEWS} />
       </section>
 
       <div className="h-10 bg-roe-sand" aria-hidden="true" />

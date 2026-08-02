@@ -1,41 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import type { Review } from "@/data/reviews";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 
-type Review = {
-  name: string;
-  rating: number;
-  text: string;
+type Props = {
+  reviews: Review[];
 };
-
-const REVIEWS: Review[] = [
-  {
-    name: "Juliana Grasiele",
-    rating: 5,
-    text: "Gostei muito do atendimento. Os funcionários etendem o cliente, são muito educados, eu amei o atendimento da recepção, conversei com Elaine, muito gentil e atenciosa em me atender. Recomendo o serviço que é de qualidade!",
-  },
-  {
-    name: "Paulo C.",
-    rating: 5,
-    text: "Ótimo local, fui muito bem atendido.!",
-  },
-  {
-    name: "JulianEu",
-    rating: 5,
-    text: "Muito educados e prestativos no agendamento e a explicações sobre dúvidas, muito claras.",
-  },
-  {
-    name: "Marcio Panciera",
-    rating: 5,
-    text: "Ótimo serviço e atendimento.",
-  },
-  {
-    name: "Josi Kozlovski",
-    rating: 5,
-    text: "Atendimento super rápido.",
-  },
-];
 
 // The list is repeated so the reader never reaches an edge: we sit on the middle
 // copy and rewind by whole copies whenever we drift off it. Five gives a hard
@@ -61,16 +32,17 @@ const ARROW_CLASS =
 // Width of one copy of the list, gap included. Measuring two siblings' offsetLeft
 // dodges the trailing-margin quirks of a flex scroll container, and transforms do
 // not affect it — so the card scaling cannot throw the math off.
-function copyWidth(track: HTMLUListElement) {
+function copyWidth(track: HTMLUListElement, perCopy: number) {
   const first = track.children[0] as HTMLElement | undefined;
-  const nextCopy = track.children[REVIEWS.length] as HTMLElement | undefined;
+  const nextCopy = track.children[perCopy] as HTMLElement | undefined;
   return first && nextCopy ? nextCopy.offsetLeft - first.offsetLeft : 0;
 }
 
-export default function TestimonialsCarousel() {
+export default function TestimonialsCarousel({ reviews }: Props) {
   const trackRef = useRef<HTMLUListElement>(null);
   const [active, setActive] = useState(-1);
   const prefersReducedMotion = usePrefersReducedMotion();
+  const perCopy = reviews.length;
 
   useEffect(() => {
     const track = trackRef.current;
@@ -99,7 +71,7 @@ export default function TestimonialsCarousel() {
     };
 
     const rewind = () => {
-      const span = copyWidth(track);
+      const span = copyWidth(track, perCopy);
       if (!span) return;
 
       // Snap back to within half a copy of home, however far the fling went. The
@@ -120,7 +92,7 @@ export default function TestimonialsCarousel() {
     };
 
     // Start on the middle copy so the first click has room in either direction.
-    track.scrollLeft = copyWidth(track) * HOME_COPY;
+    track.scrollLeft = copyWidth(track, perCopy) * HOME_COPY;
     highlight();
 
     track.addEventListener("scroll", onScroll, { passive: true });
@@ -131,7 +103,7 @@ export default function TestimonialsCarousel() {
       cancelAnimationFrame(frame);
       clearTimeout(settle);
     };
-  }, []);
+  }, [perCopy]);
 
   function nudge(direction: 1 | -1) {
     const track = trackRef.current;
@@ -156,8 +128,8 @@ export default function TestimonialsCarousel() {
         className="mt-6 flex snap-x snap-mandatory gap-5 overflow-x-auto overscroll-x-contain py-12 outline-none [scrollbar-width:none] focus-visible:inset-ring-2 focus-visible:inset-ring-roe-yellow sm:gap-6 [&::-webkit-scrollbar]:hidden"
       >
         {Array.from({ length: COPIES }).flatMap((_, copy) =>
-          REVIEWS.map((review, position) => {
-            const index = copy * REVIEWS.length + position;
+          reviews.map((review, position) => {
+            const index = copy * perCopy + position;
             const state = active < 0 ? "idle" : index === active ? "on" : "off";
 
             return (

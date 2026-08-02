@@ -2,14 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
+import { NAV_LINKS } from "@/data/navigation";
 import { UNITS } from "@/data/units";
-
-const NAV_LINKS = [
-  { label: "Exames", href: "#servicos" },
-  { label: "A Clínica", href: "#beneficios" },
-  { label: "Unidades", href: "#clinicas" },
-  { label: "Dúvidas", href: "#faq" },
-];
 
 // Full brand badges rather than outlines: colour is what makes these
 // recognisable at a glance, which is the whole job of a social icon.

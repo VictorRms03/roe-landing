@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, type FormEvent, type ReactNode } from "react";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
-import { UNITS } from "@/data/units";
+import { BOOKABLE_UNITS } from "@/data/units";
 
 const EXAM_TYPES = [
   "Panorâmica",
@@ -19,9 +19,6 @@ const EXAM_TYPES = [
 // ring still wins over the hover one when a pointer rests on the focused field.
 const FIELD_CLASS =
   "w-full rounded-lg bg-roe-white px-4 py-3 text-sm text-gray-900 ring-1 ring-black/10 placeholder:text-gray-500 outline-none transition-shadow duration-200 hover:ring-black/25 focus:ring-2 focus:ring-roe-yellow";
-
-// A unit with no WhatsApp number has nowhere to send the booking.
-const BOOKABLE_UNITS = UNITS.filter((unit) => unit.whatsapp !== null);
 
 // Visible labels rather than placeholders alone: the placeholder disappears the
 // moment someone types, right when they still want to know what the field was.
@@ -85,7 +82,7 @@ function formatDate(value: string) {
 function buildChatUrl(form: HTMLFormElement) {
   const data = new FormData(form);
   const unit = BOOKABLE_UNITS.find((candidate) => candidate.id === data.get("unidade"));
-  if (!unit?.whatsapp) return null;
+  if (!unit) return null;
 
   const message = [
     "Olá! Gostaria de agendar um exame.",

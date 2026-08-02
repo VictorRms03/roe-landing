@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import Footer from "@/components/Footer";
 import MobileActionBar from "@/components/MobileActionBar";
 import Navbar from "@/components/Navbar";
-import { UNITS } from "@/data/units";
+import { OPENING_HOURS, UNITS } from "@/data/units";
 import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
@@ -69,10 +69,13 @@ const jsonLd = UNITS.map((unit) => ({
   telephone: unit.whatsapp ? `+${unit.whatsapp}` : undefined,
   address: {
     "@type": "PostalAddress",
-    streetAddress: unit.address,
+    streetAddress: unit.street,
+    addressLocality: unit.city,
+    addressRegion: unit.state,
+    postalCode: unit.postalCode,
     addressCountry: "BR",
   },
-  openingHours: "Mo-Fr 08:00-12:00,13:00-17:00",
+  openingHours: OPENING_HOURS.schema,
 }));
 
 export default function RootLayout({
