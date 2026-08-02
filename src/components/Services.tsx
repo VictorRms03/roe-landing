@@ -1,7 +1,12 @@
+"use client";
+
 import type { ReactNode } from "react";
+import { useRef } from "react";
+import { ChevronIcon } from "@/components/Icons";
 import Reveal from "@/components/Reveal";
 import Section from "@/components/ui/Section";
 import SectionHeader from "@/components/ui/SectionHeader";
+import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 
 type Exam = {
   name: string;
@@ -75,9 +80,32 @@ const EXAMS: Exam[] = [
   },
 ];
 
+const ARROW_CLASS =
+  "flex size-11 cursor-pointer items-center justify-center rounded-full border border-black/10 bg-white text-gray-900 outline-none transition-[background-color,transform] duration-200 ease-out hover:scale-105 hover:bg-roe-yellow active:scale-95 focus-visible:ring-2 focus-visible:ring-roe-yellow focus-visible:ring-offset-2";
+
 export default function Services() {
+  const trackRef = useRef<HTMLUListElement>(null);
+  const prefersReducedMotion = usePrefersReducedMotion();
+
+  // No scrollbar and no trackpad on most phones means the only way to move
+  // the mobile carousel is a swipe, so these buttons give mouse/keyboard
+  // users the same reach without needing to expose the native scrollbar.
+  function nudge(direction: 1 | -1) {
+    const track = trackRef.current;
+    if (!track) return;
+
+    const first = track.children[0] as HTMLElement | undefined;
+    const second = track.children[1] as HTMLElement | undefined;
+    if (!first || !second) return;
+
+    track.scrollBy({
+      left: direction * (second.offsetLeft - first.offsetLeft),
+      behavior: prefersReducedMotion ? "auto" : "smooth",
+    });
+  }
+
   return (
-    <Section id="servicos" className="bg-roe-white py-12">
+    <Section id="servicos" className="bg-roe-white py-4 md:py-8">
       <SectionHeader
         eyebrow="Exames"
         title="Raio-x para Cada Necessidade"
@@ -87,11 +115,25 @@ export default function Services() {
       />
 
       <div className="mt-5">
-        <ul className="grid gap-12 sm:grid-cols-2 lg:grid-cols-3">
+        {/* Below sm: a snap-scroll carousel so 6 cards don't stack the section
+            tall on mobile. The -mx-6/px-6 bleed lets it reach the viewport
+            edge while the first card still lines up with the page padding.
+            py-8 (instead of clipping at the edges) gives the hover lift and
+            shadow room, since overflow-x-auto also clips the y axis.
+            From sm up this reverts to the original grid, unchanged. */}
+        <ul
+          ref={trackRef}
+          className="-mx-6 flex snap-x snap-mandatory gap-5 overflow-x-auto overscroll-x-contain px-6 py-8 [scrollbar-width:none] sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-12 sm:overflow-visible sm:px-0 sm:py-0 lg:grid-cols-3 [&::-webkit-scrollbar]:hidden"
+        >
           {EXAMS.map((exam, index) => (
             // Reveal owns the transform of the li, so the hover lift lives on
             // the card inside it — h-full because the li is what stretches.
-            <Reveal as="li" key={exam.name} delay={index * 80}>
+            <Reveal
+              as="li"
+              key={exam.name}
+              delay={index * 80}
+              className="w-[78%] shrink-0 snap-center sm:w-auto sm:shrink sm:snap-align-none"
+            >
               <div className="group bg-roe-clay h-full rounded-3xl px-8 py-6 shadow-[0_2px_5px_rgba(0,0,0,0.12)] transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_10px_24px_rgba(0,0,0,0.16)]">
                 <span className="bg-roe-yellow flex size-16 items-center justify-center rounded-xl transition-transform duration-300 ease-out group-hover:scale-110">
                   <svg
@@ -113,6 +155,25 @@ export default function Services() {
             </Reveal>
           ))}
         </ul>
+      </div>
+
+      <div className="mt-2 flex justify-center gap-3 sm:hidden">
+        <button
+          type="button"
+          onClick={() => nudge(-1)}
+          aria-label="Exame anterior"
+          className={ARROW_CLASS}
+        >
+          <ChevronIcon className="size-5 rotate-180" />
+        </button>
+        <button
+          type="button"
+          onClick={() => nudge(1)}
+          aria-label="Próximo exame"
+          className={ARROW_CLASS}
+        >
+          <ChevronIcon className="size-5" />
+        </button>
       </div>
     </Section>
   );
