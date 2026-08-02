@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  useEffect,
-  useRef,
-  useState,
-  type FormEvent,
-  type MouseEvent,
-  type ReactNode,
-} from "react";
+import { useEffect, useRef, type FormEvent, type ReactNode } from "react";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
 import { UNITS } from "@/data/units";
 
@@ -110,7 +103,6 @@ function buildChatUrl(form: HTMLFormElement) {
 export default function BookingForm() {
   const formRef = useRef<HTMLFormElement>(null);
   const dateRef = useRef<HTMLInputElement>(null);
-  const [chatUrl, setChatUrl] = useState<string | null>(null);
 
   // Written straight to the DOM after mount instead of rendered: the server has
   // no idea what "today" is in the visitor's timezone, so shipping its own date
@@ -120,28 +112,17 @@ export default function BookingForm() {
     if (dateRef.current) dateRef.current.min = new Date().toLocaleDateString("sv-SE");
   }, []);
 
-  function syncChatUrl() {
-    if (formRef.current) setChatUrl(buildChatUrl(formRef.current));
-  }
-
-  function handleClick(event: MouseEvent<HTMLAnchorElement>) {
-    // Native validation still gates the action, even though this is a link.
-    if (!formRef.current?.reportValidity() || !chatUrl) event.preventDefault();
-  }
-
+  // A real submit button means the browser runs the native validation before
+  // this fires, so every required field is already filled by the time we build
+  // the message.
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (formRef.current?.reportValidity() && chatUrl) window.location.assign(chatUrl);
+    const chatUrl = buildChatUrl(event.currentTarget);
+    if (chatUrl) window.open(chatUrl, "_blank", "noopener,noreferrer");
   }
 
   return (
-    <form
-      ref={formRef}
-      onChange={syncChatUrl}
-      onInput={syncChatUrl}
-      onSubmit={handleSubmit}
-      className="flex flex-col gap-4"
-    >
+    <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col gap-4">
       <Field id="nome" label="Nome completo">
         <input
           id="nome"
@@ -195,16 +176,13 @@ export default function BookingForm() {
         </Select>
       </div>
 
-      <a
-        href={chatUrl ?? "#"}
-        target="_blank"
-        rel="noopener noreferrer"
-        onClick={handleClick}
+      <button
+        type="submit"
         className="mt-2 flex items-center justify-center gap-2 rounded-lg bg-black px-5 py-3.5 text-center text-sm font-semibold text-roe-white shadow-md shadow-black/10 transition-all duration-300 ease-out outline-none hover:-translate-y-0.5 hover:bg-roe-yellow hover:text-gray-900 hover:shadow-lg hover:shadow-black/20 active:translate-y-0 active:shadow-md focus-visible:ring-2 focus-visible:ring-roe-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-roe-cream"
       >
         <WhatsAppIcon />
         Enviar pelo WhatsApp
-      </a>
+      </button>
 
       <p className="text-xs leading-relaxed text-gray-600">
         O WhatsApp abre com a mensagem pronta para você conferir e confirmar.

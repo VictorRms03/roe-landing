@@ -74,7 +74,7 @@ export default function Clinics() {
                       className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent sm:bg-gradient-to-r sm:from-black/30 sm:via-transparent sm:to-transparent"
                     />
                     <span className="absolute top-3 left-3 rounded-full bg-black/60 px-2.5 py-1 text-[11px] font-semibold tracking-[0.14em] text-roe-yellow uppercase">
-                      Unidade 0{index + 1}
+                      Unidade {String(index + 1).padStart(2, "0")}
                     </span>
                   </div>
 

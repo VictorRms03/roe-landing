@@ -43,6 +43,10 @@ const REVIEWS: Review[] = [
 const COPIES = 5;
 const SETTLE = 120; // ms of quiet before rewinding, so we never fight momentum
 
+// The copy the track actually rests on, and so the only one worth exposing to
+// assistive tech — the other four are duplicates scrolled out of view.
+const HOME_COPY = Math.floor(COPIES / 2);
+
 // `idle` is what the server renders — the highlight only exists once we can
 // measure which card sits in the middle.
 const CARD_STATE = {
@@ -100,7 +104,7 @@ export default function TestimonialsCarousel() {
 
       // Snap back to within half a copy of home, however far the fling went. The
       // copies are identical, so the jump is invisible.
-      const drift = Math.round((track.scrollLeft - span * Math.floor(COPIES / 2)) / span);
+      const drift = Math.round((track.scrollLeft - span * HOME_COPY) / span);
       if (drift !== 0) track.scrollLeft -= drift * span;
     };
 
@@ -116,7 +120,7 @@ export default function TestimonialsCarousel() {
     };
 
     // Start on the middle copy so the first click has room in either direction.
-    track.scrollLeft = copyWidth(track) * Math.floor(COPIES / 2);
+    track.scrollLeft = copyWidth(track) * HOME_COPY;
     highlight();
 
     track.addEventListener("scroll", onScroll, { passive: true });
@@ -159,7 +163,7 @@ export default function TestimonialsCarousel() {
             return (
               <li
                 key={`${review.name}-${copy}`}
-                aria-hidden={copy > 0 || undefined}
+                aria-hidden={copy !== HOME_COPY || undefined}
                 className={`flex w-[300px] shrink-0 snap-center flex-col rounded-2xl border border-black/5 bg-white p-6 transition duration-300 ease-out motion-reduce:transition-none sm:w-[340px] ${CARD_STATE[state]}`}
               >
                 <div

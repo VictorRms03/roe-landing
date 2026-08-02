@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
+const MOBILE_MENU_ID = "mobile-menu";
+
 // Every href below must match a section id rendered on the page.
 const NAV_LINKS = [
   { label: "Exames", href: "#servicos" },
@@ -78,6 +80,7 @@ export default function Navbar() {
             type="button"
             aria-label={isOpen ? "Fechar menu" : "Abrir menu"}
             aria-expanded={isOpen}
+            aria-controls={MOBILE_MENU_ID}
             onClick={() => setIsOpen((prev) => !prev)}
             className="relative flex h-10 w-10 items-center justify-center rounded-md text-gray-900 md:hidden"
           >
@@ -100,7 +103,11 @@ export default function Navbar() {
         </div>
       </div>
 
+      {/* `inert` while closed: the panel is only visually collapsed, so without
+          it the four links stay in the tab order with nothing to see. */}
       <div
+        id={MOBILE_MENU_ID}
+        inert={!isOpen}
         className={`overflow-hidden transition-all duration-300 ease-in-out md:hidden ${
           isOpen ? "max-h-[28rem] opacity-100" : "max-h-0 opacity-0"
         }`}
