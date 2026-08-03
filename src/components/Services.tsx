@@ -123,7 +123,7 @@ export default function Services() {
             From sm up this reverts to the original grid, unchanged. */}
         <ul
           ref={trackRef}
-          className="-mx-6 flex snap-x snap-mandatory gap-5 overflow-x-auto overscroll-x-contain px-6 py-8 [scrollbar-width:none] sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-12 sm:overflow-visible sm:px-0 sm:py-0 lg:grid-cols-3 [&::-webkit-scrollbar]:hidden"
+          className="-mx-6 flex snap-x snap-mandatory [scrollbar-width:none] gap-5 overflow-x-auto overscroll-x-contain px-6 py-8 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-12 sm:overflow-visible sm:px-0 sm:py-0 lg:grid-cols-3 [&::-webkit-scrollbar]:hidden"
         >
           {EXAMS.map((exam, index) => (
             // Reveal owns the transform of the li, so the hover lift lives on

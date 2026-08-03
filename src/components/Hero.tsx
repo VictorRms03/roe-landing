@@ -41,7 +41,10 @@ export default function Hero() {
                 shrink the text span against. */}
             <div className="animate-fade-up bg-roe-cream inline-flex max-w-[calc(100vw-3rem)] items-center gap-2.5 rounded-full border border-black/10 py-1.5 pr-4 pl-2.5 shadow-sm shadow-black/5 motion-reduce:animate-none sm:max-w-none">
               {/* Decorative: the sentence beside it already carries the rating. */}
-              <span className="text-roe-yellow flex shrink-0 items-center gap-0.5" aria-hidden="true">
+              <span
+                className="text-roe-yellow flex shrink-0 items-center gap-0.5"
+                aria-hidden="true"
+              >
                 {Array.from({ length: 4 }, (_, index) => (
                   <StarIcon key={index} className="size-3.5" />
                 ))}
