@@ -10,14 +10,27 @@ type Benefit = {
   description: string;
 };
 
+// Four items rather than two: the list below is already sm:grid-cols-2, so this
+// fills it as 2x2 without touching the layout. "Foco no Paciente" and
+// "Equipamentos Modernos" are absorbed here, traded for something concrete.
 const BENEFITS: Benefit[] = [
   {
-    title: "Foco no Paciente",
-    description: "Seu conforto sempre em primeiro lugar.",
+    title: "Atendimento Inclusivo",
+    description:
+      "Experiência no atendimento a pacientes especiais e neurodivergentes, respeitando o tempo de cada um.",
   },
   {
-    title: "Equipamentos Modernos",
-    description: "Tecnologia de ponta para melhores laudos.",
+    // TODO: name the actual specialisations and awards once they are confirmed.
+    title: "Laudos por Especialistas",
+    description: "Equipe de radiologistas com especialização e reconhecimento na área.",
+  },
+  {
+    title: "Imagens em Alta Resolução",
+    description: "Equipamentos digitais que entregam a nitidez necessária para um laudo seguro.",
+  },
+  {
+    title: "Conforto no Exame",
+    description: "Exames rápidos, com orientação em cada etapa.",
   },
 ];
 

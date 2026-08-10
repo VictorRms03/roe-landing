@@ -12,6 +12,13 @@ export const FAQ_ITEMS: FaqItem[] = [
       "Não. O panorâmico e a tomografia são feitos com você em pé, sem nada dentro da boca, e duram menos de um minuto. Nos exames intrabucais, um sensor pequeno é apoiado próximo ao dente e pode incomodar um pouco, mas sem dor.",
   },
   {
+    // TODO: confirm which accommodations we can name here (visiting the room
+    // beforehand, reduced stimuli, a reserved slot).
+    question: "Vocês atendem pacientes especiais e neurodivergentes?",
+    answer:
+      "Sim. Nossa equipe tem experiência nesse atendimento e adapta o ritmo do exame ao paciente, com acompanhante junto durante todo o procedimento. Conte a necessidade no agendamento pelo WhatsApp para prepararmos o atendimento.",
+  },
+  {
     // TODO: replace with the real list of accepted health plans.
     question: "Vocês aceitam convênio?",
     answer:
@@ -26,5 +33,11 @@ export const FAQ_ITEMS: FaqItem[] = [
     question: "Qual a diferença entre panorâmico e tomografia 3D?",
     answer:
       "O panorâmico é uma imagem única e plana de toda a arcada, ótima para uma visão geral. A tomografia 3D reconstrói a região em volume, mostrando profundidade e a posição exata de cada estrutura — é o que se usa para planejar implantes, avaliar dentes inclusos e casos mais complexos.",
+  },
+  {
+    // TODO: confirm how the files are delivered (link, e-mail, pendrive).
+    question: "Como recebo as imagens e os arquivos do exame?",
+    answer:
+      "As imagens são digitais e em alta resolução. Tomografias saem em DICOM e escaneamentos em STL, formatos que o seu dentista usa nos softwares de planejamento. A forma de entrega é combinada no agendamento.",
   },
 ];

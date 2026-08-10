@@ -1,6 +1,7 @@
 import Benefits from "@/components/Benefits";
 import Booking from "@/components/Booking";
 import Clinics from "@/components/Clinics";
+import Digital from "@/components/Digital";
 import Faq from "@/components/Faq";
 import Hero from "@/components/Hero";
 import Services from "@/components/Services";
@@ -11,6 +12,9 @@ export default function Home() {
     <>
       <Hero />
       <Services />
+      {/* Ink between two light sections: it must not land next to Clinics,
+          which is ink too. */}
+      <Digital />
       <Benefits />
       <Clinics />
       <Testimonials />
