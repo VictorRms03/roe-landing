@@ -12,8 +12,9 @@ export default function Home() {
     <>
       <Hero />
       <Services />
-      {/* Ink between two light sections: it must not land next to Clinics,
-          which is ink too. */}
+      {/* Order is load-bearing here: Digital's background washes from
+          Services' roe-white down to Benefits' roe-sand, so it only joins
+          seamlessly between these two. */}
       <Digital />
       <Benefits />
       <Clinics />
