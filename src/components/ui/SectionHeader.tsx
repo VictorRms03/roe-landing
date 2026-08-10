@@ -12,7 +12,12 @@ type SectionHeaderProps = {
   descriptionClassName?: string;
 };
 
-const EYEBROW = "text-2xl font-semibold text-roe-yellow sm:text-3xl";
+// No colour here, for the same reason TITLE has none: roe-yellow reads at 1.9:1
+// on cream and 1.2:1 on clay, so an eyebrow that hardcoded it went invisible on
+// every light ground. Baking it in also made it unoverridable — a colour passed
+// through eyebrowClassName only tied with it on specificity, leaving the winner
+// up to the order Tailwind happened to emit. Yellow on ink, dark on light.
+const EYEBROW = "text-2xl font-semibold sm:text-3xl";
 const TITLE = "mt-2 text-3xl leading-tight font-bold tracking-tight sm:text-4xl";
 
 // Deliberately a thin wrapper: the eyebrow/heading/lede structure is identical

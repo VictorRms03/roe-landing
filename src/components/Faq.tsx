@@ -35,7 +35,7 @@ export default function Faq() {
         eyebrow="Dúvidas"
         title="Perguntas Frequentes sobre Raio-X Odontológico"
         description="Respostas rápidas para dúvidas comuns."
-        eyebrowClassName="text-center"
+        eyebrowClassName="text-center text-gray-900"
         titleClassName="text-center text-gray-900"
         descriptionClassName="mt-3 text-center text-sm text-gray-600 sm:text-base"
       />

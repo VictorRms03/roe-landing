@@ -7,36 +7,26 @@ import SectionHeader from "@/components/ui/SectionHeader";
 import WhatsAppLink from "@/components/ui/WhatsAppLink";
 import { UNITS } from "@/data/units";
 
-// Ink rather than yellow: the Mogi Guaçu facade is itself a yellow building, so
-// on yellow the subject dissolved into the page.
+// White, between clay above and ink below. The yellow rules stay: they used to
+// fence a dark block from light neighbours, and they now frame the one light
+// block sitting between two coloured ones — either way they mark the boundary.
+// The radial bloom the ink version carried is gone; it existed to lift a dark
+// ground, and on white it would only tint the page.
 export default function Clinics() {
   return (
     <>
       {/* Outside the section so #clinicas still lands where scroll-mt-32 expects. */}
       <div className="bg-roe-yellow h-1" aria-hidden="true" />
 
-      <Section
-        id="clinicas"
-        className="bg-roe-ink relative overflow-hidden py-16"
-        containerClassName="relative max-w-7xl"
-        bleed={
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-x-0 top-0 h-[420px]"
-            style={{
-              backgroundImage:
-                "radial-gradient(50% 100% at 50% 0%, rgba(230,175,46,0.16) 0%, rgba(230,175,46,0) 70%)",
-            }}
-          />
-        }
-      >
+      <Section id="clinicas" className="bg-roe-white py-16">
         <SectionHeader
           className="max-w-2xl"
           eyebrow="Unidades"
+          eyebrowClassName="text-gray-900"
           title="Nossas Clínicas em Mogi Guaçu e Mogi Mirim"
           description="Duas unidades no centro de Mogi Guaçu e Mogi Mirim, com o mesmo padrão de exame e atendimento."
-          titleClassName="text-roe-white"
-          descriptionClassName="mt-3 text-sm text-white/70 sm:text-base"
+          titleClassName="text-black"
+          descriptionClassName="mt-3 text-sm text-gray-700 sm:text-base"
         />
 
         {/* Full-width rows, not a 2-up grid: at 2-up the image column is only
@@ -47,7 +37,7 @@ export default function Clinics() {
             // card inside it — h-full because the li is what stretches.
             <Reveal as="li" key={unit.id} delay={index * 140}>
               <div
-                className={`group hover:border-roe-yellow/40 flex h-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] shadow-xl shadow-black/40 transition-all duration-300 ease-out hover:-translate-y-1 hover:bg-white/[0.06] hover:shadow-2xl sm:flex-row lg:min-h-[380px] ${
+                className={`group hover:border-roe-yellow/60 bg-roe-cream flex h-full flex-col overflow-hidden rounded-3xl border border-black/5 shadow-lg shadow-black/5 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl hover:shadow-black/10 sm:flex-row lg:min-h-[380px] ${
                   // Alternating side, so the rows do not read as identical blocks.
                   index % 2 === 1 ? "sm:flex-row-reverse" : ""
                 }`}
@@ -72,23 +62,26 @@ export default function Clinics() {
                 </div>
 
                 <div className="flex min-w-0 flex-1 flex-col p-6 sm:p-8">
-                  <h3 className="text-roe-white text-xl font-bold tracking-tight sm:text-2xl">
+                  <h3 className="text-xl font-bold tracking-tight text-black sm:text-2xl">
                     {unit.name}
                   </h3>
 
                   {/* Hairline rows rather than a stacked list: the content
                         column runs close to 700px, which two loose lines leave empty. */}
-                  <ul className="mt-6 flex flex-col divide-y divide-white/10 border-y border-white/10 text-sm">
+                  <ul className="mt-6 flex flex-col divide-y divide-black/10 border-y border-black/10 text-sm">
                     <li className="flex gap-3 py-4">
-                      <PinIcon className="text-roe-yellow mt-0.5 size-4 shrink-0" />
+                      {/* Dark, not yellow: yellow marks this small on cream sit
+                          near 1.9:1. Every light section on the site puts yellow
+                          behind dark content, never yellow on light. */}
+                      <PinIcon className="mt-0.5 size-4 shrink-0 text-gray-900" />
                       <span className="min-w-0">
-                        <span className="text-roe-white block font-medium">{unit.street}</span>
-                        <span className="mt-0.5 block text-white/60">{unit.cityLine}</span>
+                        <span className="block font-medium text-gray-900">{unit.street}</span>
+                        <span className="mt-0.5 block text-gray-600">{unit.cityLine}</span>
                       </span>
                     </li>
                     <li className="flex gap-3 py-4">
-                      <ClockIcon className="text-roe-yellow mt-0.5 size-4 shrink-0" />
-                      <span className="text-white/75">{unit.hours}</span>
+                      <ClockIcon className="mt-0.5 size-4 shrink-0 text-gray-900" />
+                      <span className="text-gray-700">{unit.hours}</span>
                     </li>
                   </ul>
 
@@ -99,7 +92,7 @@ export default function Clinics() {
                       href={unit.mapsUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="bg-roe-yellow hover:bg-roe-yellow-hover hover:shadow-roe-yellow/20 focus-visible:ring-roe-yellow focus-visible:ring-offset-roe-ink inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold text-gray-950 shadow-md shadow-black/20 transition-all duration-300 ease-out outline-none hover:-translate-y-0.5 hover:shadow-lg focus-visible:ring-2 focus-visible:ring-offset-2 active:translate-y-0 active:shadow-md"
+                      className="bg-roe-yellow hover:bg-roe-yellow-hover hover:shadow-roe-yellow/20 focus-visible:ring-roe-yellow focus-visible:ring-offset-roe-cream inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold text-gray-950 shadow-md shadow-black/10 transition-all duration-300 ease-out outline-none hover:-translate-y-0.5 hover:shadow-lg focus-visible:ring-2 focus-visible:ring-offset-2 active:translate-y-0 active:shadow-md"
                     >
                       <RouteIcon className="size-4" />
                       Como chegar
@@ -111,7 +104,7 @@ export default function Clinics() {
                       <WhatsAppLink
                         phone={unit.whatsapp}
                         unitName={unit.name}
-                        className="text-roe-white hover:bg-roe-whatsapp focus-visible:ring-roe-yellow focus-visible:ring-offset-roe-ink inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-semibold transition-colors duration-200 outline-none hover:border-transparent focus-visible:ring-2 focus-visible:ring-offset-2"
+                        className="bg-roe-white hover:bg-roe-whatsapp focus-visible:ring-roe-yellow focus-visible:ring-offset-roe-cream inline-flex items-center gap-2 rounded-full border border-black/15 px-5 py-2.5 text-sm font-semibold text-gray-900 transition-colors duration-200 outline-none hover:border-transparent hover:text-white focus-visible:ring-2 focus-visible:ring-offset-2"
                       >
                         <WhatsAppIcon className="size-4" />
                         WhatsApp

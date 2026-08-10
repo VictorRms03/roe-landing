@@ -80,6 +80,7 @@ export default function Services() {
     <Section id="servicos" className="bg-roe-white py-4 md:py-8">
       <SectionHeader
         eyebrow="Exames"
+        eyebrowClassName="text-gray-900"
         title="Exames de Raio-X e Tomografia Odontológica"
         description="Tecnologia avançada de imagem para todo tipo de diagnóstico odontológico."
         titleClassName="text-black"

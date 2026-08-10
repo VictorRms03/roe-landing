@@ -20,15 +20,16 @@ const SETTLE = 120; // ms of quiet before rewinding, so we never fight momentum
 const HOME_COPY = Math.floor(COPIES / 2);
 
 // `idle` is what the server renders — the highlight only exists once we can
-// measure which card sits in the middle.
+// measure which card sits in the middle. The shadows are deep because the cards
+// are white on ink: at black/5 they were invisible against a dark ground.
 const CARD_STATE = {
-  idle: "shadow-lg shadow-black/5",
-  on: "scale-105 shadow-xl shadow-black/10",
-  off: "scale-95 opacity-70 shadow-lg shadow-black/5",
+  idle: "shadow-lg shadow-black/40",
+  on: "scale-105 shadow-xl shadow-black/50",
+  off: "scale-95 opacity-70 shadow-lg shadow-black/40",
 };
 
 const ARROW_CLASS =
-  "flex size-11 cursor-pointer items-center justify-center rounded-full border border-black/10 bg-white text-gray-900 outline-none transition-[background-color,transform] duration-200 ease-out hover:scale-105 hover:bg-roe-yellow active:scale-95 focus-visible:ring-2 focus-visible:ring-roe-yellow focus-visible:ring-offset-2";
+  "flex size-11 cursor-pointer items-center justify-center rounded-full border border-black/10 bg-white text-gray-900 outline-none transition-[background-color,transform] duration-200 ease-out hover:scale-105 hover:bg-roe-yellow active:scale-95 focus-visible:ring-2 focus-visible:ring-roe-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-roe-ink";
 
 // Width of one copy, gap included. offsetLeft dodges the trailing-margin quirks
 // of a flex scroll container and ignores transforms, so the card scaling cannot
