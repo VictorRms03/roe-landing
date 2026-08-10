@@ -9,7 +9,7 @@ export default function Testimonials() {
       <section id="depoimentos" className="bg-roe-white scroll-mt-32 py-12">
         <Reveal className="mx-auto max-w-7xl px-6 md:px-12 lg:px-16">
           <h2 className="text-center text-3xl leading-tight font-bold tracking-tight text-black sm:text-4xl">
-            O Que Nossos Clientes Dizem?
+            O Que Nossos Pacientes Dizem
           </h2>
         </Reveal>
 

@@ -35,9 +35,12 @@ export default function Navbar() {
                 and this 32px logo should not race the hero image for bandwidth.
                 It sits in the initial viewport, so the browser fetches it at
                 once regardless. */}
+            {/* Decorative: the span beside it already says the name, so alt
+                text here would just make a screen reader say it twice. */}
             <Image
               src="/logo.webp"
-              alt="Clínica ROE"
+              alt=""
+              aria-hidden="true"
               width={180}
               height={180}
               className="size-8 md:size-14"

@@ -6,18 +6,15 @@ import Reveal from "@/components/Reveal";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
 import WhatsAppLink from "@/components/ui/WhatsAppLink";
 import { NAV_LINKS } from "@/data/navigation";
+import { SOCIAL_PROFILES, type SocialProfile } from "@/data/social";
 import { UNITS } from "@/data/units";
 
-type SocialLink = {
-  label: string;
-  href: string;
-  Icon: (props: IconProps) => ReactNode;
+// Keyed by profile id: the URLs live in `@/data/social` because the
+// Organization JSON-LD lists them as `sameAs`.
+const SOCIAL_ICONS: Record<SocialProfile["id"], (props: IconProps) => ReactNode> = {
+  instagram: InstagramIcon,
+  facebook: FacebookIcon,
 };
-
-const SOCIAL_LINKS: SocialLink[] = [
-  { label: "Instagram", href: "https://www.instagram.com/clinicaroe_/", Icon: InstagramIcon },
-  { label: "Facebook", href: "https://www.facebook.com/roelilian.raiox", Icon: FacebookIcon },
-];
 
 // One shared style for the three column titles.
 const COLUMN_TITLE = "text-xs font-semibold uppercase tracking-[0.14em] text-roe-yellow";
@@ -57,19 +54,22 @@ export default function Footer() {
               </p>
 
               <ul className="mt-6 flex items-center gap-3">
-                {SOCIAL_LINKS.map(({ label, href, Icon }) => (
-                  <li key={label}>
-                    <a
-                      href={href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`${label} da Clínica ROE`}
-                      className="focus-visible:ring-roe-yellow focus-visible:ring-offset-roe-ink block size-11 rounded-xl transition-transform duration-200 ease-out outline-none hover:-translate-y-0.5 hover:scale-105 focus-visible:ring-2 focus-visible:ring-offset-2"
-                    >
-                      <Icon />
-                    </a>
-                  </li>
-                ))}
+                {SOCIAL_PROFILES.map(({ id, label, href }) => {
+                  const Icon = SOCIAL_ICONS[id];
+                  return (
+                    <li key={id}>
+                      <a
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`${label} da Clínica ROE`}
+                        className="focus-visible:ring-roe-yellow focus-visible:ring-offset-roe-ink block size-11 rounded-xl transition-transform duration-200 ease-out outline-none hover:-translate-y-0.5 hover:scale-105 focus-visible:ring-2 focus-visible:ring-offset-2"
+                      >
+                        <Icon />
+                      </a>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
 

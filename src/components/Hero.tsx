@@ -57,15 +57,18 @@ export default function Hero() {
               </span>
             </div>
 
+            {/* The single h1 is the heaviest text on the page, so it carries
+                the service and both cities — the query patients actually type.
+                The brand promise it used to hold moved into the lead below. */}
             <h1
               style={{ animationDelay: "60ms" }}
-              className="animate-fade-up mt-6 max-w-[18ch] text-[2.5rem] leading-[1.06] font-bold tracking-tight text-balance text-gray-950 motion-reduce:animate-none sm:text-5xl lg:text-[3.4rem]"
+              className="animate-fade-up mt-6 max-w-[22ch] text-[2.5rem] leading-[1.06] font-bold tracking-tight text-balance text-gray-950 motion-reduce:animate-none sm:text-5xl lg:text-[3.4rem]"
             >
-              Imagens Precisas para{" "}
+              Raio-X Odontológico em{" "}
               {/* The accent is an underline rather than yellow type: yellow on
                   this cream sits at about 1.9:1, which is unreadable. */}
               <span className="relative inline-block">
-                <span className="relative z-10">Diagnósticos Certos</span>
+                <span className="relative z-10">Mogi Guaçu e Mogi Mirim</span>
                 <span
                   aria-hidden="true"
                   className="animate-draw-underline bg-roe-yellow/70 absolute inset-x-0 bottom-0.5 z-0 h-3 origin-left rounded-full motion-reduce:animate-none sm:h-4"
@@ -77,8 +80,8 @@ export default function Hero() {
               style={{ animationDelay: "140ms" }}
               className="animate-fade-up mt-6 max-w-md text-lg leading-relaxed text-gray-800 motion-reduce:animate-none"
             >
-              Tecnologia de ponta em radiologia odontológica para oferecer imagens de alta precisão,
-              laudos rápidos e um atendimento pensado no seu conforto.
+              Imagens precisas para diagnósticos certos: panorâmico, periapical, telerradiografia e
+              tomografia 3D, com laudos rápidos e um atendimento pensado no seu conforto.
             </p>
 
             {/* Focus is an outline here, not the site's ring + ring-offset: the

@@ -33,7 +33,7 @@ export default function Faq() {
     >
       <SectionHeader
         eyebrow="Dúvidas"
-        title="Perguntas Frequentes"
+        title="Perguntas Frequentes sobre Raio-X Odontológico"
         description="Respostas rápidas para dúvidas comuns."
         eyebrowClassName="text-center"
         titleClassName="text-center text-gray-900"

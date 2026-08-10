@@ -38,7 +38,7 @@ export default function Booking() {
         <div>
           <SectionHeader
             eyebrow="Agendamento"
-            title="Agende Seu Exame"
+            title="Agende Seu Exame de Raio-X pelo WhatsApp"
             description="Preencha os dados ao lado e abrimos o WhatsApp com a mensagem pronta para você conferir e confirmar."
             titleClassName="text-black"
             descriptionClassName="mt-3 max-w-md text-sm text-black sm:text-base"
