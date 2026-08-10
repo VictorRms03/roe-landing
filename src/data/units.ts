@@ -1,9 +1,20 @@
-/** Both units keep the same hours, in the two forms the site needs. */
+/** Both units keep the same hours, in the three forms the site needs. */
 export const OPENING_HOURS = {
   /** What the page shows. */
   label: "Segunda a Sexta · 8h às 12h e 13h às 17h",
-  /** schema.org openingHours, for the Dentist JSON-LD. */
+  /** schema.org openingHours, the compact string form. */
   schema: "Mo-Fr 08:00-12:00,13:00-17:00",
+  /**
+   * The same hours as `openingHoursSpecification` entries. Google prefers this
+   * expanded form, and unlike the string it can express the midday close
+   * without ambiguity.
+   */
+  specification: [
+    { opens: "08:00", closes: "12:00" },
+    { opens: "13:00", closes: "17:00" },
+  ],
+  /** The days both windows apply to, as schema.org DayOfWeek names. */
+  days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
 } as const;
 
 export type Unit = {

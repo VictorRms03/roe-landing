@@ -33,7 +33,7 @@ export default function Clinics() {
         <SectionHeader
           className="max-w-2xl"
           eyebrow="Unidades"
-          title="Nossas Clínicas"
+          title="Nossas Clínicas em Mogi Guaçu e Mogi Mirim"
           description="Duas unidades no centro de Mogi Guaçu e Mogi Mirim, com o mesmo padrão de exame e atendimento."
           titleClassName="text-roe-white"
           descriptionClassName="mt-3 text-sm text-white/70 sm:text-base"
