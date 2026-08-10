@@ -52,19 +52,23 @@ const STATS: Stat[] = [
 
 export default function Benefits() {
   return (
-    <Section id="beneficios" className="bg-roe-clay py-12">
+    <Section id="beneficios" className="bg-roe-white py-12">
       <div className="grid gap-10 lg:grid-cols-[1.05fr_auto] lg:items-center lg:gap-12">
         <div>
           <SectionHeader
             eyebrow="Diferenciais"
-            eyebrowClassName="text-gray-900"
             title="Por que escolher a clínica ROE?"
             description="Confiada por milhares de pacientes para exames precisos e humanizados."
             titleClassName="text-black"
             descriptionClassName="mt-3 max-w-md text-xs text-black sm:text-sm"
           />
 
-          <ul className="mt-8 grid gap-6 sm:grid-cols-2">
+          {/* Row gap wider than the column gap: the descriptions run to
+              different line counts, so at a uniform gap-6 the shorter item left
+              slack inside its row and the two rows read as unevenly spaced. A
+              row gap larger than the text's own leading makes each item its own
+              block regardless of how far its description wraps. */}
+          <ul className="mt-8 grid gap-x-6 gap-y-9 sm:grid-cols-2">
             {BENEFITS.map((benefit, index) => (
               <FeatureItem
                 key={benefit.title}
@@ -102,9 +106,7 @@ export default function Benefits() {
               <Reveal as="li" key={stat.label} delay={200 + index * 90}>
                 <p className="text-2xl font-bold tracking-tight text-gray-900">
                   <CountUp to={stat.target} decimals={stat.decimals} />
-                  {/* gray-700, not 500: clay is darker than the sand this used
-                      to sit on, and 500 drops to about 3:1 against it. */}
-                  <span className="text-lg font-medium text-gray-700">{stat.suffix}</span>
+                  <span className="text-lg font-medium text-gray-500">{stat.suffix}</span>
                 </p>
                 <p className="text-xs text-gray-800">{stat.label}</p>
               </Reveal>

@@ -16,7 +16,6 @@ export default function Digital() {
       <SectionHeader
         className="max-w-2xl"
         eyebrow="Fluxo Digital"
-        eyebrowClassName="text-roe-yellow"
         title="Do Escaneamento ao Modelo"
         description="Além dos exames de imagem, a ROE escaneia, entrega os arquivos digitais e imprime o modelo — tudo na mesma clínica."
         titleClassName="text-roe-white"

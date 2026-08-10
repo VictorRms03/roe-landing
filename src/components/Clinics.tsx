@@ -7,22 +7,20 @@ import SectionHeader from "@/components/ui/SectionHeader";
 import WhatsAppLink from "@/components/ui/WhatsAppLink";
 import { UNITS } from "@/data/units";
 
-// White, between clay above and ink below. The yellow rules stay: they used to
-// fence a dark block from light neighbours, and they now frame the one light
-// block sitting between two coloured ones — either way they mark the boundary.
-// The radial bloom the ink version carried is gone; it existed to lift a dark
-// ground, and on white it would only tint the page.
+// Sand, with a white section above and below, so the yellow rules now bracket
+// the one tinted block on this stretch of the page rather than fencing a dark
+// one — either way they mark the boundary. The radial bloom the ink version
+// carried is gone; it existed to lift a dark ground.
 export default function Clinics() {
   return (
     <>
       {/* Outside the section so #clinicas still lands where scroll-mt-32 expects. */}
       <div className="bg-roe-yellow h-1" aria-hidden="true" />
 
-      <Section id="clinicas" className="bg-roe-white py-16">
+      <Section id="clinicas" className="bg-roe-sand py-16">
         <SectionHeader
           className="max-w-2xl"
           eyebrow="Unidades"
-          eyebrowClassName="text-gray-900"
           title="Nossas Clínicas em Mogi Guaçu e Mogi Mirim"
           description="Duas unidades no centro de Mogi Guaçu e Mogi Mirim, com o mesmo padrão de exame e atendimento."
           titleClassName="text-black"

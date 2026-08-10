@@ -38,14 +38,15 @@ export default function Booking() {
         <div>
           <SectionHeader
             eyebrow="Agendamento"
-            eyebrowClassName="text-gray-900"
             title="Agende Seu Exame de Raio-X pelo WhatsApp"
             description="Preencha os dados ao lado e abrimos o WhatsApp com a mensagem pronta para você conferir e confirmar."
             titleClassName="text-black"
             descriptionClassName="mt-3 max-w-md text-sm text-black sm:text-base"
           />
 
-          <ul className="mt-8 grid gap-6">
+          {/* Same row gap as the Benefits list, so the two topic lists on the
+              page space their items identically. */}
+          <ul className="mt-8 grid gap-y-9">
             {ASSURANCES.map((item, index) => (
               <FeatureItem
                 key={item.title}
