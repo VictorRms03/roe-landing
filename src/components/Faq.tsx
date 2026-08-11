@@ -22,7 +22,7 @@ export default function Faq() {
   return (
     <Section
       id="faq"
-      className="bg-roe-white py-16"
+      className="bg-roe-white py-16 md:py-20"
       containerClassName="max-w-4xl"
       bleed={
         <script

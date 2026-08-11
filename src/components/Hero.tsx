@@ -24,7 +24,7 @@ const BACKGROUND =
 export default function Hero() {
   return (
     <section
-      className="relative isolate overflow-hidden px-6 pt-10 pb-16 md:px-12 md:pt-14 lg:px-16"
+      className="relative isolate overflow-hidden px-6 py-10 md:px-12 md:py-14 lg:px-16"
       style={{ backgroundImage: BACKGROUND }}
     >
       <div className="mx-auto max-w-7xl">
