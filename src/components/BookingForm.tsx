@@ -182,7 +182,7 @@ export default function BookingForm() {
 
       <button
         type="submit"
-        className="text-roe-white hover:bg-roe-yellow focus-visible:ring-roe-yellow focus-visible:ring-offset-roe-cream mt-2 flex items-center justify-center gap-2 rounded-lg bg-black px-5 py-3.5 text-center text-sm font-semibold shadow-md shadow-black/10 transition-all duration-300 ease-out outline-none hover:-translate-y-0.5 hover:text-gray-900 hover:shadow-lg hover:shadow-black/20 focus-visible:ring-2 focus-visible:ring-offset-2 active:translate-y-0 active:shadow-md"
+        className="text-roe-white hover:bg-roe-yellow focus-visible:ring-roe-yellow focus-visible:ring-offset-roe-cream mt-2 flex cursor-pointer items-center justify-center gap-2 rounded-lg bg-black px-5 py-3.5 text-center text-sm font-semibold shadow-md shadow-black/10 transition-all duration-300 ease-out outline-none hover:-translate-y-0.5 hover:text-gray-900 hover:shadow-lg hover:shadow-black/20 focus-visible:ring-2 focus-visible:ring-offset-2 active:translate-y-0 active:shadow-md"
       >
         <WhatsAppIcon />
         Enviar pelo WhatsApp
