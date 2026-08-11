@@ -1,4 +1,4 @@
-import { EXAMS } from "@/data/services";
+import { DIGITAL_STAGES, EXAMS } from "@/data/services";
 import { SOCIAL_URLS } from "@/data/social";
 import { OPENING_HOURS, UNITS, type Unit } from "@/data/units";
 import { absoluteUrl, SITE_NAME, SITE_URL } from "@/lib/site";
@@ -9,8 +9,10 @@ const ORGANIZATION_ID = `${SITE_URL}/#organization`;
 const WEBSITE_ID = `${SITE_URL}/#website`;
 const unitId = (unit: Unit) => `${SITE_URL}/#${unit.id}`;
 
+// TODO: this is a verbatim copy of the DESCRIPTION in `app/layout.tsx`. The two
+// have to be edited together until one of them becomes the single source.
 const DESCRIPTION =
-  "Radiologia odontológica em Mogi Guaçu e Mogi Mirim: raio-x panorâmico, periapical, interproximal, telerradiografia e tomografia com imagens de alta precisão e laudos rápidos.";
+  "Radiologia odontológica em Mogi Guaçu e Mogi Mirim: raio-x, tomografia e escaneamento intraoral, com imagens em alta resolução, arquivos DICOM e STL.";
 
 /** The cities each unit realistically draws from. */
 const AREA_SERVED = ["Mogi Guaçu", "Mogi Mirim", "Itapira", "Estiva Gerbi", "Conchal"].map(
@@ -30,17 +32,30 @@ const OPENING_HOURS_SPECIFICATION = OPENING_HOURS.specification.map((window) => 
 const primaryWhatsApp = UNITS.map((unit) => unit.whatsapp).find(Boolean);
 const PRIMARY_PHONE = primaryWhatsApp ? `+${primaryWhatsApp}` : undefined;
 
+// Exams are procedures performed on a patient; scanning, file delivery and
+// printing are services around them, so the two halves carry different
+// `itemOffered` types inside the one catalog `hasOfferCatalog` accepts.
 const OFFER_CATALOG = {
   "@type": "OfferCatalog",
-  name: "Exames de radiologia odontológica",
-  itemListElement: EXAMS.map((exam) => ({
-    "@type": "Offer",
-    itemOffered: {
-      "@type": "MedicalProcedure",
-      name: exam.name,
-      description: exam.description,
-    },
-  })),
+  name: "Exames e serviços de imagem odontológica",
+  itemListElement: [
+    ...EXAMS.map((exam) => ({
+      "@type": "Offer",
+      itemOffered: {
+        "@type": "MedicalProcedure",
+        name: exam.name,
+        description: exam.description,
+      },
+    })),
+    ...DIGITAL_STAGES.map((stage) => ({
+      "@type": "Offer",
+      itemOffered: {
+        "@type": "Service",
+        name: stage.service,
+        description: stage.description,
+      },
+    })),
+  ],
 };
 
 function dentistNode(unit: Unit) {

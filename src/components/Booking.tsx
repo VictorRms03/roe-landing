@@ -44,7 +44,9 @@ export default function Booking() {
             descriptionClassName="mt-3 max-w-md text-sm text-black sm:text-base"
           />
 
-          <ul className="mt-8 grid gap-6">
+          {/* Same row gap as the Benefits list, so the two topic lists on the
+              page space their items identically. */}
+          <ul className="mt-8 grid gap-y-9">
             {ASSURANCES.map((item, index) => (
               <FeatureItem
                 key={item.title}

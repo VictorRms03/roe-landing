@@ -12,6 +12,11 @@ type SectionHeaderProps = {
   descriptionClassName?: string;
 };
 
+// Yellow on every ground, dark or light, as the brand asks. Note for anyone
+// tempted to override it per section: roe-yellow measures about 1.9:1 on the
+// light grounds, under the 3:1 WCAG floor for large text, and a colour passed
+// through eyebrowClassName only ties with this one on specificity — the winner
+// would come down to the order Tailwind emits. Change it here, not at a call site.
 const EYEBROW = "text-2xl font-semibold text-roe-yellow sm:text-3xl";
 const TITLE = "mt-2 text-3xl leading-tight font-bold tracking-tight sm:text-4xl";
 

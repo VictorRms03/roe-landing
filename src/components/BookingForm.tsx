@@ -5,6 +5,8 @@ import WhatsAppIcon from "@/components/WhatsAppIcon";
 import { BOOKABLE_UNITS } from "@/data/units";
 import { whatsappUrl } from "@/lib/whatsapp";
 
+// The last three are not exams, which is why the field is labelled "exame ou
+// serviço" and the message says "Serviço".
 const EXAM_TYPES: string[] = [
   "Panorâmica",
   "Periapical",
@@ -13,6 +15,9 @@ const EXAM_TYPES: string[] = [
   "Telerradiografia",
   "Tomografia",
   "Documentação Ortodôntica",
+  "Escaneamento iTero / Invisalign",
+  "Escaneamento intraoral (STL)",
+  "Impressão de modelo em resina",
 ];
 
 // Field names, kept in one place because buildChatUrl reads them back by string.
@@ -95,12 +100,12 @@ function buildChatUrl(form: HTMLFormElement): string | null {
   if (!unit) return null;
 
   const message = [
-    "Olá! Gostaria de agendar um exame.",
+    "Olá! Gostaria de fazer um agendamento.",
     "",
     `Nome: ${data.get(FIELD.name)}`,
     `E-mail: ${data.get(FIELD.email)}`,
     `Data desejada: ${formatDate(String(data.get(FIELD.date)))}`,
-    `Tipo de exame: ${data.get(FIELD.examType)}`,
+    `Serviço: ${data.get(FIELD.examType)}`,
     `Unidade: ${unit.shortName}`,
   ].join("\n");
 
@@ -163,7 +168,11 @@ export default function BookingForm() {
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2">
-        <Select id={FIELD.examType} label="Tipo de exame" placeholder="Selecione o exame">
+        <Select
+          id={FIELD.examType}
+          label="Tipo de exame ou serviço"
+          placeholder="Selecione o exame ou serviço"
+        >
           {EXAM_TYPES.map((exam) => (
             <option key={exam} value={exam}>
               {exam}

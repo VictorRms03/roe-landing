@@ -18,8 +18,11 @@ const inter = Inter({
 // "raio-x odontológico em <cidade>" is the query the clinic is actually chasing.
 // ~60 characters, so it survives without being truncated.
 const TITLE = "Raio-X Odontológico em Mogi Guaçu e Mogi Mirim | Clínica ROE";
+// ~150 characters, so Google shows it whole — which is why the exam list is
+// named by family instead of enumerated. The individual exam names are in
+// `keywords` and in the section headings either way.
 const DESCRIPTION =
-  "Radiologia odontológica em Mogi Guaçu e Mogi Mirim: raio-x panorâmico, periapical, interproximal, telerradiografia e tomografia com imagens de alta precisão e laudos rápidos.";
+  "Radiologia odontológica em Mogi Guaçu e Mogi Mirim: raio-x, tomografia e escaneamento intraoral, com imagens em alta resolução, arquivos DICOM e STL.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -35,6 +38,11 @@ export const metadata: Metadata = {
     "tomografia odontológica",
     "raio-x panorâmico",
     "documentação ortodôntica",
+    "escaneamento iTero",
+    "Invisalign",
+    "arquivos DICOM",
+    "arquivos STL",
+    "impressão de modelos em resina",
     "clínica ROE",
     "Mogi Guaçu",
     "Mogi Mirim",

@@ -10,14 +10,27 @@ type Benefit = {
   description: string;
 };
 
+// Four items rather than two: the list below is already sm:grid-cols-2, so this
+// fills it as 2x2 without touching the layout. "Foco no Paciente" and
+// "Equipamentos Modernos" are absorbed here, traded for something concrete.
 const BENEFITS: Benefit[] = [
   {
-    title: "Foco no Paciente",
-    description: "Seu conforto sempre em primeiro lugar.",
+    title: "Atendimento Inclusivo",
+    description:
+      "Experiência no atendimento a pacientes especiais e neurodivergentes, respeitando o tempo de cada um.",
   },
   {
-    title: "Equipamentos Modernos",
-    description: "Tecnologia de ponta para melhores laudos.",
+    // TODO: name the actual specialisations and awards once they are confirmed.
+    title: "Laudos por Especialistas",
+    description: "Equipe de radiologistas com especialização e reconhecimento na área.",
+  },
+  {
+    title: "Imagens em Alta Resolução",
+    description: "Equipamentos digitais que entregam a nitidez necessária para um laudo seguro.",
+  },
+  {
+    title: "Conforto no Exame",
+    description: "Exames rápidos, com orientação em cada etapa.",
   },
 ];
 
@@ -39,7 +52,7 @@ const STATS: Stat[] = [
 
 export default function Benefits() {
   return (
-    <Section id="beneficios" className="bg-roe-sand py-12">
+    <Section id="beneficios" className="bg-roe-white py-12">
       <div className="grid gap-10 lg:grid-cols-[1.05fr_auto] lg:items-center lg:gap-12">
         <div>
           <SectionHeader
@@ -50,7 +63,12 @@ export default function Benefits() {
             descriptionClassName="mt-3 max-w-md text-xs text-black sm:text-sm"
           />
 
-          <ul className="mt-8 grid gap-6 sm:grid-cols-2">
+          {/* Row gap wider than the column gap: the descriptions run to
+              different line counts, so at a uniform gap-6 the shorter item left
+              slack inside its row and the two rows read as unevenly spaced. A
+              row gap larger than the text's own leading makes each item its own
+              block regardless of how far its description wraps. */}
+          <ul className="mt-8 grid gap-x-6 gap-y-9 sm:grid-cols-2">
             {BENEFITS.map((benefit, index) => (
               <FeatureItem
                 key={benefit.title}

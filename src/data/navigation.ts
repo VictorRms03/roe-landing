@@ -8,6 +8,7 @@ export type NavLink = {
 export const NAV_LINKS: NavLink[] = [
   { label: "Exames", href: "#servicos" },
   { label: "A Clínica", href: "#beneficios" },
+  { label: "Digital", href: "#digital" },
   { label: "Unidades", href: "#clinicas" },
   { label: "Dúvidas", href: "#faq" },
 ];
