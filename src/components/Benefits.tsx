@@ -70,7 +70,7 @@ export default function Benefits() {
           <Reveal delay={120} className="relative">
             <div className="group relative aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-xl lg:w-[380px]">
               <Image
-                src="/images/benefits/exame-4.webp"
+                src="/images/benefits/exame.webp"
                 alt="Paciente posicionada em um aparelho de raio-x panorâmico"
                 fill
                 sizes="(min-width: 1024px) 33vw, 100vw"

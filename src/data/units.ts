@@ -73,7 +73,7 @@ export const UNITS: Unit[] = [
     state: "SP",
     postalCode: "13840-001",
     hours: OPENING_HOURS.label,
-    image: "/images/hero/clinica-guacu.webp",
+    image: "/images/clinics/clinica-guacu.webp",
     imageAlt: "Fachada amarela da unidade de Mogi Guaçu",
     // TODO: read off the clinic's own signage in the photo. Confirm before launch.
     whatsapp: "5519998807176",
@@ -88,7 +88,7 @@ export const UNITS: Unit[] = [
     state: "SP",
     postalCode: "13800-040",
     hours: OPENING_HOURS.label,
-    image: "/images/hero/clinica-mogi.webp",
+    image: "/images/clinics/clinica-mogi.webp",
     imageAlt: "Fachada em pedra e tijolo da unidade de Mogi Mirim",
     whatsapp: "5519998863332",
   }),

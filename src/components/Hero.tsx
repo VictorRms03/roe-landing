@@ -134,7 +134,7 @@ export default function Hero() {
             >
               <div className="relative aspect-3/4">
                 <Image
-                  src="/images/hero/exame-3.webp"
+                  src="/images/hero/exame-2.webp"
                   alt="Paciente realizando exame de tomografia odontológica"
                   fill
                   sizes="160px"
