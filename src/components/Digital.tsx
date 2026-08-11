@@ -12,7 +12,7 @@ import { DIGITAL_STAGES } from "@/data/services";
  */
 export default function Digital() {
   return (
-    <Section id="digital" className="bg-roe-ink py-16">
+    <Section id="digital" className="bg-roe-ink py-16 md:py-20">
       <SectionHeader
         className="max-w-2xl"
         eyebrow="Fluxo Digital"

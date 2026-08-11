@@ -77,7 +77,7 @@ export default function Services() {
   }
 
   return (
-    <Section id="servicos" className="bg-roe-white py-4 md:py-8">
+    <Section id="servicos" className="bg-roe-white py-16 md:py-20">
       <SectionHeader
         eyebrow="Exames"
         title="Exames de Raio-X e Tomografia Odontológica"

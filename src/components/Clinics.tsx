@@ -17,7 +17,7 @@ export default function Clinics() {
       {/* Outside the section so #clinicas still lands where scroll-mt-32 expects. */}
       <div className="bg-roe-yellow h-1" aria-hidden="true" />
 
-      <Section id="clinicas" className="bg-roe-sand py-16">
+      <Section id="clinicas" className="bg-roe-sand py-16 md:py-20">
         <SectionHeader
           className="max-w-2xl"
           eyebrow="Unidades"

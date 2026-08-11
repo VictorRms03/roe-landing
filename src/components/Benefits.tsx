@@ -52,7 +52,7 @@ const STATS: Stat[] = [
 
 export default function Benefits() {
   return (
-    <Section id="beneficios" className="bg-roe-white py-12">
+    <Section id="beneficios" className="bg-roe-white py-16 md:py-20">
       <div className="grid gap-10 lg:grid-cols-[1.05fr_auto] lg:items-center lg:gap-12">
         <div>
           <SectionHeader
