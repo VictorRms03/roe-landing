@@ -7,6 +7,7 @@ import {
   PinIcon,
   StarIcon,
 } from "@/components/Icons";
+import ScrollCue from "@/components/ScrollCue";
 
 const INFO_ITEMS = [
   { icon: PinIcon, title: "Duas Unidades", detail: "Mogi Mirim e Mogi Guaçu" },
@@ -14,10 +15,6 @@ const INFO_ITEMS = [
   { icon: ChatIcon, title: "Agende no WhatsApp", detail: "Respostas no horário comercial" },
 ];
 
-// A yellow bloom behind the photography over a vertical wash, running sand to
-// roe-white so this section joins the navbar above and Services below without a
-// seam. Inline rather than a utility: two layers with rgba() stops would need
-// more underscore escaping than it is worth.
 const BACKGROUND =
   "radial-gradient(60% 55% at 82% 22%, rgba(230,175,46,0.42) 0%, rgba(230,175,46,0.12) 45%, rgba(230,175,46,0) 72%), linear-gradient(180deg, #EAE4D7 0%, #F5EDDD 40%, #FEFDFF 100%)";
 
@@ -29,18 +26,8 @@ export default function Hero() {
     >
       <div className="mx-auto max-w-7xl">
         <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_1fr] lg:gap-16">
-          {/* The opening cascade is pure CSS: the first fold cannot wait for
-              hydration, so no Reveal anywhere in this section. */}
           <div>
-            {/* A percentage max-width wouldn't do it here: this pill sits
-                inside an auto-sized single-column grid track below sm, so a
-                nowrap descendant's full width would inflate that track before
-                any percentage of it could clamp back down. Anchoring to
-                100vw (minus this section's own px-6) sidesteps that
-                circularity and gives the flex row below an actual width to
-                shrink the text span against. */}
             <div className="animate-fade-up bg-roe-cream inline-flex max-w-[calc(100vw-3rem)] items-center gap-2.5 rounded-full border border-black/10 py-1.5 pr-4 pl-2.5 shadow-sm shadow-black/5 motion-reduce:animate-none sm:max-w-none">
-              {/* Decorative: the sentence beside it already carries the rating. */}
               <span
                 className="text-roe-yellow flex shrink-0 items-center gap-0.5"
                 aria-hidden="true"
@@ -57,16 +44,11 @@ export default function Hero() {
               </span>
             </div>
 
-            {/* The single h1 is the heaviest text on the page, so it carries
-                the service and both cities — the query patients actually type.
-                The brand promise it used to hold moved into the lead below. */}
             <h1
               style={{ animationDelay: "60ms" }}
               className="animate-fade-up mt-6 max-w-[22ch] text-[2.5rem] leading-[1.06] font-bold tracking-tight text-balance text-gray-950 motion-reduce:animate-none sm:text-5xl lg:text-[3.4rem]"
             >
               Raio-X Odontológico em{" "}
-              {/* The accent is an underline rather than yellow type: yellow on
-                  this cream sits at about 1.9:1, which is unreadable. */}
               <span className="relative inline-block">
                 <span className="relative z-10">Mogi Guaçu e Mogi Mirim</span>
                 <span
@@ -84,9 +66,6 @@ export default function Hero() {
               tomografia 3D, com laudos rápidos e um atendimento pensado no seu conforto.
             </p>
 
-            {/* Focus is an outline here, not the site's ring + ring-offset: the
-                offset needs a solid colour to sit on and this ground is a
-                gradient. Every other section keeps the ring. */}
             <div
               style={{ animationDelay: "220ms" }}
               className="animate-fade-up mt-8 flex flex-wrap gap-4 motion-reduce:animate-none"
@@ -107,8 +86,6 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* `isolate` is load-bearing: without its own stacking context the
-              -z-10 frame below would paint behind the section background. */}
           <div className="relative isolate">
             <div
               aria-hidden="true"
@@ -175,28 +152,11 @@ export default function Hero() {
           ))}
         </ul>
 
-        {/* Wayfinding, not pure decoration: it links to the next section
-            rather than sitting there inert. Hidden below sm — the hero is
-            already tight on vertical space at that width. */}
-        <div className="mt-16 hidden justify-center sm:flex">
-          <a
-            href="#servicos"
-            style={{ animationDelay: "820ms" }}
-            className="animate-fade-up group flex flex-col items-center gap-2 motion-reduce:animate-none"
-          >
-            <span className="text-xs font-medium tracking-widest text-gray-500 uppercase transition-colors group-hover:text-gray-800">
-              Desça para ver mais
-            </span>
-            <span className="animate-bounce-slow motion-reduce:animate-none">
-              <span
-                aria-hidden="true"
-                className="flex h-9 w-5 items-start justify-center rounded-full border-2 border-gray-400/70 pt-1.5 transition-colors group-hover:border-gray-700"
-              >
-                <span className="animate-scroll-wheel size-1 rounded-full bg-gray-400/70 transition-colors group-hover:bg-gray-700 motion-reduce:animate-none" />
-              </span>
-            </span>
-          </a>
-        </div>
+        {/* Wayfinding, not pure decoration: it links to the next section rather
+            than sitting there inert. It stays in flow here on a tall window and
+            becomes a pill fixed to the viewport on anything shorter, where this
+            position falls below the fold — see ScrollCue. */}
+        <ScrollCue />
       </div>
     </section>
   );

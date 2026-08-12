@@ -5,36 +5,23 @@
   --color-roe-gray: #d9d9d9;
   --color-roe-white: #fefdff;
   --color-roe-yellow: #e6af2e;
-  /* Page surfaces. A focus ring's offset has to match whatever the element
-     sits on, so these have to be named for `ring-offset-roe-ink` to exist. */
   --color-roe-sand: #eae4d7;
   --color-roe-cream: #fffcf5;
   --color-roe-clay: #d5cbb3;
   --color-roe-ink: #121212;
   --color-roe-whatsapp: #25d366;
-  /* Lifted yellow, for hover on a surface that is already roe-yellow. */
   --color-roe-yellow-hover: #f2bd3f;
 
   --animate-fade-up: fade-up 600ms ease-out both;
   --animate-fade-in: fade-in 400ms ease-out both;
-  /* Same keyframe, shorter: an accordion answer has to open quickly. */
   --animate-fade-in-up: fade-up 300ms ease-out both;
   --animate-float-slow: float-slow 7s ease-in-out infinite;
-  /* Duration then delay. The delay is baked in rather than passed inline
-     because the underline always trails its own headline, wherever it sits. */
   --animate-draw-underline: draw-underline 620ms 420ms cubic-bezier(0.65, 0, 0.35, 1) both;
-  /* Hero's "scroll for more" cue: the mouse outline bobs, the wheel dot
-     travels inside it. Kept apart from float-slow's bigger travel so the cue
-     reads as a hint, not as the same decoration drifting elsewhere. */
   --animate-bounce-slow: bounce-slow 2.2s ease-in-out infinite;
   --animate-scroll-wheel: scroll-wheel 1.8s ease-in-out infinite;
-  /* Hero's rating badge: ticks sideways to reveal text too long for one line
-     on a narrow phone, instead of wrapping it to a second line. */
   --animate-marquee-peek: marquee-peek 9s ease-in-out infinite;
 }
 
-/* Declared outside @theme so they are emitted as plain CSS, independent of how
-   `inline` resolves the tokens above. */
 @keyframes fade-up {
   from {
     opacity: 0;
@@ -55,8 +42,7 @@
   }
 }
 
-/* Reserved for empty decoration only. Anything that never stops moving pulls
-   the eye forever, so this drives an outlined shape, never a photo or text. */
+
 @keyframes float-slow {
   0%,
   100% {
@@ -67,7 +53,7 @@
   }
 }
 
-/* Sweeps the headline accent in from the left once the h1 has settled. */
+
 @keyframes draw-underline {
   from {
     transform: scaleX(0);
@@ -87,8 +73,6 @@
   }
 }
 
-/* The dot inside the scroll cue's mouse outline, mimicking a wheel travelling
-   down and fading before it would exit the shape. */
 @keyframes scroll-wheel {
   0% {
     transform: translateY(0);
@@ -103,12 +87,6 @@
   }
 }
 
-/* Percentages resolve against the element's own width, not the viewport, so
-   this needs no JS measurement of the actual text/container mismatch. -25%
-   was picked by measuring the real overflow at common phone widths: it fully
-   clears ~375px and up, and still meaningfully advances (if not quite to the
-   end) on the rare ~320-360px phone — better than one fixed number ever
-   being exactly right for every width. */
 @keyframes marquee-peek {
   0%,
   15% {
@@ -123,8 +101,6 @@
   }
 }
 
-/* Only on <html>. A wider selector would also animate the `scrollLeft` the
-   testimonials carousel sets by hand, breaking its infinite-loop rewind. */
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
