@@ -48,8 +48,8 @@ export default function Navbar() {
             <span className="text-[22px] font-bold text-gray-900">Clínica ROE</span>
           </Link>
 
-          <div className="hidden items-center gap-8 md:flex">
-            <nav className="flex items-center gap-6">
+          <div className="hidden items-center gap-5 md:flex lg:gap-8">
+            <nav className="flex items-center gap-4 lg:gap-6">
               {NAV_LINKS.map((link) => (
                 <Link
                   key={link.label}
@@ -97,12 +97,14 @@ export default function Navbar() {
       </div>
 
       {/* `inert` while closed: the panel is only visually collapsed, so without
-          it the four links stay in the tab order with nothing to see. */}
+          it the links stay in the tab order with nothing to see. The open cap is
+          a fixed height so the panel can transition: keep it above what the
+          links actually measure, or overflow-hidden clips the last one. */}
       <div
         id={MOBILE_MENU_ID}
         inert={!isOpen}
         className={`overflow-hidden transition-all duration-300 ease-in-out md:hidden ${
-          isOpen ? "max-h-[28rem] opacity-100" : "max-h-0 opacity-0"
+          isOpen ? "max-h-[32rem] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
         <nav className="flex flex-col gap-2 border-t border-gray-100 px-6 py-4 shadow-lg">

@@ -10,5 +10,6 @@ export const NAV_LINKS: NavLink[] = [
   { label: "A Clínica", href: "#beneficios" },
   { label: "Digital", href: "#digital" },
   { label: "Unidades", href: "#clinicas" },
+  { label: "Convênios", href: "#convenios" },
   { label: "Dúvidas", href: "#faq" },
 ];
