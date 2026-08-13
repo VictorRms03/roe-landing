@@ -1,3 +1,5 @@
+import { INSURERS_SENTENCE } from "@/data/insurers";
+
 export type FaqItem = {
   question: string;
   answer: string;
@@ -19,10 +21,10 @@ export const FAQ_ITEMS: FaqItem[] = [
       "Sim. Nossa equipe tem experiência nesse atendimento e adapta o ritmo do exame ao paciente, com acompanhante junto durante todo o procedimento. Conte a necessidade no agendamento pelo WhatsApp para prepararmos o atendimento.",
   },
   {
-    // TODO: replace with the real list of accepted health plans.
+    // The names come from `@/data/insurers`, the same array the Convênios carousel
+    // renders — this answer feeds Google's FAQ rich result, so the two cannot drift.
     question: "Vocês aceitam convênio?",
-    answer:
-      "Fale com a gente pelo WhatsApp para confirmarmos se o seu convênio está entre os aceitos e quais exames ele cobre.",
+    answer: `Sim. Atendemos ${INSURERS_SENTENCE}. A cobertura de cada exame varia conforme o plano, então confirme pelo WhatsApp no momento do agendamento.`,
   },
   {
     // TODO: state the real turnaround time for the report.
