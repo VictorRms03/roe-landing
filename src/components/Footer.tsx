@@ -7,7 +7,7 @@ import WhatsAppIcon from "@/components/WhatsAppIcon";
 import WhatsAppLink from "@/components/ui/WhatsAppLink";
 import { NAV_LINKS } from "@/data/navigation";
 import { SOCIAL_PROFILES, type SocialProfile } from "@/data/social";
-import { UNITS } from "@/data/units";
+import { GENERAL_MANAGER, UNITS } from "@/data/units";
 
 // Keyed by profile id: the URLs live in `@/data/social` because the
 // Organization JSON-LD lists them as `sameAs`.
@@ -99,6 +99,13 @@ export default function Footer() {
                     <p className="text-roe-white font-semibold">{unit.shortName}</p>
                     <p className="mt-1.5">{unit.address}</p>
                     <p className="mt-1.5">{unit.hours}</p>
+                    {/* Beside the address it answers for, rather than pooled
+                        with the other unit's at the bottom: which dentist holds
+                        which address is the whole point of publishing it. */}
+                    <p className="mt-1.5 text-white/50">
+                      Responsável técnica: {unit.technicalManager.name} ·{" "}
+                      {unit.technicalManager.cro}
+                    </p>
                     {unit.whatsapp && (
                       <WhatsAppLink
                         phone={unit.whatsapp}
@@ -116,8 +123,16 @@ export default function Footer() {
           </Reveal>
 
           <div className="mt-12 flex flex-col gap-4 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
-            {/* TODO: add the CNPJ and the technical director with their CRO number. */}
-            <p className="text-xs text-white/50">© {year} Clínica ROE · Radiologia Odontológica</p>
+            {/* TODO: add the CNPJ. */}
+            <div className="text-xs text-white/50">
+              <p>© {year} Clínica ROE · Radiologia Odontológica</p>
+              {/* Institutional, so it sits with the copyright rather than in
+                  either unit's block — she answers for both. */}
+              {/* Her name only: her CRO is already a few lines up, in the Mogi
+                  Mirim block, and printing it twice in one footer reads as two
+                  different facts. */}
+              <p className="mt-1.5">Administração e coordenação geral: {GENERAL_MANAGER.name}</p>
+            </div>
 
             {/* "#top" has no element behind it on purpose: with no match, the
                 fragment is defined to mean the top of the document. */}

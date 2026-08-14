@@ -52,6 +52,16 @@ export function RouteIcon({ className = "size-5" }: IconProps) {
   );
 }
 
+// Head and shoulders: the dentist who answers for a unit, beside its address.
+export function PersonIcon({ className = "size-5" }: IconProps) {
+  return (
+    <svg {...STROKE} className={className}>
+      <circle cx="12" cy="8" r="3.5" />
+      <path d="M5 20a7 7 0 0 1 14 0" />
+    </svg>
+  );
+}
+
 export function ArrowRightIcon({ className = "size-4" }: IconProps) {
   return (
     <svg {...STROKE} strokeWidth={2} className={className}>
