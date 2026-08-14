@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Reveal from "@/components/Reveal";
 import Section from "@/components/ui/Section";
 import SectionHeader from "@/components/ui/SectionHeader";
@@ -13,14 +14,27 @@ import { DIGITAL_STAGES } from "@/data/services";
 export default function Digital() {
   return (
     <Section id="digital" className="bg-roe-ink py-16 md:py-20">
-      <SectionHeader
-        className="max-w-2xl"
-        eyebrow="Fluxo Digital"
-        title="Do Escaneamento ao Modelo"
-        description="Além dos exames de imagem, a ROE escaneia, entrega os arquivos digitais e imprime o modelo — tudo na mesma clínica."
-        titleClassName="text-roe-white"
-        descriptionClassName="mt-3 text-sm text-white/70 sm:text-base"
-      />
+      {/* Mascot to the right of the header. Decorative — the heading already
+          says everything he could, hence the empty alt. */}
+      <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-7">
+        <SectionHeader
+          className="max-w-2xl"
+          eyebrow="Fluxo Digital"
+          title="Do Escaneamento ao Modelo"
+          description="Além dos exames de imagem, a ROE escaneia, entrega os arquivos digitais e imprime o modelo — tudo na mesma clínica."
+          titleClassName="text-roe-white"
+          descriptionClassName="mt-3 text-sm text-white/70 sm:text-base"
+        />
+
+        <Image
+          src="/icone-apontando.png"
+          alt=""
+          aria-hidden="true"
+          width={224}
+          height={244}
+          className="w-20 shrink-0 sm:w-28"
+        />
+      </div>
 
       {/* The rails sit outside the <ol> so the list holds three items, not five.
           Two of them rather than one rotated: the nodes run down the left on a
