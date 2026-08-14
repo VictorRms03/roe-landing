@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ClockIcon, PinIcon, RouteIcon } from "@/components/Icons";
+import { ClockIcon, PersonIcon, PinIcon, RouteIcon } from "@/components/Icons";
 import Reveal from "@/components/Reveal";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
 import Section from "@/components/ui/Section";
@@ -80,6 +80,16 @@ export default function Clinics() {
                     <li className="flex gap-3 py-4">
                       <ClockIcon className="mt-0.5 size-4 shrink-0 text-gray-900" />
                       <span className="text-gray-700">{unit.hours}</span>
+                    </li>
+                    {/* A third hairline row rather than a line under the
+                        buttons: it belongs to this address the same way the
+                        street and the hours do. */}
+                    <li className="flex gap-3 py-4">
+                      <PersonIcon className="mt-0.5 size-4 shrink-0 text-gray-900" />
+                      <span className="min-w-0 text-gray-700">
+                        Responsável técnica: {unit.technicalManager.name} ·{" "}
+                        {unit.technicalManager.cro}
+                      </span>
                     </li>
                   </ul>
 

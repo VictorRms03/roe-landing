@@ -4,6 +4,7 @@ import Reveal from "@/components/Reveal";
 import FeatureItem from "@/components/ui/FeatureItem";
 import Section from "@/components/ui/Section";
 import SectionHeader from "@/components/ui/SectionHeader";
+import { GENERAL_MANAGER } from "@/data/units";
 
 type Benefit = {
   title: string;
@@ -80,6 +81,18 @@ export default function Benefits() {
               />
             ))}
           </ul>
+
+          {/* Behind a hairline below the list, the way Booking closes its own
+              column: who answers for the clinic is context for the four claims
+              above, not a fifth claim competing with them. The delay picks up
+              where the list's cascade left off. */}
+          <Reveal delay={400} className="mt-9 border-t border-black/10 pt-6">
+            <p className="text-sm leading-relaxed text-gray-700">
+              Administração e coordenação geral:{" "}
+              <span className="font-semibold text-black">{GENERAL_MANAGER.name}</span> ·{" "}
+              {GENERAL_MANAGER.cro}
+            </p>
+          </Reveal>
         </div>
 
         <div className="flex items-center gap-8 lg:gap-8">

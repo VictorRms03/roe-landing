@@ -84,6 +84,15 @@ function dentistNode(unit: Unit) {
     areaServed: AREA_SERVED,
     availableLanguage: { "@type": "Language", name: "Portuguese", alternateName: "pt-BR" },
     medicalSpecialty: "Radiography",
+    // The dentist on file for this address. `Person` with the CRO as an
+    // identifier rather than a bare name, so the registration reads as the
+    // credential it is instead of punctuation inside the name.
+    employee: {
+      "@type": "Person",
+      name: unit.technicalManager.name,
+      jobTitle: "Responsável técnica",
+      identifier: unit.technicalManager.cro,
+    },
     parentOrganization: { "@id": ORGANIZATION_ID },
     isPartOf: { "@id": WEBSITE_ID },
     sameAs: SOCIAL_URLS,

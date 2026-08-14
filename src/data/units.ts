@@ -17,6 +17,29 @@ export const OPENING_HOURS = {
   days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
 } as const;
 
+export type TechnicalManager = {
+  name: string;
+  /** With the "CRO-SP" prefix, which is how the council itself writes it. */
+  cro: string;
+};
+
+/**
+ * One record per dentist, referenced by each role she holds, so a registration
+ * number is never typed twice and cannot drift between the places it appears.
+ */
+const LILIAN: TechnicalManager = {
+  name: "Dra. Lilian Maria Polettini Setoguchi",
+  cro: "CRO-SP 47136",
+};
+
+/**
+ * Coordination of the clinic as a whole, which is not a unit's responsibility —
+ * hence a reference of its own rather than a reach into `UNITS`. It happens to
+ * be the same dentist who answers for Mogi Mirim today; the day one of the two
+ * roles changes hands, only that reference moves.
+ */
+export const GENERAL_MANAGER = LILIAN;
+
 export type Unit = {
   id: string;
   /** Full name, for headings. */
@@ -34,6 +57,12 @@ export type Unit = {
   imageAlt: string;
   /** Digits only, with country and area code. Null hides WhatsApp for this unit. */
   whatsapp: string | null;
+  /**
+   * The dentist who answers for this address before the CRO. Per unit rather
+   * than per clinic because that is how the responsibility is actually held:
+   * one name is on file for Mogi Guaçu and a different one for Mogi Mirim.
+   */
+  technicalManager: TechnicalManager;
   /** Full one-line address. Derived. */
   address: string;
   /** The quieter half of `address`, so the card can weight the street on its own. Derived. */
@@ -77,6 +106,10 @@ export const UNITS: Unit[] = [
     imageAlt: "Fachada amarela da unidade de Mogi Guaçu",
     // TODO: read off the clinic's own signage in the photo. Confirm before launch.
     whatsapp: "5519998807176",
+    technicalManager: {
+      name: "Dra. Daniela Brait Silva Ladeira",
+      cro: "CRO-SP 62495",
+    },
   }),
   buildUnit({
     id: "mogi-mirim",
@@ -91,6 +124,7 @@ export const UNITS: Unit[] = [
     image: "/images/clinics/clinica-mogi.webp",
     imageAlt: "Fachada em pedra e tijolo da unidade de Mogi Mirim",
     whatsapp: "5519998863332",
+    technicalManager: LILIAN,
   }),
 ];
 
