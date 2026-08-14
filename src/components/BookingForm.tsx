@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useRef, type FormEvent, type ReactNode } from "react";
+import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
+import { INSURERS } from "@/data/insurers";
 import { BOOKABLE_UNITS } from "@/data/units";
 import { whatsappUrl } from "@/lib/whatsapp";
 
@@ -26,6 +27,7 @@ const FIELD = {
   email: "email",
   date: "date",
   examType: "examType",
+  insurer: "insurer",
   unit: "unit",
 } as const;
 
@@ -56,9 +58,17 @@ function Field({ id, label, children }: FieldProps) {
 
 type SelectProps = FieldProps & {
   placeholder: string;
+  /** Off only for the convênio, which most visitors have nothing to say about. */
+  required?: boolean;
 };
 
-function Select({ id, label, placeholder, children }: SelectProps) {
+// `invalid:` greyed the untouched placeholder back when every select was
+// required; an optional one is valid while empty, so whether it still holds its
+// placeholder has to be tracked rather than inferred. Kept as a variant, since a
+// bare `text-gray-500` would race the `text-gray-900` already in FIELD_CLASS.
+function Select({ id, label, placeholder, required = true, children }: SelectProps) {
+  const [empty, setEmpty] = useState(true);
+
   return (
     <Field id={id} label={label}>
       <div className="relative">
@@ -66,10 +76,14 @@ function Select({ id, label, placeholder, children }: SelectProps) {
           id={id}
           name={id}
           defaultValue=""
-          required
-          className={`${FIELD_CLASS} appearance-none pr-10 invalid:text-gray-500`}
+          required={required}
+          data-placeholder={empty || undefined}
+          onChange={(event) => setEmpty(event.target.value === "")}
+          className={`${FIELD_CLASS} appearance-none pr-10 data-[placeholder]:text-gray-500`}
         >
-          <option value="" disabled>
+          {/* Locked shut only where an answer is mandatory: on the optional
+              field, reselecting it is how someone takes a convênio back off. */}
+          <option value="" disabled={required}>
             {placeholder}
           </option>
           {children}
@@ -99,6 +113,8 @@ function buildChatUrl(form: HTMLFormElement): string | null {
   const unit = BOOKABLE_UNITS.find((candidate) => candidate.id === data.get(FIELD.unit));
   if (!unit) return null;
 
+  const insurer = data.get(FIELD.insurer);
+
   const message = [
     "Olá! Gostaria de fazer um agendamento.",
     "",
@@ -106,10 +122,33 @@ function buildChatUrl(form: HTMLFormElement): string | null {
     `E-mail: ${data.get(FIELD.email)}`,
     `Data desejada: ${formatDate(String(data.get(FIELD.date)))}`,
     `Serviço: ${data.get(FIELD.examType)}`,
+    // Dropped entirely when nobody picked one: an empty "Convênio:" line reads
+    // as an answer, and the atendente would have to ask all the same.
+    ...(insurer ? [`Convênio: ${insurer}`] : []),
     `Unidade: ${unit.shortName}`,
   ].join("\n");
 
   return whatsappUrl(unit.whatsapp, message);
+}
+
+/**
+ * A synthesised link click rather than `window.open`. On the desktop, a
+ * `window.open` carrying a features string is a popup as far as the blocker is
+ * concerned — Chrome, Safari and every ad blocker swallow a share of them, and
+ * the visitor is left looking at a button that did nothing at all. A link click
+ * inside the same gesture is an ordinary navigation, which nothing blocks, and
+ * `rel` still severs the opener the way the third argument used to.
+ */
+function openChat(url: string) {
+  const link = document.createElement("a");
+  link.href = url;
+  link.target = "_blank";
+  link.rel = "noopener noreferrer";
+
+  // In the document, because a detached anchor's click is a no-op in Firefox.
+  document.body.append(link);
+  link.click();
+  link.remove();
 }
 
 export default function BookingForm() {
@@ -127,7 +166,7 @@ export default function BookingForm() {
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const chatUrl = buildChatUrl(event.currentTarget);
-    if (chatUrl) window.open(chatUrl, "_blank", "noopener,noreferrer");
+    if (chatUrl) openChat(chatUrl);
   }
 
   return (
@@ -188,6 +227,22 @@ export default function BookingForm() {
           ))}
         </Select>
       </div>
+
+      {/* Full width rather than sharing a row: the plan names run long, and this
+          is the one field nobody is obliged to answer. The option values are the
+          names themselves, so the message needs no lookup on the way out. */}
+      <Select
+        id={FIELD.insurer}
+        label="Convênio (opcional)"
+        placeholder="Selecione seu convênio, se tiver"
+        required={false}
+      >
+        {INSURERS.map((insurer) => (
+          <option key={insurer.id} value={insurer.name}>
+            {insurer.name}
+          </option>
+        ))}
+      </Select>
 
       <button
         type="submit"

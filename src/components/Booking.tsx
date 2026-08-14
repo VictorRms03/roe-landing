@@ -17,7 +17,7 @@ type Assurance = {
 const ASSURANCES: Assurance[] = [
   {
     title: "Sem cadastro",
-    description: "Nada de login ou senha: são cinco campos e pronto.",
+    description: "Nada de login ou senha: cinco campos, mais o convênio se você tiver.",
   },
   {
     title: "Você confere antes de enviar",
