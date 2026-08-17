@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import Reveal from "@/components/Reveal";
 
 type SectionHeaderProps = {
@@ -6,6 +7,12 @@ type SectionHeaderProps = {
   description: string;
   /** Wrapper classes, e.g. the max-width Clinics puts on its header. */
   className?: string;
+  /**
+   * Sits on the eyebrow's own line, to its right. Exists for the mascot on
+   * narrow screens: the eyebrow is short, so the space beside it is free, and
+   * anything parked there costs almost no height.
+   */
+  eyebrowAside?: ReactNode;
   eyebrowClassName?: string;
   /** Sections sit on different grounds, so the heading colour travels with the call site. */
   titleClassName?: string;
@@ -28,13 +35,23 @@ export default function SectionHeader({
   title,
   description,
   className = "",
+  eyebrowAside,
   eyebrowClassName = "",
   titleClassName = "",
   descriptionClassName = "",
 }: SectionHeaderProps) {
+  const eyebrowLine = <p className={`${EYEBROW} ${eyebrowClassName}`}>{eyebrow}</p>;
+
   return (
     <Reveal className={className}>
-      <p className={`${EYEBROW} ${eyebrowClassName}`}>{eyebrow}</p>
+      {eyebrowAside ? (
+        <div className="flex items-center gap-3">
+          {eyebrowLine}
+          {eyebrowAside}
+        </div>
+      ) : (
+        eyebrowLine
+      )}
       <h2 className={`${TITLE} ${titleClassName}`}>{title}</h2>
       <p className={descriptionClassName}>{description}</p>
     </Reveal>

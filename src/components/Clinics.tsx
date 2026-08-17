@@ -2,8 +2,8 @@ import Image from "next/image";
 import { ClockIcon, PersonIcon, PinIcon, RouteIcon } from "@/components/Icons";
 import Reveal from "@/components/Reveal";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
+import MascotHeader from "@/components/ui/MascotHeader";
 import Section from "@/components/ui/Section";
-import SectionHeader from "@/components/ui/SectionHeader";
 import WhatsAppLink from "@/components/ui/WhatsAppLink";
 import { UNITS } from "@/data/units";
 
@@ -18,7 +18,7 @@ export default function Clinics() {
       <div className="bg-roe-yellow h-1" aria-hidden="true" />
 
       <Section id="clinicas" className="bg-roe-sand py-16 md:py-20">
-        <SectionHeader
+        <MascotHeader
           className="max-w-2xl"
           eyebrow="Unidades"
           title="Nossas Clínicas em Mogi Guaçu e Mogi Mirim"
