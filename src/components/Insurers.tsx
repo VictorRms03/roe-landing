@@ -2,7 +2,7 @@ import { existsSync, readdirSync } from "node:fs";
 import { basename, extname, join } from "node:path";
 import InsurersCarousel from "@/components/InsurersCarousel";
 import Reveal from "@/components/Reveal";
-import SectionHeader from "@/components/ui/SectionHeader";
+import MascotHeader from "@/components/ui/MascotHeader";
 import { INSURERS, type Insurer } from "@/data/insurers";
 import { imageSize } from "@/lib/imageSize";
 
@@ -80,7 +80,7 @@ export default function Insurers() {
   return (
     <section id="convenios" className="bg-roe-ink scroll-mt-32 py-16">
       <div className={CONTAINER}>
-        <SectionHeader
+        <MascotHeader
           className="max-w-2xl"
           eyebrow="Convênios"
           title="Convênios Odontológicos Atendidos"
