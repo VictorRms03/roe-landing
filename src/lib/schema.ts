@@ -1,6 +1,6 @@
 import { DIGITAL_STAGES, EXAMS } from "@/data/services";
 import { SOCIAL_URLS } from "@/data/social";
-import { OPENING_HOURS, UNITS, type Unit } from "@/data/units";
+import { UNITS, type Unit } from "@/data/units";
 import { absoluteUrl, SITE_NAME, SITE_URL } from "@/lib/site";
 
 // Stable node ids. Search engines use these to tell the entities apart and to
@@ -20,13 +20,16 @@ const AREA_SERVED = ["Mogi Guaçu", "Mogi Mirim", "Itapira", "Estiva Gerbi", "Co
 );
 
 // One `openingHoursSpecification` per window per day set, which is the shape
-// Google documents. Both units keep identical hours.
-const OPENING_HOURS_SPECIFICATION = OPENING_HOURS.specification.map((window) => ({
-  "@type": "OpeningHoursSpecification",
-  dayOfWeek: [...OPENING_HOURS.days],
-  opens: window.opens,
-  closes: window.closes,
-}));
+// Google documents. Per unit, not shared: Mogi Guaçu closes over lunch and Mogi
+// Mirim runs straight through, so the two no longer describe the same week.
+function openingHoursFor(unit: Unit) {
+  return unit.hours.specification.map((window) => ({
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: [...unit.hours.days],
+    opens: window.opens,
+    closes: window.closes,
+  }));
+}
 
 /** The brand-level number: the first unit that actually has one, in E.164. */
 const primaryWhatsApp = UNITS.map((unit) => unit.whatsapp).find(Boolean);
@@ -80,7 +83,7 @@ function dentistNode(unit: Unit) {
     // TODO: add `geo` with the real latitude/longitude of each unit — it is a
     // strong local-search signal, but the coordinates have to be read off
     // Google Maps rather than guessed.
-    openingHoursSpecification: OPENING_HOURS_SPECIFICATION,
+    openingHoursSpecification: openingHoursFor(unit),
     areaServed: AREA_SERVED,
     availableLanguage: { "@type": "Language", name: "Portuguese", alternateName: "pt-BR" },
     medicalSpecialty: "Radiography",

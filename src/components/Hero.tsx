@@ -8,10 +8,22 @@ import {
   StarIcon,
 } from "@/components/Icons";
 import ScrollCue from "@/components/ScrollCue";
+import { UNITS } from "@/data/units";
 
 const INFO_ITEMS = [
   { icon: PinIcon, title: "Duas Unidades", detail: "Mogi Mirim e Mogi Guaçu" },
-  { icon: ClockIcon, title: "Segunda a Sexta", detail: "8h às 12h · 13h às 17h" },
+  {
+    icon: ClockIcon,
+    title: "Segunda a Sexta",
+    // The units share the days but no longer the hours, so one line cannot
+    // speak for both. Naming each is also the only honest summary: collapsing
+    // Mogi Guaçu to "8h às 17h30" would claim it is open over lunch.
+    detail: UNITS.map((unit) => (
+      <span key={unit.id} className="block">
+        {unit.shortName}: {unit.hours.time}
+      </span>
+    )),
+  },
   { icon: ChatIcon, title: "Agende no WhatsApp", detail: "Respostas no horário comercial" },
 ];
 
