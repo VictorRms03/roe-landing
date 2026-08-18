@@ -79,7 +79,12 @@ export default function Clinics() {
                     </li>
                     <li className="flex gap-3 py-4">
                       <ClockIcon className="mt-0.5 size-4 shrink-0 text-gray-900" />
-                      <span className="text-gray-700">{unit.hours}</span>
+                      <span className="min-w-0">
+                        <span className="block text-gray-700">{unit.hours.label}</span>
+                        {/* The image the clinic posts leads with the weekend being
+                            closed; the page only ever implied it. */}
+                        <span className="mt-0.5 block text-gray-600">{unit.hours.closed}</span>
+                      </span>
                     </li>
                     {/* A third hairline row rather than a line under the
                         buttons: it belongs to this address the same way the

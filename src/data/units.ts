@@ -1,21 +1,56 @@
-/** Both units keep the same hours, in the three forms the site needs. */
-export const OPENING_HOURS = {
-  /** What the page shows. */
-  label: "Segunda a Sexta · 8h às 12h e 13h às 17h",
-  /** schema.org openingHours, the compact string form. */
-  schema: "Mo-Fr 08:00-12:00,13:00-17:00",
+/** One continuous stretch the door stays open, as 24h "HH:MM" times. */
+type OpeningWindow = { opens: string; closes: string };
+
+/** A unit's week, in the three forms the site needs. */
+export type OpeningHours = {
+  /** The windows on their own: "8h às 12h e 13h às 17h30". Derived. */
+  time: string;
+  /** What the page shows, days included. Derived. */
+  label: string;
+  /** The days the doors stay shut, which the page never said out loud. Derived. */
+  closed: string;
+  /** schema.org openingHours, the compact string form. Derived. */
+  schema: string;
   /**
    * The same hours as `openingHoursSpecification` entries. Google prefers this
    * expanded form, and unlike the string it can express the midday close
    * without ambiguity.
    */
-  specification: [
-    { opens: "08:00", closes: "12:00" },
-    { opens: "13:00", closes: "17:00" },
-  ],
-  /** The days both windows apply to, as schema.org DayOfWeek names. */
-  days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-} as const;
+  specification: readonly OpeningWindow[];
+  /** The days the windows apply to, as schema.org DayOfWeek names. */
+  days: readonly string[];
+};
+
+/** Neither unit opens on the weekend, so every window runs Monday to Friday. */
+const WEEKDAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"] as const;
+
+/** "08:00" → "8h" and "17:30" → "17h30", the way the clinic writes its hours. */
+function formatTime(time: string): string {
+  const [hour, minute] = time.split(":");
+  return minute === "00" ? `${Number(hour)}h` : `${Number(hour)}h${minute}`;
+}
+
+/**
+ * The two units no longer keep the same hours, so a unit declares its own — and
+ * declares only the windows, with every display form derived from them. Typing
+ * the label out beside the specification is what would let the page and the
+ * JSON-LD drift apart.
+ */
+function weekdayHours(...windows: OpeningWindow[]): OpeningHours {
+  const time = windows
+    .map((window) => `${formatTime(window.opens)} às ${formatTime(window.closes)}`)
+    .join(" e ");
+  return {
+    time,
+    label: `Segunda a Sexta · ${time}`,
+    // The other half of WEEKDAYS: this factory only builds Monday-to-Friday
+    // weeks, so the weekend line states the same fact the schema already carries.
+    closed: "Sábados e domingos: fechado",
+    schema: `Mo-Fr ${windows.map((window) => `${window.opens}-${window.closes}`).join(",")}`,
+    specification: windows,
+    days: WEEKDAYS,
+  };
+}
 
 export type TechnicalManager = {
   name: string;
@@ -52,7 +87,8 @@ export type Unit = {
   /** Two-letter state code, as schema.org addressRegion expects. */
   state: string;
   postalCode: string;
-  hours: string;
+  /** This unit's own hours — the two no longer keep the same ones. */
+  hours: OpeningHours;
   image: string;
   imageAlt: string;
   /** Digits only, with country and area code. Null hides WhatsApp for this unit. */
@@ -101,7 +137,7 @@ export const UNITS: Unit[] = [
     city: "Mogi Guaçu",
     state: "SP",
     postalCode: "13840-001",
-    hours: OPENING_HOURS.label,
+    hours: weekdayHours({ opens: "08:00", closes: "12:00" }, { opens: "13:00", closes: "17:30" }),
     image: "/images/clinics/clinica-guacu.webp",
     imageAlt: "Fachada amarela da unidade de Mogi Guaçu",
     // TODO: read off the clinic's own signage in the photo. Confirm before launch.
@@ -120,7 +156,7 @@ export const UNITS: Unit[] = [
     city: "Mogi Mirim",
     state: "SP",
     postalCode: "13800-040",
-    hours: OPENING_HOURS.label,
+    hours: weekdayHours({ opens: "08:00", closes: "18:00" }),
     image: "/images/clinics/clinica-mogi.webp",
     imageAlt: "Fachada em pedra e tijolo da unidade de Mogi Mirim",
     whatsapp: "5519998863332",

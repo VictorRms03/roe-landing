@@ -98,7 +98,8 @@ export default function Footer() {
                   <li key={unit.id} className="text-sm leading-relaxed text-white/70">
                     <p className="text-roe-white font-semibold">{unit.shortName}</p>
                     <p className="mt-1.5">{unit.address}</p>
-                    <p className="mt-1.5">{unit.hours}</p>
+                    <p className="mt-1.5">{unit.hours.label}</p>
+                    <p className="mt-1.5 text-white/50">{unit.hours.closed}</p>
                     {/* Beside the address it answers for, rather than pooled
                         with the other unit's at the bottom: which dentist holds
                         which address is the whole point of publishing it. */}
