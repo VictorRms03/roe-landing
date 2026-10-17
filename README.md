@@ -41,10 +41,10 @@ em vez de hex arbitrário.
 
 Veja `.env.example`.
 
-| Variável                               | Para que serve                                                |
-| -------------------------------------- | ------------------------------------------------------------- |
-| `NEXT_PUBLIC_SITE_URL`                 | Canonical, sitemap, robots e JSON-LD. **Sem barra no final.** |
-| `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` | Token do Search Console. Vazia, nenhuma meta tag é emitida.   |
+| Variável                               | Para que serve                                                       |
+| -------------------------------------- | -------------------------------------------------------------------- |
+| `NEXT_PUBLIC_SITE_URL`                 | Canonical, sitemap, robots e JSON-LD. **Sem barra no final.**        |
+| `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` | Meta tag do Search Console. Sem uso: a verificação é por TXT no DNS. |
 
 Sem `NEXT_PUBLIC_SITE_URL`, `src/lib/site.ts` cai em `https://roeclinica.com.br`.
 A barra final é removida de qualquer forma, porque os caminhos são concatenados
@@ -71,17 +71,19 @@ não considera avaliações auto-declaradas de `LocalBusiness` elegíveis para r
 result, e republicar avaliações coletadas em outro lugar é o caso que rende ação
 manual), e **não** preenchemos `priceRange` nem `geo` com valores inventados.
 
+O **Search Console** já está configurado como propriedade de domínio, verificada
+por um registro TXT `google-site-verification` na Cloudflare (não apague, o Google
+reconfere), com `https://roeclinica.com.br/sitemap.xml` enviado.
+
 ### O que falta, e não dá para fazer em código
 
 1. **Google Business Profile das duas unidades** — de longe a maior alavanca de
    busca local. Sem isso a clínica não aparece no mapa nem no pacote local,
    por melhor que o site esteja.
-2. **Search Console** — preencher `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` no Coolify
-   (como variável de build) e submeter `https://roeclinica.com.br/sitemap.xml`.
-3. **Bing Webmaster Tools** — dá para importar direto do Search Console.
-4. **NAP consistente** — nome, endereço e telefone idênticos no site, no Google
+2. **Bing Webmaster Tools** — dá para importar direto do Search Console.
+3. **NAP consistente** — nome, endereço e telefone idênticos no site, no Google
    Business Profile e em qualquer diretório.
-5. **Dados que dependem da clínica**: coordenadas de latitude/longitude das duas
+4. **Dados que dependem da clínica**: coordenadas de latitude/longitude das duas
    unidades (para o campo `geo` já marcado com TODO em `src/lib/schema.ts`),
    CNPJ e CRO do responsável técnico (`src/components/Footer.tsx`), lista real de
    convênios e prazo real de laudo (`src/data/faq.ts`).
