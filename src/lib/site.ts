@@ -1,4 +1,4 @@
-const RAW_SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://clinicaroe.vercel.app";
+const RAW_SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://roeclinica.com.br";
 
 /**
  * Never ends in a slash. Canonical links, the sitemap and the JSON-LD all
