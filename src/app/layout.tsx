@@ -1,7 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
-import { Analytics } from "@vercel/analytics/next";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import Footer from "@/components/Footer";
 import MobileActionBar from "@/components/MobileActionBar";
 import Navbar from "@/components/Navbar";
@@ -117,10 +115,6 @@ export default function RootLayout({
         <main>{children}</main>
         <Footer />
         <MobileActionBar />
-        {/* Cookieless, so no LGPD consent banner. Speed Insights reports the
-            field Core Web Vitals that feed ranking. */}
-        <Analytics />
-        <SpeedInsights />
       </body>
     </html>
   );

@@ -46,7 +46,7 @@ Veja `.env.example`.
 | `NEXT_PUBLIC_SITE_URL`                 | Canonical, sitemap, robots e JSON-LD. **Sem barra no final.** |
 | `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` | Token do Search Console. Vazia, nenhuma meta tag é emitida.   |
 
-Sem `NEXT_PUBLIC_SITE_URL`, `src/lib/site.ts` cai em `https://clinicaroe.vercel.app`.
+Sem `NEXT_PUBLIC_SITE_URL`, `src/lib/site.ts` cai em `https://roeclinica.com.br`.
 A barra final é removida de qualquer forma, porque os caminhos são concatenados
 direto nesse valor.
 
@@ -65,8 +65,6 @@ O que já está no código:
   colado nos dados que ele renderiza.
 - **`robots.txt` e `sitemap.xml`** — gerados. Deploys de preview saem com
   `Disallow: /` e `noindex`, para não competirem com o site de produção.
-- **Vercel Analytics + Speed Insights** — sem cookies, então não exigem banner de
-  consentimento (LGPD).
 
 Duas escolhas deliberadas: **não** marcamos `aggregateRating` (a política do Google
 não considera avaliações auto-declaradas de `LocalBusiness` elegíveis para rich
@@ -78,8 +76,8 @@ manual), e **não** preenchemos `priceRange` nem `geo` com valores inventados.
 1. **Google Business Profile das duas unidades** — de longe a maior alavanca de
    busca local. Sem isso a clínica não aparece no mapa nem no pacote local,
    por melhor que o site esteja.
-2. **Search Console** — preencher `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` na Vercel
-   e submeter `https://clinicaroe.vercel.app/sitemap.xml`.
+2. **Search Console** — preencher `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` no Coolify
+   (como variável de build) e submeter `https://roeclinica.com.br/sitemap.xml`.
 3. **Bing Webmaster Tools** — dá para importar direto do Search Console.
 4. **NAP consistente** — nome, endereço e telefone idênticos no site, no Google
    Business Profile e em qualquer diretório.
