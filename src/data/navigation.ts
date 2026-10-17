@@ -7,8 +7,8 @@ export type NavLink = {
 // href must match a section id rendered on the page.
 export const NAV_LINKS: NavLink[] = [
   { label: "Exames", href: "#servicos" },
-  { label: "A Clínica", href: "#beneficios" },
   { label: "Digital", href: "#digital" },
+  { label: "A Clínica", href: "#beneficios" },
   { label: "Unidades", href: "#clinicas" },
   { label: "Convênios", href: "#convenios" },
   { label: "Dúvidas", href: "#faq" },
